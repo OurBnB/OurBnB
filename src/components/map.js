@@ -1,36 +1,53 @@
 import React, { Component } from 'react'
-import GoogleMapReact from 'google-map-react'
-
+import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+const APIKey = 'AIzaSyBHm1z95Or8WefNxOjZ-wejrcZqEcRkVwY'
 const AnyReactComponent = ({ text }) => <div>{ text }</div>;
 
-export default class Map extends Component {
-  static defaultProps = {
-    center: { lat: 40.7446790, lng: -73.9485420 },
-    zoom: 11
+class MapView extends Component {
+
+  // static defaultProps = {
+  //   center: { lat: 40.7446790, lng: -73.9485420 },
+  //   zoom: 11
+  //   }
+    constructor(){
+      super()
+    }
+
+  render() {
+      return (
+        <Map google={this.props.google} zoom={9}
+            style={{ height: '250px', width: '100%' }}
+            initialCenter={{
+            lat: 40.854885,
+            lng: -88.081807
+          }}>
+
+          <Marker onClick={this.onMarkerClick}
+                  title={'Current location'} />
+
+          <InfoWindow onClose={this.onInfoWindowClose}>
+              <div>
+                <h1>London</h1>
+              </div>
+          </InfoWindow>
+
+        </Map>
+      );
+    }
   }
-render() {
-    return (
-      <div className='google-map' style={{ height: '250px', width: '100%' }}>
-        <GoogleMapReact
-          defaultCenter={ this.props.center }
-          defaultZoom={ this.props.zoom }>
-          <AnyReactComponent
-            lat={ 40.7473310 }
-            lng={ -73.8517440 }
-            text={ 'Test Location?' }
-          />
-        </GoogleMapReact>
-      </div>
-    )
-  }
-}
+
+export default GoogleApiWrapper({
+  apiKey: (APIKey)
+})(MapView)
+
+
 
 // take an address from State
 // fetch to the google APi with it
 // return the long lat
 //that can then go into maps - stage 2
 
-const APIKey = 'AIzaSyBHm1z95Or8WefNxOjZ-wejrcZqEcRkVwY'
+
 
 function googleGeocoding(postCode, APIKey){
   fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${postCode}&key=${APIKey}`)

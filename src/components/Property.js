@@ -1,11 +1,6 @@
 import React from 'react';
 import '../styles/Property.scss';
 
-// render descriptionText as markdown
-// see https://github.com/mapbox/remark-react
-// npm install remark
-// npm install remark-react
-
 const remark = require('remark');
 const reactRenderer = require('remark-react');
 
@@ -23,10 +18,10 @@ class Property extends React.Component {
             descriptionToggle: !this.state.descriptionToggle
         })
     }
-    
+
     render () {
 
-    const descriptionText = 
+    const descriptionText =
 `#### WELCOME TO THE CITY THAT NEVER SLEEPS!
 
 Cozy and quiet private apartment with kitchen.
