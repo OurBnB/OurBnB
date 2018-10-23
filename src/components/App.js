@@ -1,4 +1,7 @@
-import React from 'react'
+import React from 'react';
+import Header from './Header';
+import Property from './Property';
+import '../styles/App.scss';
 
 
 class App extends React.Component {
@@ -8,11 +11,14 @@ class App extends React.Component {
 
   render(){
     return(
-      <div>
-        Hello!
-      </div>
+      <React.Fragment>
+        <Header />
+        <main className="main">
+          <Property />
+        </main>
+      </React.Fragment>
     )
   }
 }
 
-export default App
+export default App;

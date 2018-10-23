@@ -1,0 +1,15 @@
+
+$header-colour: #999;
+$light-colour: white;
+
+.header {
+    background-color: $header-colour;
+    padding: 1rem;
+    margin: 0;
+    display: block;
+    min-width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }

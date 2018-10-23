@@ -1,4 +1,4 @@
-create database ourBnB
+create database ourbnb;
 
 create table guest (
   id serial primary key,
@@ -7,7 +7,7 @@ create table guest (
   email varchar(50) not null unique,
   telephone varchar(20) not null unique,
   password varchar(15) not null
-)
+);
 
 create table host (
   id serial primary key,
@@ -16,7 +16,7 @@ create table host (
   email varchar(50) not null unique,
   telephone varchar(20) not null unique,
   password varchar(15) not null
-)
+);
 
 create table property (
   id serial primary key,
@@ -43,7 +43,7 @@ create table property (
   check_in_time time with time zone,
   check_out_time time with time zone,
   foreign key (host_id) references host(id)
-)
+);
 
 create table booking (
   id serial primary key,
@@ -54,7 +54,7 @@ create table booking (
   date_end date not null,
   foreign key (guest_id) references guest (id),
   foreign key (property_id) references property (id)
-)
+);
 
 create table guest_review (
   id serial primary key,
@@ -66,7 +66,7 @@ create table guest_review (
   foreign key (guest_id) references guest (id),
   foreign key (property_id) references property (id),
   foreign key (host_id) references host (id)
-)
+);
 
 create table property_review (
   id serial primary key,
@@ -76,7 +76,7 @@ create table property_review (
   review text,
   foreign key (guest_id) references guest (id),
   foreign key (property_id) references property (id)
-)
+);
 
 insert into guest (id, first_name, last_name, email, telephone, password) values (1, 'John', 'Doe', 'john.doe@whatever.com', '07777777777', 'Tiger23');
 insert into guest (id, first_name, last_name, email, telephone, password) values (2, 'Jane', 'Doe', 'jane.doe@whatever.com', '07888888888', 'RayMe6');
