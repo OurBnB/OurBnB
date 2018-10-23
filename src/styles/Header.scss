@@ -1,5 +1,5 @@
 
-$header-colour: #ddd;
+$header-colour: #eee;
 $light-colour: white;
 
 .header {
@@ -14,10 +14,11 @@ $light-colour: white;
     align-items: center;
 
     & h1 {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
+      font-weight: 400;
     }
     & a {
       text-decoration: none;
-      color: rgb(255, 85, 85);
+      color: rgb(252, 92, 99);
     }
   }

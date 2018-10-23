@@ -1,48 +1,78 @@
-import React from 'react'
+import React from 'react';
+import DatePicker from "react-datepicker";
+import moment from "moment";
 import '../styles/Search.scss';
+import '../styles/datepicker.scss';
 
 class Search extends React.Component {
   constructor(){
     super()
     this.state = {
+      startDate: moment()
+    };
 
-    }
-
-    this.handleChangeCity = this.handleChangeCity.bind(this)
-    this.handleChangeStartDate = this.handleChangeStartDate.bind(this)
-    this.handleChangeEndDate = this.handleChangeEndDate.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChangeCity = this.handleChangeCity.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChangeEnd = this.handleChangeEnd.bind(this);
+    this.handleChangeStart = this.handleChangeStart.bind(this);
+    
   }
 
-handleChangeCity(event){
-  this.props.handleChangeCity(event.target.value)
-}
+  handleChangeCity(event){
+    this.props.handleChangeCity(event.target.value)
+  }
 
-handleChangeStartDate(event){
-  this.props.handleChangeStartDate(event.target.value)
-}
+  handleSubmit(event){
+    event.preventDefault();
+    this.props.handleSubmitReceiver();
+  }
 
-handleChangeEndDate(event){
-  this.props.handleChangeEndDate(event.target.value)
-}
+  handleChangeStart(date) {
+    this.setState({ startDate: date });
+    this.props.handleChangeStartDate(date);
+  }
 
-handleSubmit(event){
-  event.preventDefault();
-  this.props.handleSubmitReceiver();
-}
+  handleChangeEnd(date) {
+    this.setState({ endDate: date });
+    this.props.handleChangeEndDate(date);
+  }
 
   render(){
     return(
-      <form onSubmit={this.handleSubmit} className="search__form">
-        <input onChange={this.handleChangeCity} className="search__city" type="text" placeholder="enter city here" name="city" autoComplete="on" />
-        <div className="search__dates">
-          <input onChange={this.handleChangeStartDate} className="search__date-start" type="text" placeholder="DD/MM/YY" name="start-date" autoComplete="on" />
-          <input onChange={this.handleChangeEndDate} className="search__date-end" type="text" placeholder="DD/MM/YY" name="end-date" autoComplete="on" />
-        </div>
-        <button type="submit" className="search__button">Search</button>
-    </form>
+      <React.Fragment>
+        <form onSubmit={this.handleSubmit} className="search__form">
+          <input onChange={this.handleChangeCity} className="search__city" type="text" placeholder="enter city here" name="city" autoComplete="on" />
+          <div className="search__dates">
+
+            <div className="myDatePickerContainer myDatePickerStart">
+              <DatePicker
+                selected={this.state.startDate}
+                selectsStart
+                startDate={this.state.startDate}
+                endDate={this.state.endDate}
+                onChange={this.handleChangeStart}
+                placeholderText="Start date"
+              />
+            </div>
+
+            <div className="myDatePickerContainer">
+              <DatePicker
+                selected={this.state.endDate}
+                selectsEnd
+                startDate={this.state.startDate}
+                endDate={this.state.endDate}
+                onChange={this.handleChangeEnd}
+                placeholderText="End date"
+              />
+            </div>
+          </div>
+          <button type="submit" className="search__button">Search</button>
+        </form>
+      </React.Fragment>
     )
   }
 }
 
 export default Search;
+
+

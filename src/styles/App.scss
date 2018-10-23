@@ -1,3 +1,6 @@
+$button-color: rgb(252, 92, 99) !default;;
+$button-hover-color:rgb(217, 57, 70) !default;
+
 * {
   box-sizing: border-box;
 }
@@ -19,7 +22,7 @@ body {
   box-sizing: border-box;
   background-color: #fff;
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-  letter-spacing: 0.05rem;
+  letter-spacing: 0.1rem;
   font-size: 1rem;
 }
 
@@ -40,12 +43,24 @@ h3 {
   margin: 0;
 }
 
-
-button, input {
+input {
   font-size: 1rem;
   padding: 0.5em;
+  letter-spacing: 0.05rem;
 }
 
+button {
+  font-size: 1rem;
+  background-color: $button-color;
+  border: 0;
+  border-radius: 0.2rem;
+  color: #fff;
+  padding: 0.7em 0;
+  &:hover {
+    cursor: pointer;
+    background-color: $button-hover-color;
+  }
+}
 
 .main {
   padding: 0;

@@ -6,7 +6,7 @@ function Header () {
         <header className="header">
             <h1>
                 <a href="/"><i className="fas fa-1x fa-bars" /></a>
-                <a href="/" className="margin-left">OurBnB</a>
+                <a href="/" className="margin-left">Ourbnb</a>
             </h1>
         </header>
     )

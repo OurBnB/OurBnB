@@ -1,8 +1,7 @@
 import React from 'react';
 import Header from './Header';
-import Property from './Property';
-import Search from './Search.js'
-import SearchResults from './SearchResults.js'
+import Search from './Search'
+import SearchResults from './SearchResults'
 import '../styles/App.scss';
 
 class App extends React.Component {
@@ -33,34 +32,27 @@ cityCall(city){
       return response.json();
     })
     .then(body => {
-      this.setState({
-        citySearchResults: body
-      })
+      this.setState({ citySearchResults: body })
     })
 }
 
 handleChangeCity(value){
-  this.setState({
-    citySearch: value,
-  })
-}
-
-handleChangeStartDate(value){
-  this.setState({
-      startDate: value,
-  })
-}
-
-handleChangeEndDate(value){
-  this.setState({
-      endDate: value,
-  })
+  this.setState({ citySearch: value })
 }
 
 handleSubmitReceiver(){
   this.cityCall(this.state.citySearch)
 }
 
+handleChangeStartDate(value){
+  // console.log(value);
+  this.setState({ startDate: value })
+}
+
+handleChangeEndDate(value){
+  // console.log(value);
+  this.setState({ endDate: value })
+}
 
   render(){
     return(
