@@ -1,6 +1,9 @@
-import React from 'react'
+import React from 'react';
+import Header from './Header';
+import Property from './Property';
 import Search from './Search.js'
 import SearchResults from './SearchResults.js'
+import '../styles/App.scss';
 
 class App extends React.Component {
   constructor(){
@@ -76,19 +79,22 @@ handleSubmitReceiver(){
 
   render(){
     return(
-      <div>
-      <Search
-        handleSubmitReceiver={this.handleSubmitReceiver}
-        handleChangeCity={this.handleChangeCity}
-        handleChangeStartDate={this.handleChangeStartDate}
-        handleChangeEndDate={this.handleChangeEndDate}
-        cityCall={this.cityCall}
-        propertyCall={this.propertyCall}
-      />
-      <SearchResults citySearchResults={this.state.citySearchResults}/>
-      </div>
+      <React.Fragment>
+        <Header />
+        <main className="main">
+          <Search
+            handleSubmitReceiver={this.handleSubmitReceiver}
+            handleChangeCity={this.handleChangeCity}
+            handleChangeStartDate={this.handleChangeStartDate}
+            handleChangeEndDate={this.handleChangeEndDate}
+            cityCall={this.cityCall}
+            propertyCall={this.propertyCall}
+          />
+          <SearchResults citySearchResults={this.state.citySearchResults}/>
+        </main>
+      </React.Fragment>
     )
   }
 }
 
-export default App
+export default App;
