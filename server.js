@@ -32,6 +32,7 @@ app.get('/api/properties', function(req,res){ // allows front end access to all 
     })
 })
 
+<<<<<<< HEAD
 app.get('/api/properties/:city', function(req,res){ // allows front end access to all of our properties for search with city
  const city = req.params.city
  db.any(`SELECT *
@@ -45,6 +46,20 @@ app.get('/api/properties/:city', function(req,res){ // allows front end access t
 })
 
 
+=======
+app.get('/api/properties/:city', function(req,res){ // allows front end access to all of our properties for search etc
+  const city = req.params.city
+  db.any(`SELECT *
+          FROM property WHERE city=$1`, [city])
+    .then(function(data){
+      res.json(data)
+    })
+    .catch(function(error){
+      res.json({error:error.message})
+    })
+})
+
+>>>>>>> master
 app.listen(8080, function(){
   console.log('Listening on port 8080');
 });
