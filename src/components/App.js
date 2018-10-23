@@ -10,14 +10,12 @@ class App extends React.Component {
     super()
 
     this.state={
-      // propertyList: {},
       citySearchResults: [],
       citySearch: "",
       startDate: "",
       endDate: "",
     }
 
-    // this.propertyCall = this.propertyCall.bind(this);
     this.cityCall = this.cityCall.bind(this);
     this.handleChangeCity = this.handleChangeCity.bind(this);
     this.handleChangeStartDate = this.handleChangeStartDate.bind(this);
@@ -28,18 +26,6 @@ class App extends React.Component {
 componentDidMount(){
 
 }
-
-//   propertyCall(){
-//   fetch('/api/properties')
-//     .then(function(response) {
-//       return response.json();
-//     })
-//     .then(body => {
-//       this.setState({
-//         propertyList: body
-//       })
-//     })
-// }
 
 cityCall(city){
   fetch(`/api/properties/${city}`)
@@ -72,7 +58,6 @@ handleChangeEndDate(value){
 }
 
 handleSubmitReceiver(){
-  console.log(this.state.citySearch)
   this.cityCall(this.state.citySearch)
 }
 

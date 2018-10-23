@@ -1,10 +1,10 @@
 import React from 'react'
+import '../styles/Search.scss';
 
 class Search extends React.Component {
   constructor(){
     super()
-
-    this.state={
+    this.state = {
 
     }
 
@@ -31,18 +31,18 @@ handleSubmit(event){
   this.props.handleSubmitReceiver();
 }
 
-
   render(){
     return(
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <input onChange={this.handleChangeCity} type="text" placeholder="enter city here"/>
-          <input onChange={this.handleChangeStartDate} type="text" placeholder="DD/MM/YY"/><input onChange={this.handleChangeEndDate} type="text" placeholder="DD/MM/YY" />
-          <button type="submit">Search</button>
-        </form>
-      </div>
+      <form onSubmit={this.handleSubmit} className="search__form">
+        <input onChange={this.handleChangeCity} className="search__city" type="text" placeholder="enter city here" name="city" autoComplete="on" />
+        <div className="search__dates">
+          <input onChange={this.handleChangeStartDate} className="search__date-start" type="text" placeholder="DD/MM/YY" name="start-date" autoComplete="on" />
+          <input onChange={this.handleChangeEndDate} className="search__date-end" type="text" placeholder="DD/MM/YY" name="end-date" autoComplete="on" />
+        </div>
+        <button type="submit" className="search__button">Search</button>
+    </form>
     )
   }
 }
 
-export default Search
+export default Search;
