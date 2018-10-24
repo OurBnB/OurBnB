@@ -52,6 +52,7 @@ class Search extends React.Component {
                 endDate={this.state.endDate}
                 onChange={this.handleChangeStart}
                 placeholderText="Start date"
+                locale="en-gb"
               />
             </div>
 
@@ -63,6 +64,7 @@ class Search extends React.Component {
                 endDate={this.state.endDate}
                 onChange={this.handleChangeEnd}
                 placeholderText="End date"
+                locale="en-gb"
                 popperPlacement="top-end"
                 popperModifiers={{
                   offset: {

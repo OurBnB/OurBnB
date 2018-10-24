@@ -41,8 +41,10 @@ render(){
         key={property.id}
         property={property}
         receiveDisplayProperty={this.receiveDisplayProperty}
+        startDate={this.props.startDate}
+        endDate={this.props.endDate}
       />
-       </div>
+     </div>
     )
   })
 

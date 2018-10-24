@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './Header';
 import Search from './Search'
 import SearchResults from './SearchResults'
+import moment from "moment";
 import '../styles/App.scss';
 
 class App extends React.Component {
@@ -11,7 +12,7 @@ class App extends React.Component {
     this.state={
       citySearchResults: [],
       citySearch: "",
-      startDate: "",
+      startDate: moment(),
       endDate: "",
     }
 
@@ -44,6 +45,10 @@ handleSubmitReceiver(){
   this.cityCall(this.state.citySearch)
 }
 
+submittedStartEndDates(){
+  return { endDate: this.state.endDate, startDate: this.state.startDate}
+}
+
 handleChangeStartDate(value){
   // console.log(value);
   this.setState({ startDate: value })
@@ -73,6 +78,8 @@ handleChangeEndDate(value){
           </div>
           <SearchResults
             citySearchResults={this.state.citySearchResults}
+            startDate={this.state.startDate}
+            endDate={this.state.endDate}
           />
         </main>
       </React.Fragment>
