@@ -1,11 +1,13 @@
 import React from 'react'
 import SearchResultItem from './SearchResultItem.js'
+import MapView from './MapView.js'
 import Property from './Property.js';
 import '../styles/SearchResults.scss';
 
 
 class SearchResults extends React.Component {
   constructor(){
+
   super()        
   
   this.receiveDisplayProperty = this.receiveDisplayProperty.bind(this);
@@ -34,11 +36,16 @@ render(){
 
   const searchResults = this.props.citySearchResults.map(property => {
     return(
+    <div>
       <SearchResultItem 
         key={property.id} 
         property={property}
         receiveDisplayProperty={this.receiveDisplayProperty}
       />
+      <div style={{ height: '250px', position: 'relative' }}>
+         <MapView property={property}/>
+       </div>
+      </div>
     )
   })
 
@@ -54,12 +61,10 @@ render(){
     </React.Fragment>
 
   return(
-    <div>
+    <React.Fragment>
       {this.state.display === "searchResults" ? searchResults : selectedProperty}
-    </div>
+    </React.Fragment>
   )}
 }
 
-
-
-export default SearchResults
+export default SearchResults;

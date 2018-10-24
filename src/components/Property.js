@@ -18,7 +18,7 @@ class Property extends React.Component {
             descriptionToggle: !this.state.descriptionToggle
         })
     }
-    
+
     render () {
 
     const descriptionText = this.props.property.description;
