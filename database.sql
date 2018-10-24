@@ -321,7 +321,7 @@ alter sequence booking_id_seq restart with 3 increment by 1;
 --     WHERE id = 8
 
 -- UPDATE property
---   SET lat = 33.8687895, lng = 151.1942171
+--   SET lat = -33.8687895, lng = 151.1942171
 --     WHERE id = 9
 
 -- UPDATE property

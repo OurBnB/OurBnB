@@ -41,8 +41,10 @@ render(){
         key={property.id} 
         property={property}
         receiveDisplayProperty={this.receiveDisplayProperty}
+        startDate={this.props.startDate}
+        endDate={this.props.endDate}
       />
-      <div style={{ height: '250px', position: 'relative' }}>
+        <div style={{ height: '250px', position: 'relative' }}>
          <MapView property={property}/>
        </div>
       </div>

@@ -20,3 +20,8 @@
 ## AirBnB date picker we didn't use
 - https://github.com/airbnb/react-dates#readme
 - https://www.npmjs.com/package/react-dates
+
+# Webpack image loader
++ https://www.npmjs.com/package/image-webpack-loader
++ to load images in CSS with background-image: url(images/imagename.png)
++ Also, install file-loader: npm install file-loader --save-dev
