@@ -33,6 +33,8 @@
     "react-datepicker": "^1.7.0",
     "react-dates": "^18.1.1",
     "react-dom": "^16.5.2",
+    "react-image-carousel": "^2.0.18",
+    "react-transition-group": "^2.5.0",
     "remark": "^10.0.0",
     "remark-react": "^4.0.3"
   },
