@@ -55,7 +55,7 @@ class Search extends React.Component {
               />
             </div>
 
-            <div className="myDatePickerContainer">
+            <div className="myDatePickerContainer myDatePickerEnd">
               <DatePicker
                 selected={this.state.endDate}
                 selectsEnd
@@ -63,6 +63,18 @@ class Search extends React.Component {
                 endDate={this.state.endDate}
                 onChange={this.handleChangeEnd}
                 placeholderText="End date"
+                popperPlacement="top-end"
+                popperModifiers={{
+                  offset: {
+                    enabled: true,
+                    offset: '5px, 1rem'
+                  },
+                  preventOverflow: {
+                    enabled: true,
+                    escapeWithReference: false,
+                    boundariesElement: 'viewport'
+                  }
+                }}
               />
             </div>
           </div>

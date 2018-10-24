@@ -67,7 +67,9 @@ handleChangeEndDate(value){
             cityCall={this.cityCall}
             propertyCall={this.propertyCall}
           />
-          <SearchResults citySearchResults={this.state.citySearchResults}/>
+          <SearchResults 
+            citySearchResults={this.state.citySearchResults}
+          />
         </main>
       </React.Fragment>
     )

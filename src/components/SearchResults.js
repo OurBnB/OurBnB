@@ -48,6 +48,8 @@ render(){
       <Property 
         key={this.state.property.id} 
         property={this.state.property}
+        startDate={this.props.startDate}
+        endDate={this.props.endDate}
       />
     </React.Fragment>
 

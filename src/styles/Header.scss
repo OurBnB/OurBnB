@@ -1,6 +1,9 @@
 
 $header-colour: #eee;
 $light-colour: white;
+$mid-red-color: rgb(252, 92, 99);
+$dark-red-color: rgb(217, 57, 70);
+
 
 .header {
     background-color: $header-colour;
@@ -19,6 +22,6 @@ $light-colour: white;
     }
     & a {
       text-decoration: none;
-      color: rgb(252, 92, 99);
+      color: $mid-red-color; // rgb(252, 92, 99);
     }
   }

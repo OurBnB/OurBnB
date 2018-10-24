@@ -17,6 +17,6 @@
 + npm install prop-types --save
 + npm install moment
 
-## AirBnB date picker
+## AirBnB date picker we didn't use
 - https://github.com/airbnb/react-dates#readme
 - https://www.npmjs.com/package/react-dates
