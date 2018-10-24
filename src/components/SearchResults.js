@@ -8,8 +8,8 @@ import '../styles/SearchResults.scss';
 class SearchResults extends React.Component {
   constructor(){
 
-  super()        
-  
+  super()
+
   this.receiveDisplayProperty = this.receiveDisplayProperty.bind(this);
   this.backToResults = this.backToResults.bind(this);
 
@@ -37,23 +37,20 @@ render(){
   const searchResults = this.props.citySearchResults.map(property => {
     return(
     <div>
-      <SearchResultItem 
-        key={property.id} 
+      <SearchResultItem
+        key={property.id}
         property={property}
         receiveDisplayProperty={this.receiveDisplayProperty}
       />
-      <div style={{ height: '250px', position: 'relative' }}>
-         <MapView property={property}/>
        </div>
-      </div>
     )
   })
 
   const selectedProperty = this.state.property &&
     <React.Fragment>
       <button onClick={this.backToResults} className="search__back-button">&larr; back to results</button>
-      <Property 
-        key={this.state.property.id} 
+      <Property
+        key={this.state.property.id}
         property={this.state.property}
         startDate={this.props.startDate}
         endDate={this.props.endDate}

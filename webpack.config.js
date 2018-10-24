@@ -16,6 +16,24 @@ module.exports = {
         loader: require.resolve('babel-loader')
       },
       {
+        test: /\.(gif|png|jpe?g|svg)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              publicPath: 'static/'
+            }
+          },
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              bypassOnDebug: true, // webpack@1.x
+              disable: true, // webpack@2.x and newer
+            },
+          },
+        ],
+      },
+      {
   test: /\.scss$/,
   use: [
     {

@@ -2,7 +2,7 @@
     &__form {
         display: flex;
         flex-direction: column;
-        margin: 1.7rem 0;
+        margin: 0 1.7rem 0 1.7rem;
     }
     &__dates {
         display: flex;
@@ -12,6 +12,7 @@
         width: 100%;
         margin: 0;
         border: 1px solid #aeaeae;
+        border-radius: 5px;
     }
     &__button {
         width: 100%;
@@ -25,4 +26,8 @@
         width: calc(50% - 0.5rem);
         margin: 0.7rem 0 0 0.5rem;
     }
+}
+
+.react-datepicker__input-container {
+
 }

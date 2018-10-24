@@ -15,7 +15,7 @@ class Search extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChangeEnd = this.handleChangeEnd.bind(this);
     this.handleChangeStart = this.handleChangeStart.bind(this);
-    
+
   }
 
   handleChangeCity(event){
@@ -41,7 +41,7 @@ class Search extends React.Component {
     return(
       <React.Fragment>
         <form onSubmit={this.handleSubmit} className="search__form">
-          <input onChange={this.handleChangeCity} className="search__city" type="text" placeholder="enter city here" name="city" autoComplete="on" />
+          <input onChange={this.handleChangeCity} className="search__city" type="text" placeholder="Destination" name="city" autoComplete="on" />
           <div className="search__dates">
 
             <div className="myDatePickerContainer myDatePickerStart">
@@ -86,5 +86,3 @@ class Search extends React.Component {
 }
 
 export default Search;
-
-
