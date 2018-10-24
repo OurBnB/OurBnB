@@ -76,11 +76,13 @@ handleChangeEndDate(value){
               />
             </div>
           </div>
-          <SearchResults
-            citySearchResults={this.state.citySearchResults}
-            startDate={this.state.startDate}
-            endDate={this.state.endDate}
-          />
+          <div className = "search-results-feed">
+            <SearchResults
+              citySearchResults={this.state.citySearchResults}
+              startDate={this.state.startDate}
+              endDate={this.state.endDate}
+            />
+          </div>
         </main>
       </React.Fragment>
     )

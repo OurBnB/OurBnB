@@ -39,7 +39,7 @@ class Property extends React.Component {
 
     getCurrency (string) {
         return string.toLocaleString("en-GB", {
-          style: "currency", 
+          style: "currency",
           currency: "GBP"
         });
     }
@@ -66,7 +66,7 @@ class Property extends React.Component {
       `../static/images/${this.props.property.image_4}`,
       `../static/images/${this.props.property.image_5}`
     ];
-      
+
     return (
       <div className="property">
         <section className="property__details">
@@ -132,5 +132,6 @@ class Property extends React.Component {
       </div>
     );
   }
-  
+}
+
 export default Property;

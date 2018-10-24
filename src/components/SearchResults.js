@@ -36,7 +36,7 @@ render(){
 
   const searchResults = this.props.citySearchResults.map(property => {
     return(
-    <div>
+    <React.Fragment>
       <SearchResultItem
         key={property.id}
         property={property}
@@ -44,7 +44,7 @@ render(){
         startDate={this.props.startDate}
         endDate={this.props.endDate}
       />
-     </div>
+    </React.Fragment>
     )
   })
 
