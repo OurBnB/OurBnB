@@ -12,4 +12,10 @@ $light-colour: white;
             background-color: #ddd;
         }
     }
+    &__result-details {
+        & img {
+            width: 30%;
+            height: 30%;
+        }
+    }
 }

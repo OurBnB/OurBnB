@@ -22,29 +22,29 @@ class SearchResults extends React.Component {
 backToResults() {
   this.setState({
     display: "searchResults"
-  })
+  }, () => document.location = "#results")
 }
 
 receiveDisplayProperty(property) {
   this.setState({
     display: "property",
     property: property
-  })
+  }, () => document.location = "#results")
 }
 
 render(){
 
   const searchResults = this.props.citySearchResults.map(property => {
     return(
-    <div>
-      <SearchResultItem
-        key={property.id}
-        property={property}
-        receiveDisplayProperty={this.receiveDisplayProperty}
-        startDate={this.props.startDate}
-        endDate={this.props.endDate}
-      />
-     </div>
+      <React.Fragment key={property.id}>
+        <SearchResultItem
+          key={property.id}
+          property={property}
+          receiveDisplayProperty={this.receiveDisplayProperty}
+          startDate={this.props.startDate}
+          endDate={this.props.endDate}
+        />
+      </React.Fragment>
     )
   })
 
@@ -56,6 +56,7 @@ render(){
         property={this.state.property}
         startDate={this.props.startDate}
         endDate={this.props.endDate}
+        addBooking={this.props.addBooking}
       />
     </React.Fragment>
 

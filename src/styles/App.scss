@@ -22,7 +22,7 @@ body {
   box-sizing: border-box;
   background-color: #fff;
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-  letter-spacing: 0.1rem;
+  letter-spacing: 0.05rem;
   font-size: 1rem;
   height: 100vh;
 }
@@ -48,7 +48,10 @@ h3 {
 input {
   font-size: 1rem;
   padding: 1em;
+  margin: 0.7 0;
   letter-spacing: 0.05rem;
+  -webkit-filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.3));
+  filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.3));
 }
 
 button {
@@ -63,12 +66,14 @@ button {
     cursor: pointer;
     background-color: $button-hover-color;
   }
+  -webkit-filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.3));
+  filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.3));
 }
 
 .top {
-display: flex;
-flex-direction: column;
-min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .header {

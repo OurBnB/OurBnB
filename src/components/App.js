@@ -21,6 +21,7 @@ class App extends React.Component {
     this.handleChangeStartDate = this.handleChangeStartDate.bind(this);
     this.handleChangeEndDate = this.handleChangeEndDate.bind(this);
     this.handleSubmitReceiver = this.handleSubmitReceiver.bind(this);
+    this.addBooking = this.addBooking.bind(this);
   }
 
 componentDidMount(){
@@ -33,7 +34,9 @@ cityCall(city){
       return response.json();
     })
     .then(body => {
-      this.setState({ citySearchResults: body })
+      this.setState({ 
+        citySearchResults: body
+      }, () => document.location = "#results")
     })
 }
 
@@ -50,22 +53,34 @@ submittedStartEndDates(){
 }
 
 handleChangeStartDate(value){
-  // console.log(value);
   this.setState({ startDate: value })
 }
 
 handleChangeEndDate(value){
-  // console.log(value);
   this.setState({ endDate: value })
+}
+
+addBooking (bookingData) {
+  // console.log({bookingData})
+  fetch('/api/booking', {
+    method: 'post',
+    body: JSON.stringify(bookingData),
+    headers: { 'Content-Type': 'application/json' }
+  }
+  ).then(response => response.json()
+  ).then(bookingId => {
+    console.log(bookingId)
+  })
+  .catch(error => res.json({ error: error.message }));
 }
 
   render(){
     return(
       <React.Fragment>
+      <Header />
         <main className="main">
           <div className="top">
-          <Header />
-            <div className ="landing-page">
+            <div className="landing-page">
               <Search
                 handleSubmitReceiver={this.handleSubmitReceiver}
                 handleChangeCity={this.handleChangeCity}
@@ -74,13 +89,17 @@ handleChangeEndDate(value){
                 cityCall={this.cityCall}
                 propertyCall={this.propertyCall}
               />
+              <input type="hidden" value="prayer" />
             </div>
           </div>
-          <SearchResults
-            citySearchResults={this.state.citySearchResults}
-            startDate={this.state.startDate}
-            endDate={this.state.endDate}
-          />
+          <div id="results" className="search__results-feed">
+            <SearchResults
+              citySearchResults={this.state.citySearchResults}
+              startDate={this.state.startDate}
+              endDate={this.state.endDate}
+              addBooking={this.addBooking}
+            />
+          </div>
         </main>
       </React.Fragment>
     )

@@ -15,16 +15,19 @@ class Search extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChangeEnd = this.handleChangeEnd.bind(this);
     this.handleChangeStart = this.handleChangeStart.bind(this);
-
+    this.setButtonClass = this.setButtonClass.bind(this);
   }
 
   handleChangeCity(event){
-    this.props.handleChangeCity(event.target.value)
+    this.setState({ city: event.target.value });
+    this.props.handleChangeCity(event.target.value);
   }
 
   handleSubmit(event){
     event.preventDefault();
-    this.props.handleSubmitReceiver();
+    if (this.state.city && this.state.startDate && this.state.endDate) {
+      this.props.handleSubmitReceiver();
+    }
   }
 
   handleChangeStart(date) {
@@ -37,11 +40,15 @@ class Search extends React.Component {
     this.props.handleChangeEndDate(date);
   }
 
+  setButtonClass () {
+    return this.state.startDate && this.state.endDate && this.state.city ? "search__button" : "search__button-inactive";
+  }
+
   render(){
     return(
       <React.Fragment>
         <form onSubmit={this.handleSubmit} className="search__form">
-          <input onChange={this.handleChangeCity} className="search__city" type="text" placeholder="Destination" name="city" autoComplete="on" />
+          <input onChange={this.handleChangeCity} className="search__city" type="text" placeholder="Destination" name="city" autoComplete="off" />
           <div className="search__dates">
 
             <div className="myDatePickerContainer myDatePickerStart">
@@ -51,8 +58,9 @@ class Search extends React.Component {
                 startDate={this.state.startDate}
                 endDate={this.state.endDate}
                 onChange={this.handleChangeStart}
-                placeholderText="Start date"
                 locale="en-gb"
+                autoComplete="off"
+                placeholderText="Start date"
               />
             </div>
 
@@ -65,6 +73,7 @@ class Search extends React.Component {
                 onChange={this.handleChangeEnd}
                 placeholderText="End date"
                 locale="en-gb"
+                autoComplete="off"
                 popperPlacement="top-end"
                 popperModifiers={{
                   offset: {
@@ -80,7 +89,7 @@ class Search extends React.Component {
               />
             </div>
           </div>
-          <button type="submit" className="search__button">Search</button>
+          <button type="submit" className={this.setButtonClass()}>Search</button>
         </form>
       </React.Fragment>
     )

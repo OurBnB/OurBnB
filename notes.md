@@ -12,14 +12,15 @@
 ## Date picker
 
 [Documentation](https://reactdatepicker.com/)
+[Documentation](https://github.com/Hacker0x01/react-datepicker/blob/master/docs/datepicker.md)
 [NPM package](https://www.npmjs.com/package/react-datepicker)
 + npm install react-datepicker --save
 + npm install prop-types --save
 + npm install moment
 
 ## AirBnB date picker we didn't use
-- https://github.com/airbnb/react-dates#readme
-- https://www.npmjs.com/package/react-dates
+- [AirBnB date picker](https://github.com/airbnb/react-dates#readme)
+- [npmjs.com react-dates](https://www.npmjs.com/package/react-dates)
 
 
 ## Image carousel for the Property component
@@ -30,8 +31,13 @@
 **Furthermore, a CSS file needs to be imported from node_module for the carousel. Use the following code in the relevant .scss file:
 @import '~react-image-carousel/lib/css/main.min.css'
 
-# Webpack image loader
+## Webpack image loader
 + https://www.npmjs.com/package/image-webpack-loader
 + to load images in CSS with background-image: url(images/imagename.png)
-+ Also, install file-loader: npm install file-loader --save-dev
++ npm install image-webpack-loader --save-dev
++ npm install file-loader --save-dev
 
+## Twilio
+accountSid and authToken are in .env
+https://www.twilio.com/docs/libraries/node
++ npm install twilio
