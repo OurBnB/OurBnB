@@ -18,31 +18,31 @@ app.use('/static', express.static('static'));
 app.set('view engine', 'hbs');
 
 app.get('/', function(req, res){
-  res.render('index');
+  return res.render('index');
 });
 
 app.get('/api/properties', function(req,res){ // allows front end access to all of our properties for search etc
   db.any(`SELECT *
           FROM property`)
     .then(function(data){
-      res.json(data)
+      return res.json(data)
     })
     .catch(function(error){
-      res.json({error:error.message})
+      return res.json({error:error.message})
     })
-})
+});
 
 app.get('/api/properties/:city', function(req,res){ // allows front end access to all of our properties for search etc
-  const city = req.params.city
+  const city = req.params.city;
   db.any(`SELECT *
           FROM property WHERE city=$1`, [city])
     .then(function(data){
-      res.json(data)
+      return res.json(data)
     })
     .catch(function(error){
-      res.json({error:error.message})
+      return res.json({error:error.message})
     })
-})
+});
 
 app.listen(8080, function(){
   console.log('Listening on port 8080');
