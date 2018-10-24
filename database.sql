@@ -310,20 +310,48 @@ insert into booking (id, property_id, guest_id, date_booked, date_start, date_en
 alter sequence booking_id_seq restart with 3 increment by 1;
 
 
--- ALTER TABLE property
-  -- ADD COLUMN lat decimal
+ ALTER TABLE property
+   ADD COLUMN lat decimal
 
--- ALTER TABLE property
-  -- ADD COLUMN lng decimal
+ ALTER TABLE property
+   ADD COLUMN lng decimal
 
--- UPDATE property
---   SET lat = -33.8710844, lng = 151.2233585
---     WHERE id = 8
+UPDATE property
+  SET lat = 51.5200172, lng = -0.0576581
+    WHERE id = 1
 
--- UPDATE property
---   SET lat = -33.8687895, lng = 151.1942171
---     WHERE id = 9
+UPDATE property
+  SET lat = 51.5009405, lng = -0.1629288
+    WHERE id = 2
 
--- UPDATE property
---   SET lat = -33.8708464, lng = 151.20733
---     WHERE id = 10
+UPDATE property
+  SET lat = 51.489217, lng = -0.1054509
+    WHERE id = 3
+
+UPDATE property
+  SET lat = 51.52239040000001, lng = -0.1037717
+    WHERE id = 4
+
+UPDATE property
+  SET lat = 40.75368539999999, lng = -73.9991637
+    WHERE id = 5
+
+UPDATE property
+  SET lat = 40.75368539999999, lng = -73.9991637
+    WHERE id = 6
+
+UPDATE property
+  SET lat = 40.7282702, lng = -73.9506774
+    WHERE id = 7
+
+UPDATE property
+   SET lat = -33.8710844, lng = 151.2233585
+     WHERE id = 8
+
+UPDATE property
+   SET lat = -33.8687895, lng = 151.1942171
+     WHERE id = 9
+
+UPDATE property
+  SET lat = -33.8708464, lng = 151.20733
+     WHERE id = 10

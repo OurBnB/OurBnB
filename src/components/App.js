@@ -62,17 +62,21 @@ handleChangeEndDate(value){
   render(){
     return(
       <React.Fragment>
-        <Header />
         <main className="main">
-          <Search
-            handleSubmitReceiver={this.handleSubmitReceiver}
-            handleChangeCity={this.handleChangeCity}
-            handleChangeStartDate={this.handleChangeStartDate}
-            handleChangeEndDate={this.handleChangeEndDate}
-            cityCall={this.cityCall}
-            propertyCall={this.propertyCall}
-          />
-          <SearchResults 
+          <div className="top">
+          <Header />
+            <div className ="landing-page">
+              <Search
+                handleSubmitReceiver={this.handleSubmitReceiver}
+                handleChangeCity={this.handleChangeCity}
+                handleChangeStartDate={this.handleChangeStartDate}
+                handleChangeEndDate={this.handleChangeEndDate}
+                cityCall={this.cityCall}
+                propertyCall={this.propertyCall}
+              />
+            </div>
+          </div>
+          <SearchResults
             citySearchResults={this.state.citySearchResults}
             startDate={this.state.startDate}
             endDate={this.state.endDate}
