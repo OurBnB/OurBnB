@@ -21,6 +21,7 @@
 - https://github.com/airbnb/react-dates#readme
 - https://www.npmjs.com/package/react-dates
 
+
 ## Image carousel for the Property component
 [Documentation and package] (https://www.npmjs.com/package/react-image-carousel) 
 + npm install react-image-carousel
@@ -28,3 +29,9 @@
 + npm install react-transition-group@^2.3.1
 **Furthermore, a CSS file needs to be imported from node_module for the carousel. Use the following code in the relevant .scss file:
 @import '~react-image-carousel/lib/css/main.min.css'
+
+# Webpack image loader
++ https://www.npmjs.com/package/image-webpack-loader
++ to load images in CSS with background-image: url(images/imagename.png)
++ Also, install file-loader: npm install file-loader --save-dev
+
