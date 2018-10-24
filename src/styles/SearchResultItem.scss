@@ -1,0 +1,15 @@
+
+$header-colour: #eee;
+$light-colour: white;
+
+.search {
+    &__result-item {
+        margin-top: 0.25rem;
+        padding: 0.25rem 0.25rem 0.25rem 0.5rem;
+        background-color: $header-colour;
+        cursor: pointer;
+        &:hover {
+            background-color: #ddd;
+        }
+    }
+}
