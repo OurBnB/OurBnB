@@ -1,10 +1,13 @@
 
-$header-colour: #999;
+$header-colour: #eee;
 $light-colour: white;
+$mid-red-color: rgb(252, 92, 99);
+$dark-red-color: rgb(217, 57, 70);
+
 
 .header {
     background-color: $header-colour;
-    padding: 1rem;
+    padding: 0 1rem;
     margin: 0;
     display: block;
     min-width: 50%;
@@ -12,4 +15,13 @@ $light-colour: white;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
+    & h1 {
+      font-size: 1.3rem;
+      font-weight: 400;
+    }
+    & a {
+      text-decoration: none;
+      color: $mid-red-color; // rgb(252, 92, 99);
+    }
   }
