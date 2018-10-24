@@ -1,6 +1,6 @@
 import React from 'react'
 import SearchResultItem from './SearchResultItem.js'
-import Map from './Map.js'
+import MapView from './MapView.js'
 
 
 class SearchResults extends React.Component {
@@ -18,8 +18,8 @@ render(){
       return(
         <div>
           <SearchResultItem property={property}/>
-          <div style={{ height: '250px', overflow: 'hidden' }}>
-            <Map property={property}/>
+          <div style={{ height: '250px', position: 'relative' }}>
+            <MapView property={property}/>
           </div>
         </div>
         )
