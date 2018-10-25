@@ -7,6 +7,9 @@ class Header extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.state = {
+
+    }
   }
 
   handleSubmit(e) {
@@ -19,8 +22,9 @@ class Header extends React.Component {
   }
 
   render() {
+    const headerClass = this.props.activeScreen === "main" ? "header" : "header-login"
     return (
-      <header className="header">
+      <header className={headerClass}>
           <div className="dropdown">
             <a onClick={this.handleSubmit} className="dropdown__btn" href="/">
               <i className="fas fa-1x fa-bars" />

@@ -21,12 +21,12 @@ body {
   margin: 0;
   box-sizing: border-box;
   background-color: #fff;
-  font-family: 'Varela Round', sans-serif;
   // font-family: 'Montserrat', sans-serif;
-  // font-family: 'Raleway', sans-serif;
+  font-family: 'Varela Round', sans-serif;
   // font-family: 'Poppins', sans-serif;
   // font-family: 'M PLUS 1p', sans-serif;
   // font-family: 'Encode Sans Semi Expanded', sans-serif;
+  // font-family: 'Raleway', sans-serif;
   letter-spacing: 0.03rem;
   font-size: 1rem;
   height: 100vh;
@@ -103,6 +103,23 @@ button {
   background-size: cover;
 }
 
+.register, .existing__guest {
+  padding: 1.7rem 1.7rem 0.7rem 1.7rem;
+  & h1 {
+    margin: 1rem 0 2.4rem 0;
+  }
+  & h2 {
+    margin: 0.7rem 0 1.3rem 0;
+  }
+  & input, & button {
+    border-radius: 0.3rem;
+    width: 100%;
+    margin: 0.7rem 0;
+    -webkit-filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.15));
+    filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.15));  
+  }
+}
+
 .margin-left {
   margin-left: 1rem;
 }
@@ -111,7 +128,15 @@ button {
   margin-right: 1rem;
 }
 
-.fa-home-icon, .fa-map-marker-alt {
+.fa-home-icon, .fa-map-marker-alt, .fa-user {
   color: $button-color;
   margin-right: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .register, .existing__guest {
+    & input, & button {
+      max-width: 66vw;
+    }
+  }
 }

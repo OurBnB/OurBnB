@@ -65,59 +65,61 @@ class Login extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <form className="existingGuest">
-          <h2>Returning guest:</h2>
-          <label className="email">Email:</label>
+        <form className="existing__guest">
+          <h1><i class="fas fa-1x fa-user" />Guest login</h1>
+          <h2>Returning guest</h2>
           <input
             className="emailInput"
             onChange={this.handleChange}
             name="emailOld"
             type="email"
             value={this.state.emailOld}
+            placeholder="Email"
           />
-          <label className="password">Password:</label>
           <input
             className="passwordInput"
             onChange={this.handleChange}
             name="passwordOld"
             type="password"
             value={this.state.passwordOld}
+            placeholder="Password"
           />
           <button onClick={this.handleSubmitOld}>Login</button>
         </form>
+
         <form className="register">
-          <h2>New guest:</h2>
-          <label className="name">Full Name:</label>
+          <h2>New guest</h2>
           <input
             className="nameInput"
             onChange={this.handleChange}
             name="name"
             type="text"
             value={this.state.name}
+            placeholder="Full Name"
           />
-          <label className="email">Email:</label>
           <input
             className="emailInput"
             onChange={this.handleChange}
             name="email"
             type="email"
             value={this.state.email}
+            placeholder="Email"
           />
-          <label className="mobile">Mobile:</label>
           <input
             className="mobileInput"
             onChange={this.handleChange}
             name="mobile"
             type="number"
             value={this.state.mobile}
+            placeholder="Telephone"
           />
-          <label className="password">Password:</label>
           <input
             className="passwordInput"
             onChange={this.handleChange}
             name="password"
             type="password"
             value={this.state.password}
+            placeholder="Password"
           />
           <button onClick={this.handleSubmit}>Login</button>
         </form>

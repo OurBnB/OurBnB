@@ -34,7 +34,6 @@ class App extends React.Component {
 
   cityCall(city){
     const formattedCityInput = this.sentenceCase(city);
-    console.log(formattedCityInput);
     fetch(`/api/properties/${formattedCityInput}`)
       .then(function(response) {
         return response.json();
@@ -135,7 +134,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <main className="main">
-          <Header switchScreen={this.switchScreen} />
+          <Header switchScreen={this.switchScreen} activeScreen={this.state.activeScreen}/>
           {this.state.activeScreen === "main" && (
             <React.Fragment>
               <div className="top">
