@@ -26,26 +26,24 @@ class App extends React.Component {
     this.handleChangeEndDate = this.handleChangeEndDate.bind(this);
     this.handleSubmitReceiver = this.handleSubmitReceiver.bind(this);
     this.addBooking = this.addBooking.bind(this);
+    this.sentenceCase = this.sentenceCase.bind(this);
     this.switchScreen = this.switchScreen.bind(this);
     this.addGuest = this.addGuest.bind(this);
     this.retrieveGuest = this.retrieveGuest.bind(this);
   }
 
-  componentDidMount() {}
-
-  cityCall(city) {
-    fetch(`/api/properties/${city}`)
+  cityCall(city){
+    const formattedCityInput = this.sentenceCase(city);
+    console.log(formattedCityInput);
+    fetch(`/api/properties/${formattedCityInput}`)
       .then(function(response) {
         return response.json();
       })
       .then(body => {
-        this.setState(
-          {
-            citySearchResults: body
-          },
-          () => (document.location = "#results")
-        );
-      });
+        this.setState({
+          citySearchResults: body
+        }, () => document.location = "#results")
+      })
   }
 
   handleChangeCity(value) {
@@ -74,15 +72,23 @@ class App extends React.Component {
       body: JSON.stringify(bookingData),
       headers: { "Content-Type": "application/json" }
     })
-      .then(response => response.json())
-      .then(bookingId => {
-        console.log(bookingId);
-      })
-      .catch(error => res.json({ error: error.message }));
+    .then(response => response.json())
+    .then(bookingId => {
+      console.log(bookingId);
+    })
+    .catch(error => res.json({ error: error.message }));
   }
 
   switchScreen(screen) {
     this.setState({ activeScreen: screen });
+  }
+
+  sentenceCase(str) {
+    return str.split(" ").map(item => {
+      const word = item.split("");
+      word[0] = word[0].toUpperCase()
+      return word.join("");
+    }).join(" ");
   }
 
   addGuest(guest) {
@@ -116,13 +122,13 @@ class App extends React.Component {
         "Content-Type": "application/json"
       }
     })
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          guestID: data.id,
-          mobile: data.telephone
-        }, ()=> console.log(this.state.guestID, this.state.mobile));
-      });
+    .then(response => response.json())
+    .then(data => {
+      this.setState({
+        guestID: data.id,
+        mobile: data.telephone
+      }, ()=> console.log(this.state.guestID, this.state.mobile));
+    });
   }
 
   render() {

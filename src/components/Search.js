@@ -10,17 +10,11 @@ class Search extends React.Component {
     this.state = {
       startDate: moment()
     };
-
     this.handleChangeCity = this.handleChangeCity.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChangeEnd = this.handleChangeEnd.bind(this);
     this.handleChangeStart = this.handleChangeStart.bind(this);
     this.setButtonClass = this.setButtonClass.bind(this);
-  }
-
-  handleChangeCity(event){
-    this.setState({ city: event.target.value });
-    this.props.handleChangeCity(event.target.value);
   }
 
   handleSubmit(event){
@@ -42,6 +36,13 @@ class Search extends React.Component {
 
   setButtonClass () {
     return this.state.startDate && this.state.endDate && this.state.city ? "search__button" : "search__button-inactive";
+  }
+
+  handleChangeCity(event){
+    this.setState({ 
+      city: event.target.value 
+    });
+    this.props.handleChangeCity(event.target.value);
   }
 
   render(){

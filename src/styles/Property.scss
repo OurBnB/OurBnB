@@ -3,12 +3,14 @@
 
 .property__booking {
   min-width: 30vw;
+  margin: 1rem 0;
   & input, & button  {
     margin: 0 0 0.7rem 0;
     -webkit-filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.1));
     filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.1));
     width: 50%;
   }
+
 }
 
 .property__description {
@@ -36,13 +38,17 @@
   margin: 0 auto;
 }
 
-.booking__list{
-  display: flex;
-  flex-direction: column;
-}
-
-
 .booking {
+  &__name {
+    margin: 0.7rem 0;
+  }
+  &__list{
+    display: flex;
+    flex-direction: column;
+    // & ul, li {
+    //   margin: 0;
+    // }
+  }
   &__button-inactive {
       width: 100%;
       margin: 0.7rem 0 0 0;
@@ -76,7 +82,11 @@ li {
 }
 
 .property__details, .property__booking, .property__description{
-   margin: 1em;
+   // margin: 1em;
+   & h1 {
+     margin: 1rem 0;
+     line-height: 2.5rem;
+   }
 }
 
 .property__map{
@@ -99,14 +109,9 @@ li {
   .property__details{
       grid-area: p;
   }
-  .property__booking{
+
+  .property__booking {
       grid-area: b;
-      min-width: 30vw;
-      & input {
-        margin: 0 0 0.7rem 0;
-        -webkit-filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.1));
-        filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.1));
-      }
   }
 
   .property__description{

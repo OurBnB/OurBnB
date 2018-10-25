@@ -3,8 +3,6 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 const APIKey = 'AIzaSyBHm1z95Or8WefNxOjZ-wejrcZqEcRkVwY';
 
-// const AnyReactComponent = ({ text }) => <div>{ text }</div>;
-
 class MapView extends Component {
     constructor() {
         super()
