@@ -150,14 +150,17 @@ class App extends React.Component {
                   />
                 </div>
               </div>
-              <div id="results" className="search-results-feed">
+              {this.state.citySearchResults.length ?
+              <div id="results" className="search__results-feed">
                 <SearchResults
                   citySearchResults={this.state.citySearchResults}
                   startDate={this.state.startDate}
                   endDate={this.state.endDate}
                   addBooking={this.addBooking}
+                  citySearch={this.state.citySearch}
                 />
-              </div>
+              </div> : null
+            }
             </React.Fragment>
           )}
           {this.state.activeScreen === "guestLogin" && (

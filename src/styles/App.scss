@@ -22,7 +22,12 @@ body {
   box-sizing: border-box;
   background-color: #fff;
   font-family: 'Varela Round', sans-serif;
-  letter-spacing: 0.05rem;
+  // font-family: 'Montserrat', sans-serif;
+  // font-family: 'Raleway', sans-serif;
+  // font-family: 'Poppins', sans-serif;
+  // font-family: 'M PLUS 1p', sans-serif;
+  // font-family: 'Encode Sans Semi Expanded', sans-serif;
+  letter-spacing: 0.03rem;
   font-size: 1rem;
   height: 100vh;
 }
@@ -34,18 +39,20 @@ body {
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 1.7rem;
 }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 h3 {
-  font-size: 1.2rem;
+  font-size:1.2rem;
 }
 
 input {
+  border: 0.05rem solid #c2c2c2;
+  width: 100%;
   font-size: 1rem;
   padding: 1em;
   margin: 0.7 0;
@@ -55,10 +62,10 @@ input {
 }
 
 button {
+  width: 100%;
   font-size: 1rem;
   background-color: $button-color;
-  border: 0;
-  border-radius: 0.2rem;
+  border-radius: 0.3rem;
   color: #fff;
   padding: 1em;
   letter-spacing: 0.05rem;
@@ -102,4 +109,9 @@ button {
 
 .margin-right {
   margin-right: 1rem;
+}
+
+.fa-home-icon, .fa-map-marker-alt {
+  color: $button-color;
+  margin-right: 0.5rem;
 }

@@ -9,19 +9,17 @@
         flex-direction: row;
     }
     &__city {
-        width: 100%;
         margin: 0;
-        border: 1px solid #aeaeae;
-        border-radius: 0.2rem;
+        border-radius: 0.3rem;
     }
     &__button {
-        width: 100%;
+        border: 0;
         margin: 0.7rem 0 0 0;
     }
     &__button-inactive {
-        width: 100%;
+        border: 0;
         margin: 0.7rem 0 0 0;
-        background-color: #d6d6d6;
+        background-color: #eee;
         color: #333;
         &:hover {
             background-color: #d6d6d6;
@@ -38,5 +36,9 @@
 }
 
 .react-datepicker__input-container {
+  }
 
+.react-datepicker-popper, .react-datepicker {
+    -webkit-filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.1));
+    filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.1));
 }

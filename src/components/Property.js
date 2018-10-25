@@ -43,7 +43,6 @@ class Property extends React.Component {
     handleSubmit(event){
       event.preventDefault();
       if (this.state.name, this.state.telephone, this.state.email) {
-        // const { name, telephone, email} = this.state;
         const today = new Date();
         const bookingData = Object.assign({}, this.state,
           {property_id: this.props.property.id,
@@ -58,8 +57,11 @@ class Property extends React.Component {
     }
 
     setButtonClass () {
-      return this.state.name && this.state.telephone && this.state.email ? "booking__button" : "booking__button-inactive";
+      const valid = this.state.name && this.state.telephone && this.state.email;
+      console.log(valid);
+      return valid ? "booking__button" : "booking__button-inactive";
     }
+
 
     handleChange (event) {
       this.setState({
@@ -112,11 +114,11 @@ class Property extends React.Component {
     return (
       <div className="property">
         <section className="property__details">
-          <h1>
+          <h1><i className="fas fa-1x fa-home fa-home-icon" />
             {this.props.property.bedrooms} bedroom property in{" "}
             {this.props.property.city}
           </h1>
-          <div className="photo-carousel">
+          <div className="photo__carousel">
             <Carousel
               images={images}
               thumb={true}
@@ -127,30 +129,23 @@ class Property extends React.Component {
           <h2>
             {this.props.property.address_l1}, {this.props.property.address_l2}
           </h2>
-          <ul>
+          <ul className="property__icons">
             <li>
-              <img className="icon" src="../static/images/bed.png" />
-              {this.props.property.bedrooms}
+              <img className="icon" src="../static/images/bed.png" />{this.props.property.bedrooms}
             </li>
             <li>
-              <img className="icon" src="../static/images/bathroom.png" />
-              {this.props.property.bathrooms}
+              <img className="icon" src="../static/images/bathroom.png" /> {this.props.property.bathrooms}
             </li>
             <li>
-              <img className="icon" src="../static/images/family.png" />
-              {this.props.property.can_sleep} max
+              <img className="icon" src="../static/images/family.png" /> {this.props.property.can_sleep} max
             </li>
             <li>
-              <img className="icon" src="../static/images/money.png" />£
-              {this.props.property.price_per_night}
+              <img className="icon" src="../static/images/money.png" />£{this.props.property.price_per_night}
             </li>
           </ul>
         </section>
         <section className="property__description">
-          <button id="description"
-            className="property__description-btn"
-            onClick={this.handleToggleDescription}
-          >
+          <button id="description" className="property__description-btn" onClick={this.handleToggleDescription}>
             Description
           </button>
           <div className={this.setDescriptionClass()}>
@@ -166,17 +161,19 @@ class Property extends React.Component {
         <section className="property__booking">
            <h2>Make your booking</h2>
             <form onSubmit={this.handleSubmit}>
-                <ul className="booking__list">
-                    <li>Check-in date: {this.formatDate(this.props.startDate._d)}</li>
-                    <li>Check-out date: {this.formatDate(this.props.endDate._d)}</li>
-                    <li>Length of stay: {lengthOfStay} night{this.pluralise(lengthOfStay)}</li>
-                    <li>Price per night: {this.getCurrency(Number(this.props.property.price_per_night))}</li>
-                    <li>Total price: {this.getCurrency(this.props.property.price_per_night * lengthOfStay)}</li>
-                    <li><input onChange={this.handleChange} className="booking__name" type="text" placeholder="Name" name="name" autoComplete="on" /></li>
-                    <li><input onChange={this.handleChange} className="booking__telephone" type="text" placeholder="Telephone" name="telephone" autoComplete="on" /></li>
-                    <li><input onChange={this.handleChange} className="booking__email" type="text" placeholder="Email" name="email" autoComplete="on" /></li>
-                    <li><button type="submit" className={this.setButtonClass()}>Book now</button></li>
-                </ul>
+              <ul className="booking__list">
+                <li>&raquo; Check-in date: {this.formatDate(this.props.startDate._d)}</li>
+                <li>&raquo; Check-out date: {this.formatDate(this.props.endDate._d)}</li>
+                <li>&raquo; Length of stay: {lengthOfStay} night{this.pluralise(lengthOfStay)}</li>
+                <li>&raquo; Price per night: {this.getCurrency(Number(this.props.property.price_per_night))}</li>
+                <li>&raquo; Total price: {this.getCurrency(this.props.property.price_per_night * lengthOfStay)}</li>
+              </ul>                
+              <ul className="booking__submit">
+                  <li><input onChange={this.handleChange} className="booking__name" type="text" placeholder="Name" name="name" autoComplete="on" /></li>
+                  <li><input onChange={this.handleChange} className="booking__telephone" type="text" placeholder="Telephone" name="telephone" autoComplete="on" /></li>
+                  <li><input onChange={this.handleChange} className="booking__email" type="text" placeholder="Email" name="email" autoComplete="on" /></li>
+                  <li><button type="submit" className={this.setButtonClass()}>Book now</button></li>
+              </ul>
             </form>
         </section>
       </div>

@@ -21,7 +21,6 @@ class Header extends React.Component {
   render() {
     return (
       <header className="header">
-        <h1>
           <div className="dropdown">
             <a onClick={this.handleSubmit} className="dropdown__btn" href="/">
               <i className="fas fa-1x fa-bars" />
@@ -34,11 +33,11 @@ class Header extends React.Component {
               <a onClick={this.handleClick} name="contact" href="#">Contact Us</a>
             </div>
           </div>
-
-          <a href="/" className="margin-left">
-            Ourbnb
-          </a>
-        </h1>
+          <h1>
+            <a href="/">
+              Ourbnb
+            </a>
+          </h1>
       </header>
     );
   }
