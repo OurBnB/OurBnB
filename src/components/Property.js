@@ -164,7 +164,7 @@ class Property extends React.Component {
         </section>
 
         <section className="property__booking">
-           <h3>Make your booking</h3>
+           <h2>Make your booking</h2>
             <form onSubmit={this.handleSubmit}>
                 <ul className="booking__list">
                     <li>Check-in date: {this.formatDate(this.props.startDate._d)}</li>

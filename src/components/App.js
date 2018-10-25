@@ -22,6 +22,7 @@ class App extends React.Component {
     this.handleChangeEndDate = this.handleChangeEndDate.bind(this);
     this.handleSubmitReceiver = this.handleSubmitReceiver.bind(this);
     this.addBooking = this.addBooking.bind(this);
+    this.sentenceCase = this.sentenceCase.bind(this);
   }
 
 componentDidMount(){
@@ -29,7 +30,9 @@ componentDidMount(){
 }
 
 cityCall(city){
-  fetch(`/api/properties/${city}`)
+  const formattedCityInput = this.sentenceCase(city);
+  console.log(formattedCityInput);
+  fetch(`/api/properties/${formattedCityInput}`)
     .then(function(response) {
       return response.json();
     })
@@ -60,6 +63,14 @@ handleChangeEndDate(value){
   this.setState({ endDate: value })
 }
 
+sentenceCase(str) {
+  return str.split(" ").map(item => {
+    const word = item.split("");
+    word[0] = word[0].toUpperCase()
+    return word.join("");
+  }).join(" ");
+}
+
 addBooking (bookingData) {
   fetch('/api/booking', {
     method: 'post',
@@ -76,8 +87,8 @@ addBooking (bookingData) {
   render(){
       return <React.Fragment>
           <main className="main">
+              <Header/>
               <div className="top">
-                  <Header/>
                   <div className="landing-page">
                       <Search
                           handleSubmitReceiver={this.handleSubmitReceiver}
