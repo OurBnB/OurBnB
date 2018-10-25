@@ -20,7 +20,7 @@ class SearchResultItem extends React.Component {
                 <div className = "property-details">
                   <h3 onClick={this.handleClick} className="search__result-title">{this.props.property.address_l1}</h3>
                   <h4>{this.props.property.city}</h4>
-                  <h5>£{this.props.property.price_per_night} per night</h5>
+                  <h5>&pound;{this.props.property.price_per_night} per night</h5>
                 </div>
               </div>
 

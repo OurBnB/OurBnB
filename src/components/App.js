@@ -21,6 +21,7 @@ class App extends React.Component {
     this.handleChangeStartDate = this.handleChangeStartDate.bind(this);
     this.handleChangeEndDate = this.handleChangeEndDate.bind(this);
     this.handleSubmitReceiver = this.handleSubmitReceiver.bind(this);
+    this.addBooking = this.addBooking.bind(this);
   }
 
 componentDidMount(){
@@ -33,7 +34,9 @@ cityCall(city){
       return response.json();
     })
     .then(body => {
-      this.setState({ citySearchResults: body })
+      this.setState({
+        citySearchResults: body
+      }, () => document.location = "#results")
     })
 }
 
@@ -50,13 +53,24 @@ submittedStartEndDates(){
 }
 
 handleChangeStartDate(value){
-  // console.log(value);
   this.setState({ startDate: value })
 }
 
 handleChangeEndDate(value){
-  // console.log(value);
   this.setState({ endDate: value })
+}
+
+addBooking (bookingData) {
+  fetch('/api/booking', {
+    method: 'post',
+    body: JSON.stringify(bookingData),
+    headers: { 'Content-Type': 'application/json' }
+  }
+  ).then(response => response.json()
+  ).then(bookingId => {
+    console.log(bookingId);
+  })
+  .catch(error => res.json({ error: error.message }));
 }
 
   render(){
@@ -75,11 +89,12 @@ handleChangeEndDate(value){
                       />
                   </div>
               </div>
-              <div className="search-results-feed">
+              <div id="results" className="search-results-feed">
                   <SearchResults
                       citySearchResults={this.state.citySearchResults}
                       startDate={this.state.startDate}
                       endDate={this.state.endDate}
+                      addBooking={this.addBooking}
                   />
               </div>
           </main>

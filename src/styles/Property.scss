@@ -1,11 +1,33 @@
-// .property__details {
-//     & img {
-//         width: 16rem;
-//         height: 16rem;
-//         object-fit: cover;
-//     }
-// }
+
 @import "~react-image-carousel/lib/css/main.min.css";
+
+.property__booking {
+  min-width: 30vw;
+  & input, & button  {
+    margin: 0 0 0.7rem 0;
+    -webkit-filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.1));
+    filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.1));
+    width: 50%;
+  }
+}
+
+.property__description {
+  height: 300px;
+  &-btn {
+    margin-top: 1em;
+    -webkit-filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.1));
+    filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.1));
+    width: 50%;
+  }
+  &-hidden {
+    display: none;
+  }
+  &-text {
+    display: initial;
+    overflow: auto;
+    // min-height: 30vw;
+  }
+}
 
 .photo-carousel {
   width: 800px;
@@ -14,6 +36,25 @@
   max-height: 100vh;
   margin: 0 auto;
 }
+
+.booking__list{
+  display: flex;
+  flex-direction: column;
+}
+
+
+.booking {
+  &__button-inactive {
+      width: 100%;
+      margin: 0.7rem 0 0 0;
+      background-color: #d6d6d6;
+      color: #333;
+      &:hover {
+          background-color: #d6d6d6;
+      }
+  }
+}
+
 ul {
   list-style-type: none;
   margin: 0;
@@ -21,20 +62,27 @@ ul {
   display: flex;
   justify-content: space-evenly;
 }
-
 li {
   display: flex;
   align-items: center;
 }
-
 .icon {
   max-width: 32px;
   max-height: auto;
   margin-right: 0.5em;
 }
 
-.property__description__btn {
+.property__description-btn {
   margin-top: 1em;
+}
+
+.property__details, .property__booking, .property__description{
+   margin: 1em;
+}
+
+.property__map{
+    position: relative;
+    height: 250px;
 }
 
 @media (min-width: 768px) {
@@ -42,30 +90,44 @@ li {
     margin: 0;
     width: 50vw;
   }
-
   ul {
     display: flex;
     justify-content: flex-start;
   }
-
   li {
     margin-right: 1.5em;
   }
-
   .property__details{
       grid-area: p;
   }
-
   .property__booking{
       grid-area: b;
       min-width: 30vw;
+      & input {
+        margin: 0 0 0.7rem 0;
+        -webkit-filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.1));
+        filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.1));
+      }
+  }
+
+  .property__description{
+      grid-area: d;
+  }
+
+  .property__map{
+      grid-area: m;
+      position: relative;
+      height: 250px;
   }
 
   .property {
     display: grid;
     grid-gap: 1em;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
     grid-template-areas: 
-        'p b';
+        'p b'
+        'd d'
+        'm m';
   }
 }
+
