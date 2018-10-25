@@ -25,20 +25,21 @@ class Property extends React.Component {
       firstName: null,
       lastName: null,
       telephone: null,
-      email: null
+      email: null,
+      password: null
     };
   }
 
-componentDidMount () {
+  componentDidMount() {
     if (this.props.currentGuest.id) {
-        this.setState({
-            firstName: this.props.currentGuest.first_name,
-            lastName: this.props.currentGuest.last_name,
-            telephone: this.props.currentGuest.telephone,
-            email: this.props.currentGuest.email
-        })
+      this.setState({
+        firstName: this.props.currentGuest.first_name,
+        lastName: this.props.currentGuest.last_name,
+        telephone: this.props.currentGuest.telephone,
+        email: this.props.currentGuest.email
+      });
     }
-}
+  }
 
   handleToggleDescription() {
     this.setState(
@@ -55,23 +56,51 @@ componentDidMount () {
 
   handleSubmit(event) {
     event.preventDefault();
-    // this.props.currentGuest.id ? 
-    if (this.state.firstName && this.state.lastName && this.state.telephone && this.state.email) {
-      const today = new Date();
-      const bookingData = Object.assign({}, this.state, {
-        property_id: this.props.property.id,
-        guest_id: 1,
-        date_start: this.formatDateDB(this.props.startDate._d),
-        date_end: this.formatDateDB(this.props.endDate._d),
-        date_booked: this.formatDateDB(today)
-      });
-      delete bookingData.descriptionToggle;
+    if (this.props.currentGuest.id) {
+        const bookingData = {
+            guest_id: this.props.currentGuest.id, 
+            name: this.props.currentGuest.first_name,
+            telephone: this.props.currentGuest.telephone,
+            property_id: this.props.property.id,
+            date_start: this.formatDateDB(this.props.startDate._d),
+            date_end: this.formatDateDB(this.props.endDate._d)
+        }
+        console.log(bookingData, 'bookingData property.js')
       this.props.addBooking(bookingData);
+      delete bookingData.descriptionToggle;
+    } else {
+      if (
+        this.state.firstName &&
+        this.state.lastName &&
+        this.state.telephone &&
+        this.state.email &&
+        this.state.password
+      ) {
+        const newGuest ={
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            mobile: this.state.telephone,
+            email: this.state.email,
+            password: this.state.password
+        }
+        const bookingData = {
+            telephone: this.state.telephone,
+            property_id: this.props.property.id,
+            date_start: this.formatDateDB(this.props.startDate._d),
+            date_end: this.formatDateDB(this.props.endDate._d)
+        }
+        this.props.addBookingNewGuest(newGuest, bookingData);
+        delete bookingData.descriptionToggle;
+      }
     }
+   
   }
 
   setButtonClass() {
-    return this.state.firstName && this.state.lastName && this.state.telephone && this.state.email
+    return this.state.firstName &&
+      this.state.lastName &&
+      this.state.telephone &&
+      this.state.email
       ? "booking__button"
       : "booking__button-inactive";
   }

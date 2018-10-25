@@ -4,6 +4,7 @@ import Search from "./Search";
 import SearchResults from "./SearchResults";
 import GuestLogin from "./GuestLogin";
 import moment from "moment";
+import cx from "classnames";
 import "../styles/App.scss";
 
 class App extends React.Component {
@@ -16,7 +17,9 @@ class App extends React.Component {
       startDate: moment(),
       endDate: "",
       activeScreen: "main",
-      currentGuest: {}
+      currentGuest: {},
+      on: false,
+      confirmation: ""
     };
 
     this.cityCall = this.cityCall.bind(this);
@@ -25,10 +28,13 @@ class App extends React.Component {
     this.handleChangeEndDate = this.handleChangeEndDate.bind(this);
     this.handleSubmitReceiver = this.handleSubmitReceiver.bind(this);
     this.addBooking = this.addBooking.bind(this);
+    this.addBookingNewGuest = this.addBookingNewGuest.bind(this);
     this.sentenceCase = this.sentenceCase.bind(this);
     this.switchScreen = this.switchScreen.bind(this);
     this.addGuest = this.addGuest.bind(this);
     this.retrieveGuest = this.retrieveGuest.bind(this);
+    this.displayModal = this.displayModal.bind(this);
+    this.closeModal = this.closeModal.bind(this)
   }
 
   cityCall(city){
@@ -66,16 +72,38 @@ class App extends React.Component {
   }
 
   addBooking(bookingData) {
+    const booking = {bookingData:bookingData}
+    console.log(booking, 'booking')
     fetch("/api/booking", {
       method: "post",
-      body: JSON.stringify(bookingData),
+      body: JSON.stringify(booking),
       headers: { "Content-Type": "application/json" }
     })
     .then(response => response.json())
-    .then(bookingId => {
-      console.log(bookingId);
+    .then(data => {
+      this.setState({
+        confirmation: `Dear ${data.name}, thank you for your booking. Your ID is ${data.id}.`
+      }, ()=> this.displayModal(data))
     })
     .catch(error => res.json({ error: error.message }));
+  }
+
+  addBookingNewGuest(newGuest, bookingData){
+
+  };
+
+  displayModal() {
+    this.setState({
+      on: !this.state.on
+    });
+  }
+
+  closeModal() {
+    this.setState({
+      confirmation: "",
+      on: !this.state.on,
+      changeScreen: "main"
+    });
   }
 
   switchScreen(screen) {
@@ -131,6 +159,11 @@ class App extends React.Component {
   }
 
   render() {
+
+    const classes = cx("modal", {
+      "modal--active": this.state.on
+    });
+
     return (
       <React.Fragment>
         <main className="main">
@@ -155,6 +188,7 @@ class App extends React.Component {
                   startDate={this.state.startDate}
                   endDate={this.state.endDate}
                   addBooking={this.addBooking}
+                  addBookingNewGuest={this.addBookingNewGuest}
                   currentGuest={this.state.currentGuest}
                 />
               </div>
@@ -167,6 +201,12 @@ class App extends React.Component {
             />
           )}
         </main>
+        <div id="confirmationModal" className={classes}>
+          <span onClick={this.closeModal} className="close">
+            &times;
+          </span>
+          <p className="confirmation">{this.state.confirmation}</p>
+        </div>
       </React.Fragment>
     );
   }
