@@ -1,7 +1,7 @@
+
 @import "~react-image-carousel/lib/css/main.min.css";
 
 .property__booking {
-  grid-area: b;
   min-width: 30vw;
   & input, & button  {
     margin: 0 0 0.7rem 0;
@@ -42,6 +42,7 @@
   flex-direction: column;
 }
 
+
 .booking {
   &__button-inactive {
       width: 100%;
@@ -61,16 +62,27 @@ ul {
   display: flex;
   justify-content: space-evenly;
 }
-
 li {
   display: flex;
   align-items: center;
 }
-
 .icon {
   max-width: 32px;
   max-height: auto;
   margin-right: 0.5em;
+}
+
+.property__description-btn {
+  margin-top: 1em;
+}
+
+.property__details, .property__booking, .property__description{
+   margin: 1em;
+}
+
+.property__map{
+    position: relative;
+    height: 250px;
 }
 
 @media (min-width: 768px) {
@@ -78,20 +90,16 @@ li {
     margin: 0;
     width: 50vw;
   }
-
   ul {
     display: flex;
     justify-content: flex-start;
   }
-
   li {
     margin-right: 1.5em;
   }
-
   .property__details{
       grid-area: p;
   }
-
   .property__booking{
       grid-area: b;
       min-width: 30vw;
@@ -102,11 +110,24 @@ li {
       }
   }
 
+  .property__description{
+      grid-area: d;
+  }
+
+  .property__map{
+      grid-area: m;
+      position: relative;
+      height: 250px;
+  }
+
   .property {
     display: grid;
     grid-gap: 1em;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
     grid-template-areas: 
-        'p b';
+        'p b'
+        'd d'
+        'm m';
   }
 }
+

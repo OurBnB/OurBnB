@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/Property.scss";
 import Carousel from "react-image-carousel";
+import MapView from "./MapView"
 
 const remark = require("remark");
 const reactRenderer = require("remark-react");
@@ -144,6 +145,8 @@ class Property extends React.Component {
               {this.props.property.price_per_night}
             </li>
           </ul>
+        </section>
+        <section className="property__description">
           <button id="description"
             className="property__description-btn"
             onClick={this.handleToggleDescription}
@@ -155,6 +158,11 @@ class Property extends React.Component {
             remark().use(reactRenderer).processSync(descriptionText).contents}
           </div>
         </section>
+          
+        <section className="property__map">
+            <MapView property={this.props.property} />
+        </section>
+
         <section className="property__booking">
            <h3>Make your booking</h3>
             <form onSubmit={this.handleSubmit}>
@@ -175,5 +183,4 @@ class Property extends React.Component {
     );
   }
 }
-
 export default Property;
