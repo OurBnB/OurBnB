@@ -1,38 +1,40 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-const APIKey = 'AIzaSyBHm1z95Or8WefNxOjZ-wejrcZqEcRkVwY'
+
+const APIKey = 'AIzaSyBHm1z95Or8WefNxOjZ-wejrcZqEcRkVwY';
+
 // const AnyReactComponent = ({ text }) => <div>{ text }</div>;
 
 class MapView extends Component {
-  constructor(){
-    super()
+    constructor() {
+        super()
+    }
+
+    render() {
+        return (
+            <Map google={this.props.google} zoom={12}
+                 style={{height: '250px', width: '100%'}}
+                 initialCenter={{
+                     lat: this.props.property.lat,
+                     lng: this.props.property.lng
+                 }}>
+
+                <Marker onClick={this.onMarkerClick}
+                        title={'Property location'}/>
+
+                <InfoWindow onClose={this.onInfoWindowClose}>
+                    <div>
+                        <h1>London</h1>
+                    </div>
+                </InfoWindow>
+
+            </Map>
+        );
+    }
 }
 
-  render() {
-      return (
-        <Map google={this.props.google} zoom={12}
-            style={{ height: '250px', width: '100%' }}
-            initialCenter={{
-            lat: this.props.property.lat,
-            lng: this.props.property.lng
-          }}>
-
-          <Marker onClick={this.onMarkerClick}
-                  title={'Property location'} />
-
-          <InfoWindow onClose={this.onInfoWindowClose}>
-              <div>
-                <h1>London</h1>
-              </div>
-          </InfoWindow>
-
-        </Map>
-      );
-    }
-  }
-
 export default GoogleApiWrapper({
-  apiKey: (APIKey)
+    apiKey: (APIKey)
 })(MapView)
 
 // googleGeocoding(postCode, Key){
