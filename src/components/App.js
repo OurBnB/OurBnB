@@ -61,7 +61,6 @@ handleChangeEndDate(value){
 }
 
 addBooking (bookingData) {
-  // console.log({bookingData})
   fetch('/api/booking', {
     method: 'post',
     body: JSON.stringify(bookingData),
@@ -69,7 +68,7 @@ addBooking (bookingData) {
   }
   ).then(response => response.json()
   ).then(bookingId => {
-    console.log(bookingId)
+    console.log(bookingId);
   })
   .catch(error => res.json({ error: error.message }));
 }
