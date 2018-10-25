@@ -37,7 +37,7 @@ class Property extends React.Component {
             document.location = "#description";
           }
         })
-        
+
     }
 
     handleSubmit(event){
@@ -45,11 +45,11 @@ class Property extends React.Component {
       if (this.state.name, this.state.telephone, this.state.email) {
         // const { name, telephone, email} = this.state;
         const today = new Date();
-        const bookingData = Object.assign({}, this.state, 
-          {property_id: this.props.property.id, 
-            guest_id: 1, 
-            date_start: this.formatDateDB(this.props.startDate._d), 
-            date_end: this.formatDateDB(this.props.endDate._d), 
+        const bookingData = Object.assign({}, this.state,
+          {property_id: this.props.property.id,
+            guest_id: 1,
+            date_start: this.formatDateDB(this.props.startDate._d),
+            date_end: this.formatDateDB(this.props.endDate._d),
             date_booked: this.formatDateDB(today)
           });
         delete bookingData.descriptionToggle;
@@ -59,7 +59,7 @@ class Property extends React.Component {
 
     setButtonClass () {
       return this.state.name && this.state.telephone && this.state.email ? "booking__button" : "booking__button-inactive";
-    }  
+    }
 
     handleChange (event) {
       this.setState({
@@ -75,7 +75,7 @@ class Property extends React.Component {
     formatDateDB (dateObject) {
       return `${dateObject.getFullYear()}-${dateObject.getMonth()}-${dateObject.getDate()}`;
     }
-    
+
     getCurrency (string) {
         return string.toLocaleString("en-GB", {
           style: "currency", 
@@ -158,7 +158,7 @@ class Property extends React.Component {
             remark().use(reactRenderer).processSync(descriptionText).contents}
           </div>
         </section>
-          
+
         <section className="property__map">
             <MapView property={this.props.property} />
         </section>

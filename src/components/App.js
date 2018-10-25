@@ -34,7 +34,7 @@ cityCall(city){
       return response.json();
     })
     .then(body => {
-      this.setState({ 
+      this.setState({
         citySearchResults: body
       }, () => document.location = "#results")
     })
@@ -74,34 +74,31 @@ addBooking (bookingData) {
 }
 
   render(){
-    return(
-      <React.Fragment>
-      <Header />
-        <main className="main">
-          <div className="top">
-            <div className="landing-page">
-              <Search
-                handleSubmitReceiver={this.handleSubmitReceiver}
-                handleChangeCity={this.handleChangeCity}
-                handleChangeStartDate={this.handleChangeStartDate}
-                handleChangeEndDate={this.handleChangeEndDate}
-                cityCall={this.cityCall}
-                propertyCall={this.propertyCall}
-              />
-              <input type="hidden" value="prayer" />
-            </div>
-          </div>
-          <div id="results" className="search__results-feed">
-            <SearchResults
-              citySearchResults={this.state.citySearchResults}
-              startDate={this.state.startDate}
-              endDate={this.state.endDate}
-              addBooking={this.addBooking}
-            />
-          </div>
-        </main>
+      return <React.Fragment>
+          <main className="main">
+              <div className="top">
+                  <Header/>
+                  <div className="landing-page">
+                      <Search
+                          handleSubmitReceiver={this.handleSubmitReceiver}
+                          handleChangeCity={this.handleChangeCity}
+                          handleChangeStartDate={this.handleChangeStartDate}
+                          handleChangeEndDate={this.handleChangeEndDate}
+                          cityCall={this.cityCall}
+                          propertyCall={this.propertyCall}
+                      />
+                  </div>
+              </div>
+              <div id="results" className="search-results-feed">
+                  <SearchResults
+                      citySearchResults={this.state.citySearchResults}
+                      startDate={this.state.startDate}
+                      endDate={this.state.endDate}
+                      addBooking={this.addBooking}
+                  />
+              </div>
+          </main>
       </React.Fragment>
-    )
   }
 }
 
