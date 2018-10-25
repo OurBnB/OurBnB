@@ -45,7 +45,7 @@ app.post("/api/guestOld", (req, res) => {
   const { guestOld } = req.body;
   console.log({guestOld}, 'guestOld');
   db.one(
-    `select id, telephone from guest where email=$1 and password=$2`,
+    `select * from guest where email=$1 and password=$2`,
     [guestOld.emailOld, guestOld.passwordOld]
   )
     .then(data => {res.json(data); console.log(data, 'data')})
@@ -57,16 +57,17 @@ app.post("/api/guest", (req, res) => {
   const { guest } = req.body;
   console.log({guest}, "guest new");
   db.one(
-    "INSERT INTO guest (email, password, name, telephone) VALUES ($1, $2, $3, $4) RETURNING id",
+    "INSERT INTO guest (email, password, first_name, last_name, telephone) VALUES ($1, $2, $3, $4, $5) RETURNING id",
     [
       guest.email,
       guest.password,
-      guest.name,
+      guest.firstName,
+      guest.lastName,
       guest.mobile
     ]
   )
     .then(result => {
-      return res.json({ id: result.id, mobile: guest.mobile });
+      return res.json({ id: result.id, first_name: guest.firstName, last_name: guest.lastName, telephone: guest.mobile, password: guest.password, email: guest.email});
     })
     .catch(error => res.json({ error: error.message }));
 });

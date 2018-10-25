@@ -16,8 +16,7 @@ class App extends React.Component {
       startDate: moment(),
       endDate: "",
       activeScreen: "main",
-      guestID: "",
-      mobile: ""
+      currentGuest: {}
     };
 
     this.cityCall = this.cityCall.bind(this);
@@ -106,9 +105,9 @@ class App extends React.Component {
       })
       .then(data => {
         this.setState({
-          guestID: data.id,
-          mobile: data.mobile
-        }, ()=> console.log(this.state.guestID, this.state.mobile));
+          currentGuest: data,
+          activeScreen: 'main'
+        }, () => console.log(this.state.currentGuest));
       });
   }
 
@@ -125,9 +124,9 @@ class App extends React.Component {
     .then(response => response.json())
     .then(data => {
       this.setState({
-        guestID: data.id,
-        mobile: data.telephone
-      }, ()=> console.log(this.state.guestID, this.state.mobile));
+        currentGuest: data,
+        activeScreen: "main"
+      }, ()=> console.log(this.state.currentGuest));
     });
   }
 
@@ -156,6 +155,7 @@ class App extends React.Component {
                   startDate={this.state.startDate}
                   endDate={this.state.endDate}
                   addBooking={this.addBooking}
+                  currentGuest={this.state.currentGuest}
                 />
               </div>
             </React.Fragment>

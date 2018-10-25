@@ -1,6 +1,6 @@
 import React from "react";
 
-// import "../styles/components/login.scss";
+import "../styles/guestLogin.scss";
 
 class Login extends React.Component {
   constructor() {
@@ -9,7 +9,8 @@ class Login extends React.Component {
     this.state = {
       guest: {},
       guestOld: {},
-      name: "",
+      firstName: "",
+      lastName: "",
       email: "",
       mobile: "",
       password: "",
@@ -33,12 +34,14 @@ class Login extends React.Component {
     this.setState(
       {
         guest: {
-          name: this.state.name,
+          firstName: this.state.firstName,
+          lastName: this.state.lastName,
           email: this.state.email,
           mobile: this.state.mobile,
           password: this.state.password
         },
-        name: "",
+        firstName: "",
+        lastName: "",
         email: "",
         mobile: "",
         password: ""
@@ -67,57 +70,65 @@ class Login extends React.Component {
       <React.Fragment>
         <form className="existingGuest">
           <h2>Returning guest:</h2>
-          <label className="email">Email:</label>
           <input
             className="emailInput"
             onChange={this.handleChange}
             name="emailOld"
             type="email"
             value={this.state.emailOld}
+            placeholder='Email'
           />
-          <label className="password">Password:</label>
           <input
             className="passwordInput"
             onChange={this.handleChange}
             name="passwordOld"
             type="password"
             value={this.state.passwordOld}
+            placeholder="Password"
           />
           <button onClick={this.handleSubmitOld}>Login</button>
         </form>
         <form className="register">
           <h2>New guest:</h2>
-          <label className="name">Full Name:</label>
           <input
-            className="nameInput"
+            className="firstNameInput"
             onChange={this.handleChange}
-            name="name"
+            name="firstName"
             type="text"
-            value={this.state.name}
+            value={this.state.firstName}
+            placeholder="First name"
           />
-          <label className="email">Email:</label>
+          <input
+            className="lastNameInput"
+            onChange={this.handleChange}
+            name="lastName"
+            type="text"
+            value={this.state.lastName}
+            placeholder="Last name"
+          />
           <input
             className="emailInput"
             onChange={this.handleChange}
             name="email"
             type="email"
             value={this.state.email}
+            placeholder="Email"
           />
-          <label className="mobile">Mobile:</label>
           <input
             className="mobileInput"
             onChange={this.handleChange}
             name="mobile"
             type="number"
             value={this.state.mobile}
+            placeholder="Mobile"
           />
-          <label className="password">Password:</label>
           <input
             className="passwordInput"
             onChange={this.handleChange}
             name="password"
             type="password"
             value={this.state.password}
+            placeholder="Password"
           />
           <button onClick={this.handleSubmit}>Login</button>
         </form>
