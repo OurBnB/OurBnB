@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/Property.scss";
 import Carousel from "react-image-carousel";
+import MapView from "./MapView"
 
 const remark = require("remark");
 const reactRenderer = require("remark-react");
@@ -103,21 +104,28 @@ class Property extends React.Component {
               {this.props.property.price_per_night}
             </li>
           </ul>
-          <button
-            className="property__description__btn"
-            onClick={this.handleToggleDescription}
-          >
-            Description
-          </button>
-          {this.state.descriptionToggle &&
-            remark()
-              .use(reactRenderer)
-              .processSync(descriptionText).contents}
+</section>
+<section className="property__description">
+            <button
+                className="property__description__btn"
+                onClick={this.handleToggleDescription}
+                >
+                Description
+            </button>
+            {this.state.descriptionToggle &&
+                remark()
+                .use(reactRenderer)
+                .processSync(descriptionText).contents}
         </section>
+          
+        <section className="property__map">
+            <MapView property={this.props.property} />
+        </section>
+
         <section className="property__booking">
            <h3>Make your booking</h3>
             <form onSubmit={this.handleSubmit}>
-                <ul>
+                <ul className="booking__list">
                     <li>Check-in date: {this.formatDate(this.props.startDate._d)}</li>
                     <li>Check-out date: {this.formatDate(this.props.endDate._d)}</li>
                     <li>Length of stay: {lengthOfStay} night{this.pluralise(lengthOfStay)}</li>
@@ -132,5 +140,6 @@ class Property extends React.Component {
       </div>
     );
   }
+}
   
 export default Property;
