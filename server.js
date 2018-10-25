@@ -40,6 +40,36 @@ app.get('/api/properties/:city', function(req,res){ // allows front end access t
     })
 });
 
+//retrieves the existing guest's details
+app.post("/api/guestOld", (req, res) => {
+  const { guestOld } = req.body;
+  console.log({guestOld}, 'guestOld');
+  db.one(
+    `select id, telephone from guest where email=$1 and password=$2`,
+    [guestOld.emailOld, guestOld.passwordOld]
+  )
+    .then(data => {res.json(data); console.log(data, 'data')})
+    .catch(error => res.json({ error: error.message }));
+});
+
+//adds a new guest to the database
+app.post("/api/guest", (req, res) => {
+  const { guest } = req.body;
+  console.log({guest}, "guest new");
+  db.one(
+    "INSERT INTO guest (email, password, name, telephone) VALUES ($1, $2, $3, $4) RETURNING id",
+    [
+      guest.email,
+      guest.password,
+      guest.name,
+      guest.mobile
+    ]
+  )
+    .then(result => {
+      return res.json({ id: result.id, mobile: guest.mobile });
+    })
+    .catch(error => res.json({ error: error.message }));
+});
 
 // add a single booking to bookings table
 app.post('/api/booking', (req, res) =>{
