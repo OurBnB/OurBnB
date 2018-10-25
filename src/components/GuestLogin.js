@@ -9,7 +9,8 @@ class Login extends React.Component {
     this.state = {
       guest: {},
       guestOld: {},
-      name: "",
+      firstName: "",
+      lastName: "",
       email: "",
       mobile: "",
       password: "",
@@ -33,12 +34,14 @@ class Login extends React.Component {
     this.setState(
       {
         guest: {
-          name: this.state.name,
+          firstName: this.state.firstName,
+          lastName: this.state.lastName,
           email: this.state.email,
           mobile: this.state.mobile,
           password: this.state.password
         },
-        name: "",
+        firstName: "",
+        lastName: "",
         email: "",
         mobile: "",
         password: ""
@@ -87,13 +90,21 @@ class Login extends React.Component {
         </form>
         <form className="register">
           <h2>New guest:</h2>
-          <label className="name">Full Name:</label>
+          <label className="name">First Name:</label>
           <input
-            className="nameInput"
+            className="firstNameInput"
             onChange={this.handleChange}
-            name="name"
+            name="firstName"
             type="text"
-            value={this.state.name}
+            value={this.state.firstName}
+          />
+          <label className="name">Last Name:</label>
+          <input
+              className="lastNameInput"
+              onChange={this.handleChange}
+              name="lastName"
+              type="text"
+              value={this.state.lastName}
           />
           <label className="email">Email:</label>
           <input

@@ -10,6 +10,8 @@ const db = pgp({
     user: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD
 });
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 app.use(bodyParser.json());
 app.use('/static', express.static('static'));
@@ -18,7 +20,6 @@ app.set('view engine', 'hbs');
 app.get('/', function(req, res){
   return res.render('index');
 });
-
 app.get('/api/properties', function(req,res){ // allows front end access to all of our properties for search etc
   db.any(`SELECT * FROM property`)
     .then(function(data){
@@ -28,7 +29,6 @@ app.get('/api/properties', function(req,res){ // allows front end access to all 
       return res.json({error:error.message})
     })
 });
-
 app.get('/api/properties/:city', function(req,res){ // allows front end access to all of our properties for search etc
   const city = req.params.city
   db.any(`SELECT * FROM property WHERE city=$1`, [city])
@@ -55,20 +55,20 @@ app.post("/api/guestOld", (req, res) => {
 //adds a new guest to the database
 app.post("/api/guest", (req, res) => {
   const { guest } = req.body;
-  console.log({guest}, "guest new");
-  db.one(
-    "INSERT INTO guest (email, password, name, telephone) VALUES ($1, $2, $3, $4) RETURNING id",
-    [
-      guest.email,
-      guest.password,
-      guest.name,
-      guest.mobile
-    ]
-  )
-    .then(result => {
+  //console.log({guest}, "guest new");
+  bcrypt.hash(guest.password, saltRounds)
+      .then(function(hash) {
+          console.log(hash);
+          console.log(guest.password);
+          return db.one(
+              "INSERT INTO guest (email, password, first_name, last_name, telephone, hash) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id",
+              [guest.email, guest.password, guest.firstName, guest.lastName, guest.mobile, hash]
+          )
+        })
+      .then(result => {
       return res.json({ id: result.id, mobile: guest.mobile });
-    })
-    .catch(error => res.json({ error: error.message }));
+        })
+      .catch(error => res.json({ error: error.message }));
 });
 
 // add a single booking to bookings table
