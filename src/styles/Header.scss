@@ -1,37 +1,58 @@
-$header-colour: #eee;
+$header-colour: rgba(50, 80, 145, 0.9);
+$dropdown-colour: #eee;
 $light-colour: white;
 $mid-red-color: rgb(252, 92, 99);
 $dark-red-color: rgb(217, 57, 70);
 
-.header {
-  background-color: $header-colour;
-  padding: 0 1rem;
+.header,  .header-login {
+  padding: 0;
   margin: 0;
   display: block;
   min-width: 50%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start; // space-between;
   align-items: center;
-
   & h1 {
     font-size: 1.3rem;
-    font-weight: 400;
+    font-weight: 400; 
+    opacity: 1;
+    &:hover {
+      opacity: 0.7;
+    }
   }
+}
+
+.header {
+  background-color: $header-colour;
   & a {
     text-decoration: none;
-    color: $mid-red-color; // rgb(252, 92, 99);
-  }
+    color: white;    
+  } 
+}
+
+
+.header-login {
+  background: rgb(245, 238, 238);
+  & a {
+    text-decoration: none;
+    color: $mid-red-color;    
+  } 
 }
 
 /* Style The Dropdown Button */
 .dropdown__btn {
-  background-color: $header-colour;
+  padding: 1.7rem 0.7rem 1.7rem 1.7rem;
   color: $mid-red-color;
-  font-size: 16px;
+  font-size: 1.4rem;
   border: none;
   cursor: pointer;
-  box-shadow: none;
+  box-shadow: none;    
+  opacity: 1;
+  &:hover {
+    opacity: 0.7;
+  }
+
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -44,11 +65,14 @@ $dark-red-color: rgb(217, 57, 70);
 .dropdown__content {
   display: none;
   position: absolute;
-  background-color: $header-colour;
-  min-width: 160px;
-  box-shadow: 8px 8px 16px 8px rgba(0, 0, 0, 0.2);
+  background-color: $dropdown-colour;
+  min-width: 200px;
+  -webkit-filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.3));
+  filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.3));
   z-index: 1;
-  border-radius: 5px;
+  border-radius: 0.3rem;
+  top: 2.2rem;
+  left: 1.7rem;
 }
 
 /* Links inside the dropdown */
@@ -63,6 +87,8 @@ $dark-red-color: rgb(217, 57, 70);
 /* Change color of dropdown links on hover */
 .dropdown__content a:hover {
   background-color: $mid-red-color;
+  color: #fff;
+  border-radius: 0.3rem;
 }
 
 /* Show the dropdown menu on hover */

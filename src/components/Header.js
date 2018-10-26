@@ -7,6 +7,9 @@ class Header extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.state = {
+
+    }
   }
 
   handleSubmit(e) {
@@ -19,14 +22,13 @@ class Header extends React.Component {
   }
 
   render() {
+    const headerClass = this.props.activeScreen === "main" ? "header" : "header-login"
     return (
-      <header className="header">
-        <h1>
+      <header className={headerClass}>
           <div className="dropdown">
             <a onClick={this.handleSubmit} className="dropdown__btn" href="/">
               <i className="fas fa-1x fa-bars" />
             </a>
-
             <div className="dropdown__content">
               <a onClick={this.handleClick} name="guestLogin" href="#">Guest Login</a>
               <a onClick={this.handleClick} name="hostLogin" href="#">Host Login</a>
@@ -34,11 +36,11 @@ class Header extends React.Component {
               <a onClick={this.handleClick} name="contact" href="#">Contact Us</a>
             </div>
           </div>
-
-          <a href="/" className="margin-left">
-            Ourbnb
-          </a>
-        </h1>
+          <h1>
+            <a href="/">
+              Ourbnb
+            </a>
+          </h1>
       </header>
     );
   }

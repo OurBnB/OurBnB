@@ -39,19 +39,15 @@ class App extends React.Component {
 
   cityCall(city) {
     const formattedCityInput = this.sentenceCase(city);
-    console.log(formattedCityInput);
     fetch(`/api/properties/${formattedCityInput}`)
       .then(function(response) {
         return response.json();
       })
       .then(body => {
-        this.setState(
-          {
-            citySearchResults: body
-          },
-          () => (document.location = "#results")
-        );
-      });
+        this.setState({
+          citySearchResults: body
+        }, () => document.location = "#results__page-top")
+      })
   }
 
   handleChangeCity(value) {
@@ -192,7 +188,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <main className="main">
-          <Header switchScreen={this.switchScreen} />
+          <Header switchScreen={this.switchScreen} activeScreen={this.state.activeScreen}/>
           {this.state.activeScreen === "main" && (
             <React.Fragment>
               <div className="top">
@@ -207,16 +203,19 @@ class App extends React.Component {
                   />
                 </div>
               </div>
-              <div id="results" className="search-results-feed">
-                <SearchResults
-                  citySearchResults={this.state.citySearchResults}
-                  startDate={this.state.startDate}
-                  endDate={this.state.endDate}
-                  addBooking={this.addBooking}
-                  addBookingNewGuest={this.addBookingNewGuest}
-                  currentGuest={this.state.currentGuest}
-                />
-              </div>
+              {this.state.citySearchResults.length ?
+              <div id="results__page-top" className="results__page-top">
+                <div id="results" className="search__results-feed">
+                  <SearchResults
+                    citySearchResults={this.state.citySearchResults}
+                    startDate={this.state.startDate}
+                    endDate={this.state.endDate}
+                    addBooking={this.addBooking}
+                    citySearch={this.state.citySearch}
+                  />
+                </div>
+              </div> : null
+            }
             </React.Fragment>
           )}
           {this.state.activeScreen === "guestLogin" && (

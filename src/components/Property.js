@@ -54,6 +54,7 @@ class Property extends React.Component {
     );
   }
 
+
   handleSubmit(event) {
     event.preventDefault();
     if (this.props.currentGuest.id) {
@@ -96,6 +97,11 @@ class Property extends React.Component {
    
   }
 
+    formatDate (dateObject) {
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      return `${dateObject.getDate()} ${months[dateObject.getMonth()]} ${dateObject.getFullYear()}`;
+    }
+  
   setButtonClass() {
     return this.state.firstName &&
       this.state.lastName &&
@@ -109,26 +115,6 @@ class Property extends React.Component {
     this.setState({
       [event.target.name]: event.target.value
     });
-  }
-
-  formatDate(dateObject) {
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "June",
-      "July",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec"
-    ];
-    return `${dateObject.getDate()} of ${
-      months[dateObject.getMonth()]
-    } ${dateObject.getFullYear()}`;
   }
 
   formatDateDB(dateObject) {
@@ -177,11 +163,11 @@ class Property extends React.Component {
     return (
       <div className="property">
         <section className="property__details">
-          <h1>
+          <h1><i className="fas fa-1x fa-home fa-home-icon" />
             {this.props.property.bedrooms} bedroom property in{" "}
             {this.props.property.city}
           </h1>
-          <div className="photo-carousel">
+          <div className="photo__carousel">
             <Carousel
               images={images}
               thumb={true}
@@ -192,31 +178,24 @@ class Property extends React.Component {
           <h2>
             {this.props.property.address_l1}, {this.props.property.address_l2}
           </h2>
-          <ul>
+          <ul className="property__icons">
             <li>
-              <img className="icon" src="../static/images/bed.png" />
-              {this.props.property.bedrooms}
+              <img className="icon" src="../static/images/bed.png" />{this.props.property.bedrooms}
             </li>
             <li>
-              <img className="icon" src="../static/images/bathroom.png" />
-              {this.props.property.bathrooms}
+              <img className="icon" src="../static/images/bathroom.png" /> {this.props.property.bathrooms}
             </li>
             <li>
-              <img className="icon" src="../static/images/family.png" />
-              {this.props.property.can_sleep} max
+              <img className="icon" src="../static/images/family.png" /> {this.props.property.can_sleep} max
             </li>
             <li>
-              <img className="icon" src="../static/images/money.png" />£
-              {this.props.property.price_per_night}
+              <img className="icon" src="../static/images/money.png" />&pound;{Number(this.props.property.price_per_night)}
             </li>
           </ul>
         </section>
         <section className="property__description">
-          <button
-            id="description"
-            className="property__description-btn"
-            onClick={this.handleToggleDescription}
-          >
+
+          <button id="description" className="property__description-btn" onClick={this.handleToggleDescription}>
             Description
           </button>
           <div className={this.setDescriptionClass()}>
@@ -232,129 +211,24 @@ class Property extends React.Component {
         </section>
 
         <section className="property__booking">
-          <h2>Make your booking</h2>
-          <form onSubmit={this.handleSubmit}>
-            <ul className="booking__list">
-              <li>Check-in date: {this.formatDate(this.props.startDate._d)}</li>
-              <li>Check-out date: {this.formatDate(this.props.endDate._d)}</li>
-              <li>
-                Length of stay: {lengthOfStay} night
-                {this.pluralise(lengthOfStay)}
-              </li>
-              <li>
-                Price per night:{" "}
-                {this.getCurrency(Number(this.props.property.price_per_night))}
-              </li>
-              <li>
-                Total price:{" "}
-                {this.getCurrency(
-                  this.props.property.price_per_night * lengthOfStay
-                )}
-              </li>
-              {this.props.currentGuest.id ? (
-                <React.Fragment>
-                  <li>
-                    <input
-                      onChange={this.handleChange}
-                      className="booking__fistName"
-                      type="text"
-                      value={this.props.currentGuest.first_name}
-                      name="firstName"
-                      autoComplete="on"
-                    />
-                  </li>
-                  <li>
-                    <input
-                      onChange={this.handleChange}
-                      className="booking__lastName"
-                      type="text"
-                      value={this.props.currentGuest.last_name}
-                      name="lastName"
-                      autoComplete="on"
-                    />
-                  </li>
-                  <li>
-                    <input
-                      onChange={this.handleChange}
-                      className="booking__telephone"
-                      type="text"
-                      value={this.props.currentGuest.telephone}
-                      name="telephone"
-                      autoComplete="on"
-                    />
-                  </li>
-                  <li>
-                    <input
-                      onChange={this.handleChange}
-                      className="booking__email"
-                      type="text"
-                      value={this.props.currentGuest.email}
-                      name="email"
-                      autoComplete="on"
-                    />
-                  </li>
-                </React.Fragment>
-              ) : (
-                <React.Fragment>
-                  <li>
-                    <input
-                      onChange={this.handleChange}
-                      className="booking__firstName"
-                      type="text"
-                      placeholder="First Name"
-                      name="firstName"
-                      autoComplete="on"
-                    />
-                  </li>
-                  <li>
-                    <input
-                      onChange={this.handleChange}
-                      className="booking__lastName"
-                      type="text"
-                      placeholder="Last Name"
-                      name="lastName"
-                      autoComplete="on"
-                    />
-                  </li>
-                  <li>
-                    <input
-                      onChange={this.handleChange}
-                      className="booking__telephone"
-                      type="text"
-                      placeholder="Telephone"
-                      name="telephone"
-                      autoComplete="on"
-                    />
-                  </li>
-                  <li>
-                    <input
-                      onChange={this.handleChange}
-                      className="booking__email"
-                      type="text"
-                      placeholder="Email"
-                      name="email"
-                      autoComplete="on"
-                    />
-                  </li>
-                  <li>
-                    <input
-                      onChange={this.handleChange}
-                      className="booking__password"
-                      type="password"
-                      placeholder="Password"
-                      name="password"
-                      autoComplete="on"
-                    />
-                  </li>
-                </React.Fragment>
-              )}
-              <li>
-                <button type="submit" className={this.setButtonClass()}>
-                  Book now
-                </button>
-              </li>
-            </ul>
-          </form>
+
+           <h2>Make your booking</h2>
+            <form onSubmit={this.handleSubmit}>
+              <ul className="booking__list">
+                <li>&raquo; Check-in: {this.formatDate(this.props.startDate._d)}</li>
+                <li>&raquo; Check-out: {this.formatDate(this.props.endDate._d)}</li>
+                <li>&raquo; Length of stay: {lengthOfStay} night{this.pluralise(lengthOfStay)}</li>
+                <li>&raquo; Price per night: {this.getCurrency(this.props.property.price_per_night)}</li>
+                <li>&raquo; Total price: {this.getCurrency(this.props.property.price_per_night * lengthOfStay)}</li>
+              </ul>                
+              <ul className="booking__submit">
+                  <li><input onChange={this.handleChange} className="booking__name" type="text" placeholder="Name" name="name" autoComplete="on" /></li>
+                  <li><input onChange={this.handleChange} className="booking__telephone" type="text" placeholder="Telephone" name="telephone" autoComplete="on" /></li>
+                  <li><input onChange={this.handleChange} className="booking__email" type="text" placeholder="Email" name="email" autoComplete="on" /></li>
+                  <li><button type="submit" className={this.setButtonClass()}>Book now</button></li>
+              </ul>
+            </form>
+
         </section>
       </div>
     );

@@ -2,29 +2,74 @@ import React, {Component} from 'react'
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 const APIKey = 'AIzaSyBHm1z95Or8WefNxOjZ-wejrcZqEcRkVwY';
+// https://itnext.io/google-maps-react-makes-adding-google-maps-api-to-a-react-app-a-breeze-effb7b89e54
 
 class MapView extends Component {
     constructor() {
-        super()
+        super();
+        this.handleToggleOpen = this.handleToggleOpen.bind(this);
+        this.handleToggleClose = this.handleToggleClose.bind(this);
+        this.onMapClick = this.onMapClick.bind(this);
+        
+    	this.state = {
+            isOpen: false,
+            activeMarker: {}
+        }
+    }
+
+    onMapClick () {
+        if (this.state.isOpen) {
+            this.setState({
+                isOpen: false,
+                activeMarker: null
+            });
+        }
+    }
+
+    handleToggleOpen (marker, event) {
+        console.log(marker);
+        this.setState({
+          activeMarker: marker,
+          isOpen: true
+        });
+    }
+
+    handleToggleClose(event) {
+        console.log("handleToggleClose")
+        this.setState({
+            isOpen: false
+        });
     }
 
     render() {
         return (
-            <Map google={this.props.google} zoom={12}
-                 style={{height: '250px', width: '100%'}}
-                 initialCenter={{
-                     lat: this.props.property.lat,
-                     lng: this.props.property.lng
-                 }}>
+            <Map 
+                google={this.props.google} zoom={16}
+                style={{height: '250px', width: '100%'}}
+                onClick={this.onMapClick}
+                initialCenter={{
+                    lat: this.props.property.lat,
+                    lng: this.props.property.lng
+                }}
+            >
 
-                <Marker onClick={this.onMarkerClick}
-                        title={'Property location'}/>
-
-                <InfoWindow onClose={this.onInfoWindowClose}>
+                <Marker 
+                    title={'Property location'}
+                    name={this.props.property.address_l1}
+                    onClick={this.handleToggleOpen}
+                />
+                
+                { this.state.isOpen &&
+                <InfoWindow 
+                    marker={this.state.activeMarker} 
+                    onCloseClick={this.handleToggleClose}
+                    visible={this.state.isOpen}  
+                >
                     <div>
-                        <h1>London</h1>
+                        <h1>Property; {this.props.property.address_l1}</h1>
                     </div>
                 </InfoWindow>
+                }
 
             </Map>
         );

@@ -1,45 +1,54 @@
 
 $header-colour: #eee;
 $light-colour: white;
+$dark-red-color: rgb(217, 57, 70);
 
 .search {
     &__result-title {
-        background-color: $header-colour;
-        cursor: pointer;
-        font-size: 16px;
-        &:hover {
-            background-color: #ddd;
-        }
+        font-size: 1.2rem;
+        font-weight: 700;
+    }
+    &__result {
+      min-width: 20rem; 
+      width: 100%; 
+      max-width: 70vw;
+      background-color: rgb(243, 243, 243);
+      opacity: 0.7;
+      &:hover {
+        opacity: 1;
+      }
+      border-radius: 0.3rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      margin-top: 1rem;
+      &-image {
+        margin-right: 1rem;
+        object-fit: cover;
+        max-width: 30%;
+        max-height: 30%;
+        min-width: 8rem;
+        min-height: 8rem;
+        border-radius: 0.3rem 0 0 0.3rem;
+        flex: 1;
+      }
     }
 }
 
-.property-image {
-  margin-right: 10px;
-  width: 50%;
-  height: 100%;
-  border-radius: 5px;
-  flex: 1;
-}
-
-.search-result{
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
-}
-
-.property-details {
+.search__result-details {
   display: flex;
   flex-direction: column;
   flex: 1;
+  padding: 1rem 1rem 1rem 0;
 }
-.property-city {
-  font-size: 10px;
+.search__result-city {
+  font-size: 1rem;
 }
 
-.property-price {
-  font-size: 12px;
+.search__result-price {
+  font-size: 1rem;
 }
-h2, h3, h4, h5, h6{
-  margin: 0 0 0 0;
-  font-family: 'Varela Round', sans-serif;
+
+h2, h3, h4, h5, h6 {
+  margin: 0;
 }

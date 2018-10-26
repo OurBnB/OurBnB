@@ -22,21 +22,23 @@ class SearchResults extends React.Component {
 backToResults() {
   this.setState({
     display: "searchResults"
-  }, () => document.location = "#results")
+  }, () => document.location = "#results__page-top")
 }
 
 receiveDisplayProperty(property) {
   this.setState({
     display: "property",
     property: property
-  }, () => document.location = "#results")
+  }, () => document.location = "#results__page-top")
 }
 
 render(){
 
-  const searchResults = this.props.citySearchResults.map(property => {
-    return(
-      <React.Fragment key={property.id}>
+  const searchResults = 
+ <React.Fragment>
+    <h2><i className="fas fa-1x fa-map-marker-alt" />Results for places in {this.props.citySearch}</h2>
+    {this.props.citySearchResults.map(property => {
+    return <React.Fragment key={property.id}>
         <SearchResultItem
           key={property.id}
           property={property}
@@ -45,8 +47,8 @@ render(){
           endDate={this.props.endDate}
         />
       </React.Fragment>
-    )
-  })
+  })}
+</React.Fragment>
 
   const selectedProperty = this.state.property &&
     <React.Fragment>

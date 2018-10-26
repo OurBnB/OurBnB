@@ -35,7 +35,8 @@ class Search extends React.Component {
   }
 
   setButtonClass () {
-    return this.state.startDate && this.state.endDate && this.state.city ? "search__button" : "search__button-inactive";
+    const valid = this.state.startDate && this.state.endDate && this.state.city;
+    return valid ? "search__button" : "search__button-inactive";
   }
 
   handleChangeCity(event){
@@ -49,7 +50,7 @@ class Search extends React.Component {
     return(
       <React.Fragment>
         <form onSubmit={this.handleSubmit} className="search__form">
-          <input onChange={this.handleChangeCity} className="search__city" type="text" placeholder="Destination" name="city" autoComplete="off" />
+          <input defaultValue="London" onChange={this.handleChangeCity} className="search__city" type="text" placeholder="Destination" name="city" autoComplete="off" />
           <div className="search__dates">
 
             <div className="myDatePickerContainer myDatePickerStart">
