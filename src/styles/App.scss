@@ -1,4 +1,4 @@
-$button-color: rgb(252, 92, 99) !default;;
+$button-color: rgb(252, 92, 99) !default;
 $button-hover-color:rgb(217, 57, 70) !default;
 
 * {
@@ -21,12 +21,7 @@ body {
   margin: 0;
   box-sizing: border-box;
   background-color: #fff;
-  // font-family: 'Montserrat', sans-serif;
   font-family: 'Varela Round', sans-serif;
-  // font-family: 'Poppins', sans-serif;
-  // font-family: 'M PLUS 1p', sans-serif;
-  // font-family: 'Encode Sans Semi Expanded', sans-serif;
-  // font-family: 'Raleway', sans-serif;
   letter-spacing: 0.03rem;
   font-size: 1rem;
   height: 100vh;
@@ -130,8 +125,7 @@ button {
   margin-right: 1rem;
 }
 
-
-.fa-home-icon, .fa-map-marker-alt, .fa-user {
+.fa-home-icon, .fa-map-marker-alt {
   color: $button-color;
   margin-right: 0.5rem;
 }

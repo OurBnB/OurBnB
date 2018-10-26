@@ -91,18 +91,20 @@ class App extends React.Component {
   }
 
   addBookingNewGuest(newGuest, bookingData) {
-    this.addGuest(newGuest).then(response => {
-      const completeData = Object.assign(
-        {},
-        { bookingData },
-        {
-          guest_id: response.id,
-          name: response.first_name,
-          telephone: response.telephone
-        }
-      );
-      this.addBooking(completeData);
-    });
+    this.addGuest(newGuest)
+      .then(currentGuest => {
+        console.log('addBookingNewGuest(', newGuest, bookingData, ')')
+        const completeData = Object.assign(
+          {},
+          { bookingData },
+          {
+            guest_id: currentGuest.id,
+            name: currentGuest.first_name,
+            telephone: currentGuest.telephone
+          }
+        );
+        this.addBooking(completeData);
+      });
   }
 
   displayModal() {
@@ -137,7 +139,7 @@ class App extends React.Component {
   addGuest(guest) {
     const user = { guest: guest };
     console.log(user, "addGuest");
-    fetch("http://localhost:8080/api/guest", {
+    return fetch("http://localhost:8080/api/guest", {
       method: "post",
       body: JSON.stringify(user),
       headers: {
@@ -150,14 +152,15 @@ class App extends React.Component {
       .then(data => {
         this.setState(
           {
-            currentGuest: data
-            // activeScreen: 'main'
+            currentGuest: data,
+            activeScreen: this.state.activeScreen === 'guestLogin' ? "main" : this.state.activeScreen
           },
-          () => console.log(this.state.currentGuest)
+          () => console.log('current guest', this.state.currentGuest)
         );
+        return data
       });
   }
-
+ 
   retrieveGuest(guestOld) {
     const user = { guestOld: guestOld };
     console.log(user, "retrieveGuest");

@@ -1,9 +1,7 @@
-.existingGuest, .register{
-    margin: 1em;
-    align-self: center;
-}
 
-input{
-    margin-right: 1em;
-    margin-bottom: 1em;
+$mid-red-color: rgb(252, 92, 99);
+
+.guest-page {
+    margin-right: 0.5rem;
+    color: $mid-red-color;
 }

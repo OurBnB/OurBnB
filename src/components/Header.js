@@ -22,9 +22,10 @@ class Header extends React.Component {
   }
 
   render() {
-    const headerClass = this.props.activeScreen === "main" ? "header" : "header-login"
+    const headerClass = this.props.activeScreen === "main" ? "header__browse" : "header__login"
     return (
-      <header className={headerClass}>
+      <div className={headerClass}>
+        <header className="header__home">
           <div className="dropdown">
             <a onClick={this.handleSubmit} className="dropdown__btn" href="/">
               <i className="fas fa-1x fa-bars" />
@@ -37,11 +38,15 @@ class Header extends React.Component {
             </div>
           </div>
           <h1>
-            <a href="/">
-              Ourbnb
-            </a>
+            <a href="/">Ourbnb</a>
           </h1>
-      </header>
+        </header>
+        <div className="header__guest">
+          <h1>
+          <i className="fas fa-1x fa-user margin-right-user" /> Welcome Tom
+          </h1>
+        </div>
+      </div>
     );
   }
 }

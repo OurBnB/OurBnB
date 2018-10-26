@@ -70,7 +70,7 @@ class Login extends React.Component {
       <React.Fragment>
 
         <form className="existing__guest">
-          <h1><i class="fas fa-1x fa-user" />Guest login</h1>
+          <h1><i className="fas fa-1x fa-user guest-page" />Guest login</h1>
           <h2>Returning guest</h2>
           <input
             className="emailInput"
