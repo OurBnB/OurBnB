@@ -57,6 +57,8 @@ render(){
         startDate={this.props.startDate}
         endDate={this.props.endDate}
         addBooking={this.props.addBooking}
+        addBookingNewGuest={this.props.addBookingNewGuest}
+        currentGuest={this.props.currentGuest}
       />
     </React.Fragment>
 

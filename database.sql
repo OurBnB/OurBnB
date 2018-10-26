@@ -356,11 +356,11 @@ UPDATE property
   SET lat = -33.8708464, lng = 151.20733
      WHERE id = 10
 
-ALTER TABLE booking
-   ADD COLUMN name varchar(50) NOT NULL;
+-- ALTER TABLE booking
+--    ADD COLUMN name varchar(50) NOT NULL;
 
-ALTER TABLE booking
-   ADD COLUMN telephone varchar(50) NOT NULL;
+-- ALTER TABLE booking
+--    ADD COLUMN telephone varchar(50) NOT NULL;
 
-ALTER TABLE booking
-   ADD COLUMN email varchar(50) NOT NULL;
+-- ALTER TABLE booking
+--    ADD COLUMN email varchar(50) NOT NULL;
