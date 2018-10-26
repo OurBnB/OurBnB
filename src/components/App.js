@@ -34,10 +34,10 @@ class App extends React.Component {
     this.addGuest = this.addGuest.bind(this);
     this.retrieveGuest = this.retrieveGuest.bind(this);
     this.displayModal = this.displayModal.bind(this);
-    this.closeModal = this.closeModal.bind(this)
+    this.closeModal = this.closeModal.bind(this);
   }
 
-  cityCall(city){
+  cityCall(city) {
     const formattedCityInput = this.sentenceCase(city);
     console.log(formattedCityInput);
     fetch(`/api/properties/${formattedCityInput}`)
@@ -45,10 +45,13 @@ class App extends React.Component {
         return response.json();
       })
       .then(body => {
-        this.setState({
-          citySearchResults: body
-        }, () => document.location = "#results")
-      })
+        this.setState(
+          {
+            citySearchResults: body
+          },
+          () => (document.location = "#results")
+        );
+      });
   }
 
   handleChangeCity(value) {
@@ -72,25 +75,39 @@ class App extends React.Component {
   }
 
   addBooking(bookingData) {
-    const booking = {bookingData:bookingData}
-    console.log(booking, 'booking')
+    const booking = { bookingData: bookingData };
+    console.log(booking, "booking");
     fetch("/api/booking", {
       method: "post",
       body: JSON.stringify(booking),
       headers: { "Content-Type": "application/json" }
     })
-    .then(response => response.json())
-    .then(data => {
-      this.setState({
-        confirmation: `Dear ${data.name}, thank you for your booking. Your ID is ${data.id}.`
-      }, ()=> this.displayModal(data))
-    })
-    .catch(error => res.json({ error: error.message }));
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          confirmation: `Dear ${
+            data.name
+          }, thank you for your booking. Your ID is ${data.id}.`
+        });
+        this.displayModal(data);
+      })
+      .catch(error => res.json({ error: error.message }));
   }
 
-  addBookingNewGuest(newGuest, bookingData){
-
-  };
+  addBookingNewGuest(newGuest, bookingData) {
+    this.addGuest(newGuest).then(response => {
+      const completeData = Object.assign(
+        {},
+        { bookingData },
+        {
+          guest_id: response.id,
+          name: response.first_name,
+          telephone: response.telephone
+        }
+      );
+      this.addBooking(completeData);
+    });
+  }
 
   displayModal() {
     this.setState({
@@ -111,16 +128,19 @@ class App extends React.Component {
   }
 
   sentenceCase(str) {
-    return str.split(" ").map(item => {
-      const word = item.split("");
-      word[0] = word[0].toUpperCase()
-      return word.join("");
-    }).join(" ");
+    return str
+      .split(" ")
+      .map(item => {
+        const word = item.split("");
+        word[0] = word[0].toUpperCase();
+        return word.join("");
+      })
+      .join(" ");
   }
 
   addGuest(guest) {
     const user = { guest: guest };
-    console.log(user, 'addGuest');
+    console.log(user, "addGuest");
     fetch("http://localhost:8080/api/guest", {
       method: "post",
       body: JSON.stringify(user),
@@ -132,16 +152,19 @@ class App extends React.Component {
         return response.json();
       })
       .then(data => {
-        this.setState({
-          currentGuest: data,
-          activeScreen: 'main'
-        }, () => console.log(this.state.currentGuest));
+        this.setState(
+          {
+            currentGuest: data
+            // activeScreen: 'main'
+          },
+          () => console.log(this.state.currentGuest)
+        );
       });
   }
 
   retrieveGuest(guestOld) {
     const user = { guestOld: guestOld };
-    console.log(user, 'retrieveGuest');
+    console.log(user, "retrieveGuest");
     fetch("http://localhost:8080/api/guestOld", {
       method: "post",
       body: JSON.stringify(user),
@@ -149,17 +172,19 @@ class App extends React.Component {
         "Content-Type": "application/json"
       }
     })
-    .then(response => response.json())
-    .then(data => {
-      this.setState({
-        currentGuest: data,
-        activeScreen: "main"
-      }, ()=> console.log(this.state.currentGuest));
-    });
+      .then(response => response.json())
+      .then(data => {
+        this.setState(
+          {
+            currentGuest: data,
+            activeScreen: "main"
+          },
+          () => console.log(this.state.currentGuest)
+        );
+      });
   }
 
   render() {
-
     const classes = cx("modal", {
       "modal--active": this.state.on
     });
