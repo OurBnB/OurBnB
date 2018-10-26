@@ -22,14 +22,14 @@ class SearchResults extends React.Component {
 backToResults() {
   this.setState({
     display: "searchResults"
-  }, () => document.location = "#results")
+  }, () => document.location = "#results__page-top")
 }
 
 receiveDisplayProperty(property) {
   this.setState({
     display: "property",
     property: property
-  }, () => document.location = "#results")
+  }, () => document.location = "#results__page-top")
 }
 
 render(){

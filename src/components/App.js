@@ -41,7 +41,7 @@ class App extends React.Component {
       .then(body => {
         this.setState({
           citySearchResults: body
-        }, () => document.location = "#results")
+        }, () => document.location = "#results__page-top")
       })
   }
 
@@ -150,14 +150,16 @@ class App extends React.Component {
                 </div>
               </div>
               {this.state.citySearchResults.length ?
-              <div id="results" className="search__results-feed">
-                <SearchResults
-                  citySearchResults={this.state.citySearchResults}
-                  startDate={this.state.startDate}
-                  endDate={this.state.endDate}
-                  addBooking={this.addBooking}
-                  citySearch={this.state.citySearch}
-                />
+              <div id="results__page-top" className="results__page-top">
+                <div id="results" className="search__results-feed">
+                  <SearchResults
+                    citySearchResults={this.state.citySearchResults}
+                    startDate={this.state.startDate}
+                    endDate={this.state.endDate}
+                    addBooking={this.addBooking}
+                    citySearch={this.state.citySearch}
+                  />
+                </div>
               </div> : null
             }
             </React.Fragment>

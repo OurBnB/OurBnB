@@ -62,7 +62,6 @@ class Property extends React.Component {
       return valid ? "booking__button" : "booking__button-inactive";
     }
 
-
     handleChange (event) {
       this.setState({
           [event.target.name]: event.target.value
@@ -71,7 +70,7 @@ class Property extends React.Component {
 
     formatDate (dateObject) {
       const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
-      return `${dateObject.getDate()} of ${months[dateObject.getMonth()]} ${dateObject.getFullYear()}`;
+      return `${dateObject.getDate()} ${months[dateObject.getMonth()]} ${dateObject.getFullYear()}`;
     }
 
     formatDateDB (dateObject) {
@@ -140,7 +139,7 @@ class Property extends React.Component {
               <img className="icon" src="../static/images/family.png" /> {this.props.property.can_sleep} max
             </li>
             <li>
-              <img className="icon" src="../static/images/money.png" />£{this.props.property.price_per_night}
+              <img className="icon" src="../static/images/money.png" />&pound;{Number(this.props.property.price_per_night)}
             </li>
           </ul>
         </section>
@@ -162,10 +161,10 @@ class Property extends React.Component {
            <h2>Make your booking</h2>
             <form onSubmit={this.handleSubmit}>
               <ul className="booking__list">
-                <li>&raquo; Check-in date: {this.formatDate(this.props.startDate._d)}</li>
-                <li>&raquo; Check-out date: {this.formatDate(this.props.endDate._d)}</li>
+                <li>&raquo; Check-in: {this.formatDate(this.props.startDate._d)}</li>
+                <li>&raquo; Check-out: {this.formatDate(this.props.endDate._d)}</li>
                 <li>&raquo; Length of stay: {lengthOfStay} night{this.pluralise(lengthOfStay)}</li>
-                <li>&raquo; Price per night: {this.getCurrency(Number(this.props.property.price_per_night))}</li>
+                <li>&raquo; Price per night: {this.getCurrency(this.props.property.price_per_night)}</li>
                 <li>&raquo; Total price: {this.getCurrency(this.props.property.price_per_night * lengthOfStay)}</li>
               </ul>                
               <ul className="booking__submit">
