@@ -4,6 +4,7 @@ import Search from "./Search";
 import SearchResults from "./SearchResults";
 import GuestLogin from "./GuestLogin";
 import moment from "moment";
+import cx from "classnames";
 import "../styles/App.scss";
 
 class App extends React.Component {
@@ -16,8 +17,9 @@ class App extends React.Component {
       startDate: moment(),
       endDate: "",
       activeScreen: "main",
-      guestID: "",
-      mobile: ""
+      currentGuest: {},
+      on: false,
+      confirmation: ""
     };
 
     this.cityCall = this.cityCall.bind(this);
@@ -26,13 +28,16 @@ class App extends React.Component {
     this.handleChangeEndDate = this.handleChangeEndDate.bind(this);
     this.handleSubmitReceiver = this.handleSubmitReceiver.bind(this);
     this.addBooking = this.addBooking.bind(this);
+    this.addBookingNewGuest = this.addBookingNewGuest.bind(this);
     this.sentenceCase = this.sentenceCase.bind(this);
     this.switchScreen = this.switchScreen.bind(this);
     this.addGuest = this.addGuest.bind(this);
     this.retrieveGuest = this.retrieveGuest.bind(this);
+    this.displayModal = this.displayModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
-  cityCall(city){
+  cityCall(city) {
     const formattedCityInput = this.sentenceCase(city);
     fetch(`/api/properties/${formattedCityInput}`)
       .then(function(response) {
@@ -66,16 +71,52 @@ class App extends React.Component {
   }
 
   addBooking(bookingData) {
+    const booking = { bookingData: bookingData };
+    console.log(booking, "booking");
     fetch("/api/booking", {
       method: "post",
-      body: JSON.stringify(bookingData),
+      body: JSON.stringify(booking),
       headers: { "Content-Type": "application/json" }
     })
-    .then(response => response.json())
-    .then(bookingId => {
-      console.log(bookingId);
-    })
-    .catch(error => res.json({ error: error.message }));
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          confirmation: `Dear ${
+            data.name
+          }, thank you for your booking. Your ID is ${data.id}.`
+        });
+        this.displayModal(data);
+      })
+      .catch(error => res.json({ error: error.message }));
+  }
+
+  addBookingNewGuest(newGuest, bookingData) {
+    this.addGuest(newGuest).then(response => {
+      const completeData = Object.assign(
+        {},
+        { bookingData },
+        {
+          guest_id: response.id,
+          name: response.first_name,
+          telephone: response.telephone
+        }
+      );
+      this.addBooking(completeData);
+    });
+  }
+
+  displayModal() {
+    this.setState({
+      on: !this.state.on
+    });
+  }
+
+  closeModal() {
+    this.setState({
+      confirmation: "",
+      on: !this.state.on,
+      changeScreen: "main"
+    });
   }
 
   switchScreen(screen) {
@@ -83,16 +124,19 @@ class App extends React.Component {
   }
 
   sentenceCase(str) {
-    return str.split(" ").map(item => {
-      const word = item.split("");
-      word[0] = word[0].toUpperCase()
-      return word.join("");
-    }).join(" ");
+    return str
+      .split(" ")
+      .map(item => {
+        const word = item.split("");
+        word[0] = word[0].toUpperCase();
+        return word.join("");
+      })
+      .join(" ");
   }
 
   addGuest(guest) {
     const user = { guest: guest };
-    console.log(user, 'addGuest');
+    console.log(user, "addGuest");
     fetch("http://localhost:8080/api/guest", {
       method: "post",
       body: JSON.stringify(user),
@@ -104,16 +148,19 @@ class App extends React.Component {
         return response.json();
       })
       .then(data => {
-        this.setState({
-          guestID: data.id,
-          mobile: data.mobile
-        }, ()=> console.log(this.state.guestID, this.state.mobile));
+        this.setState(
+          {
+            currentGuest: data
+            // activeScreen: 'main'
+          },
+          () => console.log(this.state.currentGuest)
+        );
       });
   }
 
   retrieveGuest(guestOld) {
     const user = { guestOld: guestOld };
-    console.log(user, 'retrieveGuest');
+    console.log(user, "retrieveGuest");
     fetch("http://localhost:8080/api/guestOld", {
       method: "post",
       body: JSON.stringify(user),
@@ -121,16 +168,23 @@ class App extends React.Component {
         "Content-Type": "application/json"
       }
     })
-    .then(response => response.json())
-    .then(data => {
-      this.setState({
-        guestID: data.id,
-        mobile: data.telephone
-      }, ()=> console.log(this.state.guestID, this.state.mobile));
-    });
+      .then(response => response.json())
+      .then(data => {
+        this.setState(
+          {
+            currentGuest: data,
+            activeScreen: "main"
+          },
+          () => console.log(this.state.currentGuest)
+        );
+      });
   }
 
   render() {
+    const classes = cx("modal", {
+      "modal--active": this.state.on
+    });
+
     return (
       <React.Fragment>
         <main className="main">
@@ -171,6 +225,12 @@ class App extends React.Component {
             />
           )}
         </main>
+        <div id="confirmationModal" className={classes}>
+          <span onClick={this.closeModal} className="close">
+            &times;
+          </span>
+          <p className="confirmation">{this.state.confirmation}</p>
+        </div>
       </React.Fragment>
     );
   }

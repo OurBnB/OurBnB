@@ -1,6 +1,6 @@
 import React from "react";
 
-// import "../styles/components/login.scss";
+import "../styles/guestLogin.scss";
 
 class Login extends React.Component {
   constructor() {
@@ -9,7 +9,8 @@ class Login extends React.Component {
     this.state = {
       guest: {},
       guestOld: {},
-      name: "",
+      firstName: "",
+      lastName: "",
       email: "",
       mobile: "",
       password: "",
@@ -33,12 +34,14 @@ class Login extends React.Component {
     this.setState(
       {
         guest: {
-          name: this.state.name,
+          firstName: this.state.firstName,
+          lastName: this.state.lastName,
           email: this.state.email,
           mobile: this.state.mobile,
           password: this.state.password
         },
-        name: "",
+        firstName: "",
+        lastName: "",
         email: "",
         mobile: "",
         password: ""
@@ -65,6 +68,7 @@ class Login extends React.Component {
   render() {
     return (
       <React.Fragment>
+
         <form className="existing__guest">
           <h1><i class="fas fa-1x fa-user" />Guest login</h1>
           <h2>Returning guest</h2>
@@ -74,6 +78,7 @@ class Login extends React.Component {
             name="emailOld"
             type="email"
             value={this.state.emailOld}
+
             placeholder="Email"
           />
           <input
@@ -90,12 +95,20 @@ class Login extends React.Component {
         <form className="register">
           <h2>New guest</h2>
           <input
-            className="nameInput"
+            className="firstNameInput"
             onChange={this.handleChange}
-            name="name"
+            name="firstName"
             type="text"
-            value={this.state.name}
-            placeholder="Full Name"
+            placeholder="First name"
+            value={this.state.firstName}
+          />
+          <input
+              className="lastNameInput"
+              onChange={this.handleChange}
+              name="lastName"
+              type="text"
+              value={this.state.lastName}
+              placeholder="Last name"
           />
           <input
             className="emailInput"
@@ -112,6 +125,7 @@ class Login extends React.Component {
             type="number"
             value={this.state.mobile}
             placeholder="Telephone"
+
           />
           <input
             className="passwordInput"

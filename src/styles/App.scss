@@ -130,6 +130,7 @@ button {
   margin-right: 1rem;
 }
 
+
 .fa-home-icon, .fa-map-marker-alt, .fa-user {
   color: $button-color;
   margin-right: 0.5rem;
@@ -142,3 +143,63 @@ button {
     }
   }
 }
+
+// modal css
+
+.modal{
+  display:none;
+  position: fixed;
+  z-index:0;
+  left: 0;
+  top:0;
+  height: 100%;
+  width:100%;
+  overflow: auto;
+  background-color: #fff ;
+    .fas{
+      display: none;
+    }
+  
+}
+ .modal--active{
+  display: flex;
+  position: fixed;
+  z-index:2;
+  left: 50%;
+  top:50%;
+  height: 50%;
+  width:50%;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+  background-color: #fff;
+  border: 3px solid $button-color;
+  border-radius: 5px;
+  color: black;
+  flex-direction: column;
+}
+
+.close{
+  align-self: flex-end;
+  margin-right: .5em;
+  color: $button-color
+}
+
+span{
+  font-size: 2em;
+}
+
+.confirmation{
+  text-align: center;
+  margin: 1em;
+}
+
+@media(min-width: 768px){
+
+  .modal--active{
+    height: 30%;
+    width:30%;
+    position: fixed;
+  }
+
+}
+
