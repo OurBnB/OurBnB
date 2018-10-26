@@ -161,7 +161,7 @@ class App extends React.Component {
         );
       });
   }
-
+ 
   retrieveGuest(guestOld) {
     const user = { guestOld: guestOld };
     console.log(user, "retrieveGuest");
