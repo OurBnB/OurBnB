@@ -96,15 +96,15 @@ class Login extends React.Component {
             name="firstName"
             type="text"
             value={this.state.firstName}
-            placeholder="First name"
           />
+          <label className="name">Last Name:</label>
           <input
-            className="lastNameInput"
-            onChange={this.handleChange}
-            name="lastName"
-            type="text"
-            value={this.state.lastName}
-            placeholder="Last name"
+              className="lastNameInput"
+              onChange={this.handleChange}
+              name="lastName"
+              type="text"
+              value={this.state.lastName}
+              placeholder="Last name"
           />
           <input
             className="emailInput"
