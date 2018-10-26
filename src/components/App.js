@@ -160,7 +160,7 @@ class App extends React.Component {
         return data
       });
   }
- 
+
   retrieveGuest(guestOld) {
     const user = { guestOld: guestOld };
     console.log(user, "retrieveGuest");
@@ -210,11 +210,12 @@ class App extends React.Component {
               <div id="results__page-top" className="results__page-top">
                 <div id="results" className="search__results-feed">
                   <SearchResults
-                    citySearchResults={this.state.citySearchResults}
-                    startDate={this.state.startDate}
-                    endDate={this.state.endDate}
-                    addBooking={this.addBooking}
-                    citySearch={this.state.citySearch}
+                  citySearchResults={this.state.citySearchResults}
+                  startDate={this.state.startDate}
+                  endDate={this.state.endDate}
+                  addBooking={this.addBooking}
+                  addBookingNewGuest={this.addBookingNewGuest}
+                  currentGuest={this.state.currentGuest}
                   />
                 </div>
               </div> : null

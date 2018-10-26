@@ -59,7 +59,7 @@ class Property extends React.Component {
     event.preventDefault();
     if (this.props.currentGuest && this.props.currentGuest.id) {
         const bookingData = {
-            guest_id: this.props.currentGuest.id, 
+            guest_id: this.props.currentGuest.id,
             name: this.props.currentGuest.first_name,
             telephone: this.props.currentGuest.telephone,
             property_id: this.props.property.id,
@@ -94,14 +94,14 @@ class Property extends React.Component {
         delete bookingData.descriptionToggle;
       }
     }
-   
+
   }
 
     formatDate (dateObject) {
       const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
       return `${dateObject.getDate()} ${months[dateObject.getMonth()]} ${dateObject.getFullYear()}`;
     }
-  
+
   setButtonClass() {
     return this.state.firstName &&
       this.state.lastName &&
@@ -213,132 +213,130 @@ class Property extends React.Component {
         <section className="property__booking">
 
            <h2>Make your booking</h2>
+           <form onSubmit={this.handleSubmit}>
+                       <ul className="booking__list">
+                         <li>Check-in date: {this.formatDate(this.props.startDate._d)}</li>
+                         <li>Check-out date: {this.formatDate(this.props.endDate._d)}</li>
+                         <li>
+                           Length of stay: {lengthOfStay} night
+                           {this.pluralise(lengthOfStay)}
+                         </li>
+                         <li>
+                           Price per night:{" "}
+                           {this.getCurrency(Number(this.props.property.price_per_night))}
+                         </li>
+                         <li>
+                           Total price:{" "}
+                           {this.getCurrency(
+                             this.props.property.price_per_night * lengthOfStay
+                           )}
+                         </li>
+                         {this.props.currentGuest.id ? (
+                           <React.Fragment>
+                             <li>
+                               <input
+                                 onChange={this.handleChange}
+                                 className="booking__fistName"
+                                 type="text"
+                                 value={this.props.currentGuest.first_name}
+                                 name="firstName"
+                                 autoComplete="on"
+                               />
+                             </li>
+                             <li>
+                               <input
+                                 onChange={this.handleChange}
+                                 className="booking__lastName"
+                                 type="text"
+                                 value={this.props.currentGuest.last_name}
+                                 name="lastName"
+                                 autoComplete="on"
+                               />
+                             </li>
+                             <li>
+                               <input
+                                 onChange={this.handleChange}
+                                 className="booking__telephone"
+                                 type="text"
+                                 value={this.props.currentGuest.telephone}
+                                 name="telephone"
+                                 autoComplete="on"
+                               />
+                             </li>
+                             <li>
+                               <input
+                                 onChange={this.handleChange}
+                                 className="booking__email"
+                                 type="text"
+                                 value={this.props.currentGuest.email}
+                                 name="email"
+                                 autoComplete="on"
+                               />
+                             </li>
+                           </React.Fragment>
+                         ) : (
+                           <React.Fragment>
+                             <li>
+                               <input
+                                 onChange={this.handleChange}
+                                 className="booking__firstName"
+                                 type="text"
+                                 placeholder="First Name"
+                                 name="firstName"
+                                 autoComplete="on"
+                               />
+                             </li>
+                             <li>
+                               <input
+                                 onChange={this.handleChange}
+                                 className="booking__lastName"
+                                 type="text"
+                                 placeholder="Last Name"
+                                 name="lastName"
+                                 autoComplete="on"
+                               />
+                             </li>
+                             <li>
+                               <input
+                                 onChange={this.handleChange}
+                                 className="booking__telephone"
+                                 type="text"
+                                 placeholder="Telephone"
+                                 name="telephone"
+                                 autoComplete="on"
+                               />
+                             </li>
+                             <li>
+                               <input
+                                 onChange={this.handleChange}
+                                 className="booking__email"
+                                 type="text"
+                                 placeholder="Email"
+                                 name="email"
+                                 autoComplete="on"
+                               />
+                             </li>
+                             <li>
+                               <input
+                                 onChange={this.handleChange}
+                                 className="booking__password"
+                                 type="password"
+                                 placeholder="Password"
+                                 name="password"
+                                 autoComplete="on"
+                               />
+                             </li>
+                           </React.Fragment>
+                         )}
+                         <li>
+                           <button type="submit" className={this.setButtonClass()}>
+                             Book now
+                           </button>
+                         </li>
+                       </ul>
+                     </form>
 
-            <form onSubmit={this.handleSubmit}>
-              <ul className="booking__list">
-                <li>&raquo; Check-in: {this.formatDate(this.props.startDate._d)}</li>
-                <li>&raquo; Check-out: {this.formatDate(this.props.endDate._d)}</li>
-                <li>&raquo; Length of stay: {lengthOfStay} night{this.pluralise(lengthOfStay)}</li>
-                <li>&raquo; Price per night: {this.getCurrency(this.props.property.price_per_night)}</li>
-                <li>&raquo; Total price: {this.getCurrency(this.props.property.price_per_night * lengthOfStay)}</li>
-              </ul>
 
-              {this.props.currentGuest && this.props.currentGuest.id ? (
-                <React.Fragment>
-                  <ul className="booking__submit">
-                    <li>
-                      <input
-                        onChange={this.handleChange}
-                        className="booking__fistName"
-                        type="text"
-                        value={this.props.currentGuest.first_name}
-                        name="firstName"
-                        autoComplete="on"
-                        placeholder="First name"
-                      />
-                    </li>
-                    <li>
-                      <input
-                        onChange={this.handleChange}
-                        className="booking__lastName"
-                        type="text"
-                        value={this.props.currentGuest.last_name}
-                        name="lastName"
-                        autoComplete="on"
-                        placeholder="Last name"
-                      />
-                    </li>
-                    <li>
-                      <input
-                        onChange={this.handleChange}
-                        className="booking__telephone"
-                        type="text"
-                        value={this.props.currentGuest.telephone}
-                        name="telephone"
-                        autoComplete="on"
-                        placeholder="Telephone"
-                      />
-                    </li>
-                    <li>
-                      <input
-                        onChange={this.handleChange}
-                        className="booking__email"
-                        type="text"
-                        value={this.props.currentGuest.email}
-                        name="email"
-                        autoComplete="on"
-                        placeholder="Email"
-                      />
-                    </li>
-                    <li>
-                      <button type="submit" className={this.setButtonClass()}>
-                        Book now
-                      </button>
-                    </li>
-                  </ul>
-                </React.Fragment>
-              ) : (
-                <React.Fragment>
-                  <ul className="booking__submit">
-                    <li>
-                      <input
-                        onChange={this.handleChange}
-                        className="booking__firstName"
-                        type="text"
-                        placeholder="First Name"
-                        name="firstName"
-                        autoComplete="on"
-                      />
-                    </li>
-                    <li>
-                      <input
-                        onChange={this.handleChange}
-                        className="booking__lastName"
-                        type="text"
-                        placeholder="Last Name"
-                        name="lastName"
-                        autoComplete="on"
-                      />
-                    </li>
-                    <li>
-                      <input
-                        onChange={this.handleChange}
-                        className="booking__telephone"
-                        type="text"
-                        placeholder="Telephone"
-                        name="telephone"
-                        autoComplete="on"
-                      />
-                    </li>
-                    <li>
-                      <input
-                        onChange={this.handleChange}
-                        className="booking__email"
-                        type="text"
-                        placeholder="Email"
-                        name="email"
-                        autoComplete="on"
-                      />
-                    </li>
-                    <li>
-                      <input
-                        onChange={this.handleChange}
-                        className="booking__password"
-                        type="password"
-                        placeholder="Password"
-                        name="password"
-                        autoComplete="on"
-                      />
-                    </li>
-                    <li>
-                      <button type="submit" className={this.setButtonClass()}>
-                        Book now
-                      </button>
-                    </li>
-                  </ul>
-                </React.Fragment>
-              )}
-          </form>
         </section>
       </div>
     );
