@@ -36,7 +36,7 @@ render(){
 
   const searchResults = 
  <React.Fragment>
-    <h2><i className="fas fa-1x fa-map-marker-alt" />Results for places in {this.props.citySearch}</h2>
+    <h2><i className="fas fa-1x fa-map-marker-alt" />Results for homes in {this.props.citySearch}</h2>
     {this.props.citySearchResults.map(property => {
     return <React.Fragment key={property.id}>
         <SearchResultItem

@@ -31,7 +31,7 @@ class Property extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.currentGuest.id) {
+    if (this.props.currentGuest && this.props.currentGuest.id) {
       this.setState({
         firstName: this.props.currentGuest.first_name,
         lastName: this.props.currentGuest.last_name,
@@ -97,10 +97,10 @@ class Property extends React.Component {
    
   }
 
-    formatDate (dateObject) {
-      const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
-      return `${dateObject.getDate()} ${months[dateObject.getMonth()]} ${dateObject.getFullYear()}`;
-    }
+  formatDate (dateObject) {
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    return `${dateObject.getDate()} ${months[dateObject.getMonth()]} ${dateObject.getFullYear()}`;
+  }
   
   setButtonClass() {
     return this.state.firstName &&

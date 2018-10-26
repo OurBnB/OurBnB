@@ -19,7 +19,8 @@ class App extends React.Component {
       activeScreen: "main",
       currentGuest: {},
       on: false,
-      confirmation: ""
+      confirmation: "",
+      loggedIn: false
     };
 
     this.cityCall = this.cityCall.bind(this);
@@ -175,7 +176,17 @@ class App extends React.Component {
             currentGuest: data,
             activeScreen: "main"
           },
-          () => console.log(this.state.currentGuest)
+          () => {
+            if (this.state.currentGuest.error) {
+              alert("Incorrect Email and/or Password. Try again")
+            } else {
+              console.log(this.state.currentGuest);
+              this.setState(
+                  {
+                   loggedIn: true
+                  })
+            }
+          }
         );
       });
   }
@@ -188,7 +199,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <main className="main">
-          <Header switchScreen={this.switchScreen} activeScreen={this.state.activeScreen}/>
+          <Header loggedIn = {this.state.loggedIn} switchScreen={this.switchScreen} activeScreen={this.state.activeScreen}/>
           {this.state.activeScreen === "main" && (
             <React.Fragment>
               <div className="top">

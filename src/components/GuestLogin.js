@@ -70,7 +70,7 @@ class Login extends React.Component {
       <React.Fragment>
 
         <form className="existing__guest">
-          <h1><i class="fas fa-1x fa-user" />Guest login</h1>
+          <h1><i className ="fas fa-1x fa-user" />Guest login</h1>
           <h2>Returning guest</h2>
           <input
             className="emailInput"
@@ -91,7 +91,6 @@ class Login extends React.Component {
           />
           <button onClick={this.handleSubmitOld}>Login</button>
         </form>
-
         <form className="register">
           <h2>New guest</h2>
           <input

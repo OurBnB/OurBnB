@@ -44,19 +44,18 @@ app.get('/api/properties/:city', function(req,res){ // allows front end access t
 app.post("/api/guestOld", (req, res) => {
   const { guestOld } = req.body;
   console.log({guestOld}, 'guestOld');
-  db.one(
-    `select * from guest where email=$1 and password=$2`,
-    [guestOld.emailOld, guestOld.passwordOld]
-  )
-    .then(data => {res.json(data); console.log(data, 'data')})
-    .catch(error => res.json({ error: error.message }));
+   db.one(`SELECT hash FROM guest WHERE email = $1`, [guestOld.emailOld])
+      .then(data => {
+              console.log(data);
+              return bcrypt.compare(guestOld.passwordOld, data.hash)
+        })
+       .then(result => res.json({success: result}))
+       .catch(error => res.json({ error: error.message }));
 });
 
-//adds a new guest to the database
+//adds a new guest to the database with hashed p/w
 app.post("/api/guest", (req, res) => {
   const { guest } = req.body;
-
-  //console.log({guest}, "guest new");
   bcrypt.hash(guest.password, saltRounds)
       .then(function(hash) {
           console.log(hash);
