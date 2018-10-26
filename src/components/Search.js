@@ -50,7 +50,7 @@ class Search extends React.Component {
     return(
       <React.Fragment>
         <form onSubmit={this.handleSubmit} className="search__form">
-          <input defaultValue="London" onChange={this.handleChangeCity} className="search__city" type="text" placeholder="Destination" name="city" autoComplete="off" />
+          <input defaultValue="" onChange={this.handleChangeCity} className="search__city" type="text" placeholder="Destination" name="city" autoComplete="off" />
           <div className="search__dates">
 
             <div className="myDatePickerContainer myDatePickerStart">
@@ -62,7 +62,7 @@ class Search extends React.Component {
                 onChange={this.handleChangeStart}
                 locale="en-gb"
                 autoComplete="off"
-                placeholderText="Start date"
+                placeholder="Start date"
               />
             </div>
 
@@ -73,7 +73,7 @@ class Search extends React.Component {
                 startDate={this.state.startDate}
                 endDate={this.state.endDate}
                 onChange={this.handleChangeEnd}
-                placeholderText="End date"
+                placeholder="End date"
                 locale="en-gb"
                 autoComplete="off"
                 popperPlacement="top-end"

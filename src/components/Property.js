@@ -213,7 +213,6 @@ class Property extends React.Component {
         <section className="property__booking">
 
            <h2>Make your booking</h2>
-
             <form onSubmit={this.handleSubmit}>
               <ul className="booking__list">
                 <li>&raquo; Check-in: {this.formatDate(this.props.startDate._d)}</li>
@@ -223,7 +222,7 @@ class Property extends React.Component {
                 <li>&raquo; Total price: {this.getCurrency(this.props.property.price_per_night * lengthOfStay)}</li>
               </ul>
 
-              {this.props.currentGuest && this.props.currentGuest.id ? (
+              {this.props.currentGuest ? (
                 <React.Fragment>
                   <ul className="booking__submit">
                     <li>

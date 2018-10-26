@@ -150,14 +150,12 @@ class App extends React.Component {
         return response.json();
       })
       .then(data => {
-        this.setState(
-          {
+        this.setState({
             currentGuest: data,
             activeScreen: this.state.activeScreen === 'guestLogin' ? "main" : this.state.activeScreen
-          },
-          () => console.log('current guest', this.state.currentGuest)
+          }, () => console.log('current guest', this.state.currentGuest)
         );
-        return data
+        return data;
       });
   }
  
@@ -214,7 +212,9 @@ class App extends React.Component {
                     startDate={this.state.startDate}
                     endDate={this.state.endDate}
                     addBooking={this.addBooking}
+                    addBookingNewGuest={this.addBookingNewGuest}
                     citySearch={this.state.citySearch}
+                    currentGuest={this.state.currentGuest}
                   />
                 </div>
               </div> : null

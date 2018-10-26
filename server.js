@@ -88,7 +88,7 @@ app.post('/api/booking', (req, res) =>{
     return res.json(json)
   })
   .catch(error => res.json({ error: error.message }));
-});
+});"guest"
 
 function sendSMS(booking_id, name, telephone) {
   const accountSid = process.env.TWILIO_SID_LIVE
