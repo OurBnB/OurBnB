@@ -29,7 +29,6 @@ class Header extends React.Component {
             <a onClick={this.handleSubmit} className="dropdown__btn" href="/">
               <i className="fas fa-1x fa-bars" />
             </a>
-
             <div className="dropdown__content">
               <a onClick={this.handleClick} name="guestLogin" href="#">Guest Login</a>
               <a onClick={this.handleClick} name="hostLogin" href="#">Host Login</a>
