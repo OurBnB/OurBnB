@@ -68,15 +68,18 @@ class Login extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <form className="existingGuest">
-          <h2>Returning guest:</h2>
+
+        <form className="existing__guest">
+          <h1><i className="fas fa-1x fa-user guest-page" />Guest login</h1>
+          <h2>Returning guest</h2>
           <input
             className="emailInput"
             onChange={this.handleChange}
             name="emailOld"
             type="email"
             value={this.state.emailOld}
-            placeholder='Email'
+
+            placeholder="Email"
           />
           <input
             className="passwordInput"
@@ -88,16 +91,17 @@ class Login extends React.Component {
           />
           <button onClick={this.handleSubmitOld}>Login</button>
         </form>
+
         <form className="register">
-          <h2>New guest:</h2>
+          <h2>New guest</h2>
           <input
             className="firstNameInput"
             onChange={this.handleChange}
             name="firstName"
             type="text"
+            placeholder="First name"
             value={this.state.firstName}
           />
-          <label className="name">Last Name:</label>
           <input
               className="lastNameInput"
               onChange={this.handleChange}
@@ -120,7 +124,8 @@ class Login extends React.Component {
             name="mobile"
             type="number"
             value={this.state.mobile}
-            placeholder="Mobile"
+            placeholder="Telephone"
+
           />
           <input
             className="passwordInput"

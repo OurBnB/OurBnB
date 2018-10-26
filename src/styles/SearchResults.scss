@@ -5,6 +5,21 @@
     }
 }
 
-.search-results-feed {
-  margin: 0 1.7rem 0 1.7rem;
+.results__page-top {
+    padding-top: 0.1rem;
+}
+
+.search__results-feed {
+    & h2 {
+        font-size: 1.4rem;
+    }
+    margin: 1.7rem 1.7rem 0 1.7rem;
+}
+
+@media (min-width: 768px) {
+    .search {
+        &__back-button {
+            width: 55vw;
+        }
+    }
 }
