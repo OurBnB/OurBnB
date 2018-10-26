@@ -45,7 +45,7 @@ app.post("/api/guestOld", (req, res) => {
   const { guestOld } = req.body;
   console.log({guestOld}, 'guestOld');
   db.one(
-    `select id, telephone from guest where email=$1 and password=$2`,
+    `select * from guest where email=$1 and password=$2`,
     [guestOld.emailOld, guestOld.passwordOld]
   )
     .then(data => {res.json(data); console.log(data, 'data')})
@@ -55,6 +55,7 @@ app.post("/api/guestOld", (req, res) => {
 //adds a new guest to the database
 app.post("/api/guest", (req, res) => {
   const { guest } = req.body;
+
   //console.log({guest}, "guest new");
   bcrypt.hash(guest.password, saltRounds)
       .then(function(hash) {
@@ -66,22 +67,24 @@ app.post("/api/guest", (req, res) => {
           )
         })
       .then(result => {
-      return res.json({ id: result.id, mobile: guest.mobile });
-        })
+        return res.json({ id: result.id, first_name: guest.firstName, last_name: guest.lastName, telephone: guest.mobile, password: guest.password, email: guest.email});        })
       .catch(error => res.json({ error: error.message }));
 });
 
 // add a single booking to bookings table
 app.post('/api/booking', (req, res) =>{
-  const { property_id, guest_id, date_booked, date_start, date_end, name, telephone, email } = req.body;
+  const { bookingData } = req.body;
+  console.log(req.body, 'req.body')
   db.one(`INSERT INTO booking 
-  (property_id, guest_id, date_booked, date_start, date_end, name, telephone, email) 
-  VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id`,
-  [property_id, guest_id, date_booked, date_start, date_end, name, telephone, email])
+  (property_id, guest_id, date_booked, date_start, date_end) 
+  VALUES($1, $2, clock_timestamp(), $3, $4 ) RETURNING id`,
+  [bookingData.property_id, bookingData.guest_id, bookingData.date_start, bookingData.date_end ])
   .then(booking => {
     const booking_id = booking.id;
-    const json = { booking_id, property_id, guest_id, date_booked, date_start, date_end, name, telephone, email };
-    sendSMS(booking_id, name, telephone);
+    const {bookingData} = req.body;
+    const json = { id: booking_id, name: bookingData.name};
+    // SMS below works, commented out only for testing period.
+    // sendSMS(booking_id, bookingData.name, bookingData.telephone);
     return res.json(json)
   })
   .catch(error => res.json({ error: error.message }));
@@ -93,9 +96,9 @@ function sendSMS(booking_id, name, telephone) {
   const twilio = require('twilio');
   const client = new twilio(accountSid, authToken);
   const baseUrl = 'www.heroku.com';
+  // To view your order details, please visit ${baseUrl}/?viewBookingId=${booking_id}
   client.messages.create({
-      body: `Dear ${name}, thank you for your order. Your ID is ${booking_id}. 
-      To view your order details, please visit ${baseUrl}/?viewBookingId=${booking_id}`,
+      body: `Dear ${name}, thank you for your booking. Your ID is ${booking_id}.`,
       to: telephone,
       from: '+447446494074'
   })
@@ -105,3 +108,5 @@ function sendSMS(booking_id, name, telephone) {
 app.listen(8080, function(){
   console.log('Listening on port 8080');
 });
+
+
