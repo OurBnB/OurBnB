@@ -43,7 +43,7 @@ class Header extends React.Component {
         </header>
         <div className="header__guest">
           <h1>
-          <i className="fas fa-1x fa-user margin-right-user" /> Welcome Tom
+          <i className="fas fa-1x fa-user margin-right-user" /> Welcome Yel!
           </h1>
         </div>
       </div>

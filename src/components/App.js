@@ -72,7 +72,7 @@ class App extends React.Component {
 
   addBooking(bookingData) {
     const booking = { bookingData: bookingData };
-    console.log(booking, "booking");
+    // console.log(booking, "booking");
     fetch("/api/booking", {
       method: "post",
       body: JSON.stringify(booking),
@@ -80,12 +80,14 @@ class App extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
+        // console.log({data});
         this.setState({
           confirmation: `Dear ${
             data.name
           }, thank you for your booking. Your ID is ${data.id}.`
         });
         this.displayModal(data);
+        return data;
       })
       .catch(error => res.json({ error: error.message }));
   }
@@ -93,7 +95,7 @@ class App extends React.Component {
   addBookingNewGuest(newGuest, bookingData) {
     this.addGuest(newGuest)
       .then(currentGuest => {
-        console.log('addBookingNewGuest(', newGuest, bookingData, ')')
+        // console.log('addBookingNewGuest(', newGuest, bookingData, ')')
         const completeData = Object.assign(
           {},
           { bookingData },
@@ -138,7 +140,7 @@ class App extends React.Component {
 
   addGuest(guest) {
     const user = { guest: guest };
-    console.log(user, "addGuest");
+    // console.log(user, "addGuest");
     return fetch("http://localhost:8080/api/guest", {
       method: "post",
       body: JSON.stringify(user),
@@ -158,10 +160,10 @@ class App extends React.Component {
         return data;
       });
   }
- 
+
   retrieveGuest(guestOld) {
     const user = { guestOld: guestOld };
-    console.log(user, "retrieveGuest");
+    // console.log(user, "retrieveGuest");
     fetch("http://localhost:8080/api/guestOld", {
       method: "post",
       body: JSON.stringify(user),
@@ -213,7 +215,6 @@ class App extends React.Component {
                     endDate={this.state.endDate}
                     addBooking={this.addBooking}
                     addBookingNewGuest={this.addBookingNewGuest}
-                    citySearch={this.state.citySearch}
                     currentGuest={this.state.currentGuest}
                   />
                 </div>
