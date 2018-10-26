@@ -170,15 +170,22 @@ button {
   border-radius: 5px;
   color: black;
   flex-direction: column;
+  -webkit-filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.3));
+  filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.3));
 }
 
-.close{
+.close {
   align-self: flex-end;
-  margin-right: .5em;
-  color: $button-color
+  margin: 0.3em;
+  padding: 0.3rem 0.5rem;
+  color: $button-color;
+  cursor: pointer;
+  &:hover {
+    background: #efefef;
+  }
 }
 
-span{
+span {
   font-size: 2em;
 }
 

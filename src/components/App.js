@@ -71,16 +71,14 @@ class App extends React.Component {
   }
 
   addBooking(bookingData) {
-    const booking = { bookingData: bookingData };
-    // console.log(booking, "booking");
     fetch("/api/booking", {
       method: "post",
-      body: JSON.stringify(booking),
+      body: JSON.stringify(bookingData),
       headers: { "Content-Type": "application/json" }
     })
       .then(response => response.json())
       .then(data => {
-        // console.log({data});
+        console.log({data});
         this.setState({
           confirmation: `Dear ${
             data.name

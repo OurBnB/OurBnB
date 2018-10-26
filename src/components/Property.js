@@ -66,9 +66,9 @@ class Property extends React.Component {
             date_start: this.formatDateDB(this.props.startDate._d),
             date_end: this.formatDateDB(this.props.endDate._d)
         }
-        console.log(bookingData, 'bookingData property.js')
-      this.props.addBooking(bookingData);
+      // console.log(bookingData, 'bookingData property.js')
       delete bookingData.descriptionToggle;
+      this.props.addBooking(bookingData);
     } else {
       if (
         this.state.firstName &&
@@ -103,10 +103,12 @@ class Property extends React.Component {
     }
 
   setButtonClass() {
+    const password = this.props.currentGuest.id ? true : this.state.password;
     return this.state.firstName &&
       this.state.lastName &&
       this.state.telephone &&
-      this.state.email
+      this.state.email &&
+      password
       ? "booking__button"
       : "booking__button-inactive";
   }
@@ -118,7 +120,7 @@ class Property extends React.Component {
   }
 
   formatDateDB(dateObject) {
-    return `${dateObject.getFullYear()}-${dateObject.getMonth()}-${dateObject.getDate()}`;
+    return `${dateObject.getFullYear()}-${Number(dateObject.getMonth()+1)}-${dateObject.getDate()}`;
   }
 
   getCurrency(string) {
