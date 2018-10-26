@@ -57,7 +57,7 @@ class Property extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    if (this.props.currentGuest && this.props.currentGuest.id) {
+    if (this.props.currentGuest.id) {
         const bookingData = {
             guest_id: this.props.currentGuest.id,
             name: this.props.currentGuest.first_name,

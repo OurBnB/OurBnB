@@ -72,7 +72,7 @@ class App extends React.Component {
 
   addBooking(bookingData) {
     const booking = { bookingData: bookingData };
-    console.log(booking, "booking");
+    // console.log(booking, "booking");
     fetch("/api/booking", {
       method: "post",
       body: JSON.stringify(booking),
@@ -80,12 +80,15 @@ class App extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
+
+        console.log({data});
         this.setState({
           confirmation: `Dear ${
             data.name
           }, thank you for your booking. Your ID is ${data.id}.`
         });
         this.displayModal(data);
+        return data;
       })
       .catch(error => res.json({ error: error.message }));
   }

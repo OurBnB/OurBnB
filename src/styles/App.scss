@@ -113,7 +113,7 @@ button {
     width: 100%;
     margin: 0.7rem 0;
     -webkit-filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.15));
-    filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.15));  
+    filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.15));
   }
 }
 
@@ -153,12 +153,12 @@ button {
     .fas{
       display: none;
     }
-  
+
 }
  .modal--active{
   display: flex;
   position: fixed;
-  z-index:2;
+  z-index:2200;
   left: 50%;
   top:50%;
   height: 50%;
@@ -196,4 +196,3 @@ span{
   }
 
 }
-
