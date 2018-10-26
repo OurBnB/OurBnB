@@ -50,8 +50,8 @@ class Login extends React.Component {
     );
   }
 
-  handleSubmitOld(e) {
-    e.preventDefault();
+  handleSubmitOld(event) {
+    event.preventDefault();
     this.setState(
       {
         guestOld: {
