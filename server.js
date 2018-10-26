@@ -20,6 +20,7 @@ app.set('view engine', 'hbs');
 app.get('/', function(req, res){
   return res.render('index');
 });
+
 app.get('/api/properties', function(req,res){ // allows front end access to all of our properties for search etc
   db.any(`SELECT * FROM property`)
     .then(function(data){
@@ -29,14 +30,15 @@ app.get('/api/properties', function(req,res){ // allows front end access to all 
       return res.json({error:error.message})
     })
 });
+
 app.get('/api/properties/:city', function(req,res){ // allows front end access to all of our properties for search etc
-  const city = req.params.city
+  const city = req.params.city;
   db.any(`SELECT * FROM property WHERE city=$1`, [city])
     .then(function(data){
-      return res.json(data)
+      return res.json(data);
     })
     .catch(function(error){
-      return res.json({error:error.message})
+      return res.json({error: error.message})
     })
 });
 

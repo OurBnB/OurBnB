@@ -15,13 +15,19 @@ class Search extends React.Component {
     this.handleChangeEnd = this.handleChangeEnd.bind(this);
     this.handleChangeStart = this.handleChangeStart.bind(this);
     this.setButtonClass = this.setButtonClass.bind(this);
+    this.validInput = this.validInput.bind(this);
   }
 
   handleSubmit(event){
     event.preventDefault();
-    if (this.state.city && this.state.startDate && this.state.endDate) {
+    const valid = this.validInput ();
+    if (valid) {
       this.props.handleSubmitReceiver();
     }
+  }
+
+  validInput () {
+    return !!this.state.city && !!this.state.startDate && !!this.state.endDate;
   }
 
   handleChangeStart(date) {
@@ -35,7 +41,7 @@ class Search extends React.Component {
   }
 
   setButtonClass () {
-    const valid = this.state.startDate && this.state.endDate && this.state.city;
+    const valid = this.validInput ();
     return valid ? "search__button" : "search__button-inactive";
   }
 
