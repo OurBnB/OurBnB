@@ -74,17 +74,16 @@ app.post("/api/guest", (req, res) => {
 
 // add a single booking to bookings table
 app.post('/api/booking', (req, res) =>{
-  const { bookingData } = req.body;
+  const bookingData = req.body;
   db.one(`INSERT INTO booking
   (property_id, guest_id, date_booked, date_start, date_end)
   VALUES($1, $2, NOW(), $3, $4 ) RETURNING id`,
   [bookingData.property_id, bookingData.guest_id, bookingData.date_start, bookingData.date_end ])
   .then(booking => {
     const booking_id = booking.id;
-    // const { bookingData } = req.body;
-    const json = { id: booking_id, name: req.body.name};
+    const json = { id: booking_id, name: bookingData.name};
     // SMS below works, commented out only for testing period.
-    sendSMS(booking_id, bookingData.name, bookingData.telephone);
+    // sendSMS(booking_id, bookingData.name, bookingData.telephone);
     return res.json(json);
   })
   .catch(error => res.json({ error: error.message }));
