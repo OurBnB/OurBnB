@@ -9,14 +9,14 @@ class MapView extends Component {
         this.handleToggleOpen = this.handleToggleOpen.bind(this);
         this.handleToggleClose = this.handleToggleClose.bind(this);
         this.onMapClick = this.onMapClick.bind(this);
-        
     	this.state = {
-            isOpen: false,
+            isOpen: true,
             activeMarker: {}
         }
     }
 
-    onMapClick () {
+    onMapClick (event) {
+        // console.log("onMapClick", {event}, event.map);
         if (this.state.isOpen) {
             this.setState({
                 isOpen: false,
@@ -25,16 +25,15 @@ class MapView extends Component {
         }
     }
 
-    handleToggleOpen (marker, event) {
-        console.log(marker);
+    handleToggleOpen (event) {
         this.setState({
-          activeMarker: marker,
+          activeMarker: event.map,
+          map: event.map,
           isOpen: true
         });
     }
 
     handleToggleClose(event) {
-        console.log("handleToggleClose")
         this.setState({
             isOpen: false
         });
@@ -56,13 +55,18 @@ class MapView extends Component {
                     title={'Property location'}
                     name={this.props.property.address_l1}
                     onClick={this.handleToggleOpen}
+                    map={this.state.map}
+
                 />
                 
                 { this.state.isOpen &&
                 <InfoWindow 
-                    marker={this.state.activeMarker} 
-                    onCloseClick={this.handleToggleClose}
+                    marker={this.state.map}
+                    onClose={this.handleToggleClose}
                     visible={this.state.isOpen}  
+                    // onOpen={this.handleToggleOpen} 
+                    map={this.state.map}
+                    // position={}
                 >
                     <div>
                         <h1>Property; {this.props.property.address_l1}</h1>

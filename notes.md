@@ -26,9 +26,9 @@
 ## Image carousel for the Property component
 [Documentation and package] (https://www.npmjs.com/package/react-image-carousel) 
 + npm install react-image-carousel
-**Documentation is incomplete and also requires installation of the react-transition-group:
+**Documentation** is incomplete and also requires installation of the react-transition-group:
 + npm install react-transition-group@^2.3.1
-**Furthermore, a CSS file needs to be imported from node_module for the carousel. Use the following code in the relevant .scss file:
+**Furthermore**, a CSS file needs to be imported from node_module for the carousel. Use the following code in the relevant .scss file:
 @import '~react-image-carousel/lib/css/main.min.css'
 
 ## Webpack image loader
