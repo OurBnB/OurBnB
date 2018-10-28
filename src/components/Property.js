@@ -66,7 +66,6 @@ class Property extends React.Component {
             date_start: this.formatDateDB(this.props.startDate._d),
             date_end: this.formatDateDB(this.props.endDate._d)
         }
-        console.log(bookingData, 'bookingData property.js')
       this.props.addBooking(bookingData);
       delete bookingData.descriptionToggle;
     } else {
@@ -118,7 +117,7 @@ class Property extends React.Component {
   }
 
   formatDateDB(dateObject) {
-    return `${dateObject.getFullYear()}-${dateObject.getMonth()}-${dateObject.getDate()}`;
+    return `${dateObject.getFullYear()}-${Number(dateObject.getMonth()+1)}-${dateObject.getDate()}`;
   }
 
   getCurrency(string) {

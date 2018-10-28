@@ -43,24 +43,19 @@ app.get('/api/properties/:city', function(req,res){ // allows front end access t
 //retrieves the existing guest's details
 app.post("/api/guestOld", (req, res) => {
   const { guestOld } = req.body;
-  console.log({guestOld}, 'guestOld');
   db.one(
     `select * from guest where email=$1 and password=$2`,
     [guestOld.emailOld, guestOld.passwordOld]
   )
-    .then(data => {res.json(data); console.log(data, 'data')})
+    .then(data => res.json(data))
     .catch(error => res.json({ error: error.message }));
 });
 
 //adds a new guest to the database
 app.post("/api/guest", (req, res) => {
   const { guest } = req.body;
-
-  //console.log({guest}, "guest new");
   bcrypt.hash(guest.password, saltRounds)
       .then(function(hash) {
-          console.log(hash);
-          console.log(guest.password);
           return db.one(
               "INSERT INTO guest (email, password, first_name, last_name, telephone, hash) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id",
               [guest.email, guest.password, guest.firstName, guest.lastName, guest.mobile, hash]
@@ -72,20 +67,19 @@ app.post("/api/guest", (req, res) => {
 });
 
 // add a single booking to bookings table
-app.post('/api/booking', (req, res) =>{
+app.post("/api/booking", (req, res) =>{
   const { bookingData } = req.body;
-  console.log(req.body, 'req.body')
   db.one(`INSERT INTO booking
   (property_id, guest_id, date_booked, date_start, date_end)
-  VALUES($1, $2, clock_timestamp(), $3, $4 ) RETURNING id`,
+  VALUES($1, $2, NOW(), $3, $4 ) RETURNING id`,
   [bookingData.property_id, bookingData.guest_id, bookingData.date_start, bookingData.date_end ])
   .then(booking => {
     const booking_id = booking.id;
-    const {bookingData} = req.body;
+    const { bookingData } = req.body;
     const json = { id: booking_id, name: bookingData.name};
     // SMS below works, commented out only for testing period.
-    sendSMS(booking_id, bookingData.name, bookingData.telephone);
-    return res.json(json)
+    // sendSMS(booking_id, bookingData.name, bookingData.telephone);
+    return res.json(json);
   })
   .catch(error => res.json({ error: error.message }));
 });
