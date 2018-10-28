@@ -1,7 +1,7 @@
 # Ourbnb app > find and book accommodation worldwide
 
-![Screenshot](./static/images/screenshot-mobile.jpg) 
-![Screenshot](./assets/images/screenshot-tablet.jpg) 
+![Screenshot](./static/images/screenshot-mobile-view.jpg) 
+![Screenshot](./assets/images/screenshot-tablet-view.jpg) 
 
 ## Objective > what does it do?
 **Ourbnb** is similar to Airbnb, allowing you to find and book accomodation worldwide. It has a responsive layout for mobile, tablet and desktop screen sizes giving a user-friendly experience.
