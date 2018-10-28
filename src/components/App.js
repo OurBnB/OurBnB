@@ -187,7 +187,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <main className="main">
-          <Header switchScreen={this.switchScreen} activeScreen={this.state.activeScreen}/>
+          <Header switchScreen={this.switchScreen} activeScreen={this.state.activeScreen} currentGuest={this.state.currentGuest} />
           {this.state.activeScreen === "main" && (
             <React.Fragment>
               <div className="top">

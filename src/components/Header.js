@@ -41,11 +41,14 @@ class Header extends React.Component {
             <a href="/">Ourbnb</a>
           </h1>
         </header>
-        <div className="header__guest">
-          <h1>
-          <i className="fas fa-1x fa-user margin-right-user" /> Welcome Yel!
-          </h1>
-        </div>
+        {this.props.currentGuest.id ?  
+          <div className="header__guest">
+            <h1>
+              <i className="fas fa-1x fa-user margin-right-user" /> Welcome {this.props.currentGuest.first_name}
+            </h1>
+          </div> :
+          <div className="header__guest"></div>
+        }
       </div>
     );
   }
