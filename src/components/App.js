@@ -214,6 +214,7 @@ class App extends React.Component {
                     addBooking={this.addBooking}
                     addBookingNewGuest={this.addBookingNewGuest}
                     currentGuest={this.state.currentGuest}
+                    citySearch={this.state.citySearch}
                   />
                 </div>
               </div> : null

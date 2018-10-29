@@ -70980,7 +70980,8 @@ function (_React$Component) {
         endDate: this.state.endDate,
         addBooking: this.addBooking,
         addBookingNewGuest: this.addBookingNewGuest,
-        currentGuest: this.state.currentGuest
+        currentGuest: this.state.currentGuest,
+        citySearch: this.state.citySearch
       }))) : null), this.state.activeScreen === "guestLogin" && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_GuestLogin__WEBPACK_IMPORTED_MODULE_4__["default"], {
         addGuest: this.addGuest,
         retrieveGuest: this.retrieveGuest
@@ -71820,6 +71821,7 @@ function (_React$Component) {
     _this.handleChangeEnd = _this.handleChangeEnd.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleChangeStart = _this.handleChangeStart.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.setButtonClass = _this.setButtonClass.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.setButtonValue = _this.setButtonValue.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.validInput = _this.validInput.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
@@ -71860,6 +71862,12 @@ function (_React$Component) {
     value: function setButtonClass() {
       var valid = this.validInput();
       return valid ? "search__button" : "search__button-inactive";
+    }
+  }, {
+    key: "setButtonValue",
+    value: function setButtonValue() {
+      var valid = this.validInput();
+      return valid ? "Search" : "Enter you destination and dates...";
     }
   }, {
     key: "handleChangeCity",
@@ -71921,7 +71929,7 @@ function (_React$Component) {
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
         className: this.setButtonClass()
-      }, "Search")));
+      }, this.setButtonValue())));
     }
   }]);
 

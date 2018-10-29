@@ -1,6 +1,6 @@
 # Ourbnb app > find and book accommodation worldwide
 
-![Screenshot](./static/images/screenshot-mobile-view.jpg) 
+![Screenshot](./static/images/screenshot-mobile-views.jpg) 
 ![Screenshot](./assets/images/screenshot-tablet-view.jpg) 
 
 ## Objective > what does it do?
