@@ -19,7 +19,7 @@ class App extends React.Component {
       activeScreen: "main",
       currentGuest: {},
       on: false,
-      confirmation: ""
+      message: ""
     };
 
     this.cityCall = this.cityCall.bind(this);
@@ -72,7 +72,6 @@ class App extends React.Component {
 
   addBooking(bookingData) {
     const booking = { bookingData: bookingData };
-    // console.log(booking, "booking");
     fetch("/api/booking", {
       method: "post",
       body: JSON.stringify(booking),
@@ -80,9 +79,8 @@ class App extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        // console.log({data});
         this.setState({
-          confirmation: `Dear ${
+          message: `Dear ${
             data.name
           }, thank you for your booking. Your ID is ${data.id}.`
         });
@@ -95,7 +93,6 @@ class App extends React.Component {
   addBookingNewGuest(newGuest, bookingData) {
     this.addGuest(newGuest)
       .then(currentGuest => {
-        // console.log('addBookingNewGuest(', newGuest, bookingData, ')')
         const completeData = Object.assign(
           {},
           { bookingData },
@@ -117,9 +114,8 @@ class App extends React.Component {
 
   closeModal() {
     this.setState({
-      confirmation: "",
+      message: "",
       on: !this.state.on,
-      changeScreen: "main"
     });
   }
 
@@ -140,7 +136,6 @@ class App extends React.Component {
 
   addGuest(guest) {
     const user = { guest: guest };
-    // console.log(user, "addGuest");
     return fetch("http://localhost:8080/api/guest", {
       method: "post",
       body: JSON.stringify(user),
@@ -156,16 +151,13 @@ class App extends React.Component {
           {
             currentGuest: data,
             activeScreen: this.state.activeScreen === 'guestLogin' ? "main" : this.state.activeScreen
-          },
-          () => console.log('current guest', this.state.currentGuest)
-        );
+          });
         return data
       });
   }
 
   retrieveGuest(guestOld) {
     const user = { guestOld: guestOld };
-    // console.log(user, "retrieveGuest");
     fetch("http://localhost:8080/api/guestOld", {
       method: "post",
       body: JSON.stringify(user),
@@ -175,14 +167,16 @@ class App extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
+       console.log(data);
+        data.error? (this.setState({
+          message: "Incorrect email or password. Please try again."
+        }, ()=>this.displayModal())):
         this.setState(
           {
             currentGuest: data,
             activeScreen: "main"
-          },
-          () => console.log(this.state.currentGuest)
-        );
-      });
+          });
+      })
   }
 
   render() {
@@ -193,7 +187,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <main className="main">
-          <Header switchScreen={this.switchScreen} activeScreen={this.state.activeScreen}/>
+          <Header switchScreen={this.switchScreen} activeScreen={this.state.activeScreen} currentGuest={this.state.currentGuest} />
           {this.state.activeScreen === "main" && (
             <React.Fragment>
               <div className="top">
@@ -235,7 +229,7 @@ class App extends React.Component {
           <span onClick={this.closeModal} className="close">
             &times;
           </span>
-          <p className="confirmation">{this.state.confirmation}</p>
+          <p className="message">{this.state.message}</p>
         </div>
       </React.Fragment>
     );
