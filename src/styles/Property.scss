@@ -6,7 +6,7 @@
   margin: 2.5rem 0 1rem 0;
   & input, & button  {
     border-radius: 0.3rem;
-    margin: 0 0 0.7rem 0;
+    margin: 0.7rem 0 0.7rem 0;
     -webkit-filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.15));
     filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.15));
   }
@@ -52,7 +52,7 @@
       -webkit-filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.15));
       filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.15));
     }
-    margin: 1.4rem 0 0 0;
+    margin: 1.7rem 0;
     & ul, li {
       margin: 0;
     }
@@ -79,6 +79,11 @@ li {
   align-items: center;
   margin-right: 1em;
 }
+
+.bullet:before {
+  content: "\00BB \0020";
+}
+
 .property__icons {
   margin: 0;
   padding: 0;

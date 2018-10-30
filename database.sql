@@ -50,8 +50,8 @@ create table booking (
   property_id int,
   guest_id int,
   date_booked timestamp with time zone not null,
-  date_start date not null,
-  date_end date not null,
+  date_start date,
+  date_end date,
   foreign key (guest_id) references guest (id),
   foreign key (property_id) references property (id)
 );
@@ -311,56 +311,47 @@ alter sequence booking_id_seq restart with 3 increment by 1;
 
 
  ALTER TABLE property
-   ADD COLUMN lat decimal
+   ADD COLUMN lat decimal;
 
  ALTER TABLE property
-   ADD COLUMN lng decimal
+   ADD COLUMN lng decimal;
 
 UPDATE property
   SET lat = 51.5200172, lng = -0.0576581
-    WHERE id = 1
+    WHERE id = 1;
 
 UPDATE property
   SET lat = 51.5009405, lng = -0.1629288
-    WHERE id = 2
+    WHERE id = 2;
 
 UPDATE property
   SET lat = 51.489217, lng = -0.1054509
-    WHERE id = 3
+    WHERE id = 3;
 
 UPDATE property
   SET lat = 51.52239040000001, lng = -0.1037717
-    WHERE id = 4
+    WHERE id = 4;
 
 UPDATE property
   SET lat = 40.75368539999999, lng = -73.9991637
-    WHERE id = 5
+    WHERE id = 5;
 
 UPDATE property
   SET lat = 40.75368539999999, lng = -73.9991637
-    WHERE id = 6
+    WHERE id = 6;
 
 UPDATE property
   SET lat = 40.7282702, lng = -73.9506774
-    WHERE id = 7
+    WHERE id = 7;
 
 UPDATE property
    SET lat = -33.8710844, lng = 151.2233585
-     WHERE id = 8
+     WHERE id = 8;
 
 UPDATE property
    SET lat = -33.8687895, lng = 151.1942171
-     WHERE id = 9
+     WHERE id = 9;
 
 UPDATE property
   SET lat = -33.8708464, lng = 151.20733
-     WHERE id = 10
-
--- ALTER TABLE booking
---    ADD COLUMN name varchar(50) NOT NULL;
-
--- ALTER TABLE booking
---    ADD COLUMN telephone varchar(50) NOT NULL;
-
--- ALTER TABLE booking
---    ADD COLUMN email varchar(50) NOT NULL;
+     WHERE id = 10;

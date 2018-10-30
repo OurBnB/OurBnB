@@ -9,10 +9,10 @@ class Login extends React.Component {
     this.state = {
       guest: {},
       guestOld: {},
-      firstName: "",
-      lastName: "",
+      first_name: "",
+      last_name: "",
       email: "",
-      mobile: "",
+      telephone: "",
       password: "",
       emailOld: "",
       passwordOld: ""
@@ -23,35 +23,35 @@ class Login extends React.Component {
     this.handleSubmitOld = this.handleSubmitOld.bind(this);
   }
 
-  handleChange(e) {
+  handleChange(event) {
     this.setState({
-      [e.target.name]: e.target.value
+      [event.target.name]: event.target.value
     });
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
+  handleSubmit(event) {
+    event.preventDefault();
     this.setState(
       {
         guest: {
-          firstName: this.state.firstName,
-          lastName: this.state.lastName,
+          first_name: this.state.first_name,
+          last_name: this.state.last_name,
           email: this.state.email,
-          mobile: this.state.mobile,
+          telephone: this.state.telephone,
           password: this.state.password
         },
-        firstName: "",
-        lastName: "",
+        first_name: "",
+        last_name: "",
         email: "",
-        mobile: "",
+        telephone: "",
         password: ""
       },
       () => this.props.addGuest(this.state.guest)
     );
   }
 
-  handleSubmitOld(e) {
-    e.preventDefault();
+  handleSubmitOld(event) {
+    event.preventDefault();
     this.setState(
       {
         guestOld: {
@@ -97,17 +97,17 @@ class Login extends React.Component {
           <input
             className="firstNameInput"
             onChange={this.handleChange}
-            name="firstName"
+            name="first_name"
             type="text"
             placeholder="First name"
-            value={this.state.firstName}
+            value={this.state.first_name}
           />
           <input
               className="lastNameInput"
               onChange={this.handleChange}
-              name="lastName"
+              name="last_name"
               type="text"
-              value={this.state.lastName}
+              value={this.state.last_name}
               placeholder="Last name"
           />
           <input
@@ -119,11 +119,11 @@ class Login extends React.Component {
             placeholder="Email"
           />
           <input
-            className="mobileInput"
+            className="telephoneInput"
             onChange={this.handleChange}
-            name="mobile"
+            name="telephone"
             type="number"
-            value={this.state.mobile}
+            value={this.state.telephone}
             placeholder="Telephone"
 
           />
