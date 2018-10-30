@@ -60,6 +60,7 @@ class Property extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     if (this.props.currentGuest.id) {
+      if (this.validInput()) {
         const bookingData = {
             guest_id: this.props.currentGuest.id,
             first_name: this.props.currentGuest.first_name,
@@ -68,11 +69,10 @@ class Property extends React.Component {
             date_start: this.formatDateDB(this.props.startDate._d),
             date_end: this.formatDateDB(this.props.endDate._d)
         }
-      this.props.addBooking(bookingData);
+        this.props.addBooking(bookingData);
+      }
     } else {
-      if (
-          this.validInput()
-        ) {
+      if (this.validInput() && !!this.state.password) {
         const newGuest ={
             first_name: this.state.first_name,
             last_name: this.state.last_name,
@@ -105,7 +105,7 @@ class Property extends React.Component {
   }
 
   validInput () {
-    return !!this.state.first_name && !!this.state.last_name && !!this.state.telephone && !!this.state.email && !!this.state.password;
+    return !!this.state.first_name && !!this.state.last_name && !!this.state.telephone && !!this.state.email;
   }
 
   handleChange(event) {
@@ -236,7 +236,7 @@ class Property extends React.Component {
                       onChange={this.handleChange}
                       className="booking__first_name"
                       type="text"
-                      value={this.props.currentGuest.first_name}
+                      defaultValue={this.props.currentGuest.first_name}
                       name="first_name"
                       autoComplete="on"
                     />
@@ -246,7 +246,7 @@ class Property extends React.Component {
                       onChange={this.handleChange}
                       className="booking__last_name"
                       type="text"
-                      value={this.props.currentGuest.last_name}
+                      defaultValue={this.props.currentGuest.last_name}
                       name="last_name"
                       autoComplete="on"
                     />
@@ -256,7 +256,7 @@ class Property extends React.Component {
                       onChange={this.handleChange}
                       className="booking__telephone"
                       type="text"
-                      value={this.props.currentGuest.telephone}
+                      defaultValue={this.props.currentGuest.telephone}
                       name="telephone"
                       autoComplete="on"
                     />
@@ -266,7 +266,7 @@ class Property extends React.Component {
                       onChange={this.handleChange}
                       className="booking__email"
                       type="text"
-                      value={this.props.currentGuest.email}
+                      defaultValue={this.props.currentGuest.email}
                       name="email"
                       autoComplete="on"
                     />
