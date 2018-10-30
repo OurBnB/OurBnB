@@ -12,13 +12,13 @@ class Header extends React.Component {
     }
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
+  handleSubmit(event) {
+    event.preventDefault();
   }
 
-  handleClick(e){
-      e.preventDefault();
-      this.props.switchScreen(e.target.name);
+  handleClick(event){
+    event.preventDefault();
+      this.props.switchScreen(event.target.name);
   }
 
   render() {

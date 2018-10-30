@@ -58,33 +58,31 @@ app.post("/api/guest", (req, res) => {
       .then(function(hash) {
           return db.one(
               "INSERT INTO guest (email, password, first_name, last_name, telephone, hash) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id",
-              [guest.email, guest.password, guest.firstName, guest.lastName, guest.mobile, hash]
+              [guest.email, guest.password, guest.first_name, guest.last_name, guest.telephone, hash]
           )
         })
       .then(result => {
-        return res.json({ id: result.id, first_name: guest.firstName, last_name: guest.lastName, telephone: guest.mobile, password: guest.password, email: guest.email});        })
+        return res.json({ id: result.id, first_name: guest.first_name, last_name: guest.last_name, telephone: guest.telephone, password: guest.password, email: guest.email});        })
       .catch(error => res.json({ error: error.message }));
 });
 
 // add a single booking to bookings table
 app.post("/api/booking", (req, res) =>{
-  const { bookingData } = req.body;
+  const bookingData  = req.body;
   db.one(`INSERT INTO booking
   (property_id, guest_id, date_booked, date_start, date_end)
   VALUES($1, $2, NOW(), $3, $4 ) RETURNING id`,
   [bookingData.property_id, bookingData.guest_id, bookingData.date_start, bookingData.date_end ])
   .then(booking => {
-    const booking_id = booking.id;
-    const { bookingData } = req.body;
-    const json = { id: booking_id, name: bookingData.name};
+    const json = { id: booking.id, first_name: bookingData.first_name };
     // SMS below works, commented out only for testing period.
-    // sendSMS(booking_id, bookingData.name, bookingData.telephone);
+    // sendSMS(booking.id, bookingData.first_name, bookingData.telephone);
     return res.json(json);
   })
   .catch(error => res.json({ error: error.message }));
 });
 
-function sendSMS(booking_id, name, telephone) {
+function sendSMS(booking_id, first_name, telephone) {
   const accountSid = process.env.TWILIO_SID_LIVE
   const authToken = process.env.TWILIO_AUTH_LIVE;
   const twilio = require('twilio');
@@ -92,7 +90,7 @@ function sendSMS(booking_id, name, telephone) {
   const baseUrl = 'www.heroku.com';
   // To view your order details, please visit ${baseUrl}/?viewBookingId=${booking_id}
   client.messages.create({
-      body: `Dear ${name}, thank you for your booking. Your ID is ${booking_id}.`,
+      body: `Dear ${first_name}, thank you for your booking. Your ID is ${booking_id}.`,
       to: telephone,
       from: '+447446494074'
   })

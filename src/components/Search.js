@@ -15,6 +15,8 @@ class Search extends React.Component {
     this.handleChangeEnd = this.handleChangeEnd.bind(this);
     this.handleChangeStart = this.handleChangeStart.bind(this);
     this.setButtonClass = this.setButtonClass.bind(this);
+    this.setButtonValue = this.setButtonValue.bind(this);
+    this.validInput = this.validInput.bind(this);
   }
 
   handleSubmit(event){
@@ -35,8 +37,15 @@ class Search extends React.Component {
   }
 
   setButtonClass () {
-    const valid = this.state.startDate && this.state.endDate && this.state.city;
-    return valid ? "search__button" : "search__button-inactive";
+    return this.validInput() ? "search__button" : "search__button-inactive";
+  }
+
+  setButtonValue () {
+    return this.validInput() ? "Search": "Enter your destination and dates...";
+  }
+
+  validInput () {
+    return !!this.state.startDate && !!this.state.endDate && !!this.state.city;
   }
 
   handleChangeCity(event){
@@ -91,7 +100,7 @@ class Search extends React.Component {
               />
             </div>
           </div>
-          <button type="submit" className={this.setButtonClass()}>Search</button>
+          <button type="submit" className={this.setButtonClass()}>{this.setButtonValue()}</button>
         </form>
       </React.Fragment>
     )

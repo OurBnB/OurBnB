@@ -71,37 +71,35 @@ class App extends React.Component {
   }
 
   addBooking(bookingData) {
-    const booking = { bookingData: bookingData };
     fetch("/api/booking", {
       method: "post",
-      body: JSON.stringify(booking),
+      body: JSON.stringify(bookingData),
       headers: { "Content-Type": "application/json" }
     })
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          message: `Dear ${
-            data.name
-          }, thank you for your booking. Your ID is ${data.id}.`
-        });
-        this.displayModal(data);
-        return data;
-      })
-      .catch(error => res.json({ error: error.message }));
+    .then(response => response.json())
+    .then(data => {
+      this.setState({
+        message: `Dear ${
+          data.first_name
+        }, thank you for your booking. Your ID is ${data.id}.`
+      });
+      this.displayModal(data);
+      return data;
+    })
+    .catch(error => res.json({ error: error.message }));
   }
 
   addBookingNewGuest(newGuest, bookingData) {
     this.addGuest(newGuest)
       .then(currentGuest => {
         const completeData = Object.assign(
-          {},
-          { bookingData },
-          {
-            guest_id: currentGuest.id,
-            name: currentGuest.first_name,
+          {}, 
+          bookingData, 
+          { 
+            guest_id: currentGuest.id, 
+            first_name: currentGuest.first_name, 
             telephone: currentGuest.telephone
-          }
-        );
+          })
         this.addBooking(completeData);
       });
   }
@@ -167,7 +165,6 @@ class App extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-       console.log(data);
         data.error? (this.setState({
           message: "Incorrect email or password. Please try again."
         }, ()=>this.displayModal())):
@@ -212,6 +209,7 @@ class App extends React.Component {
                   addBooking={this.addBooking}
                   addBookingNewGuest={this.addBookingNewGuest}
                   currentGuest={this.state.currentGuest}
+                  citySearch={this.state.citySearch}
                   />
                 </div>
               </div> : null
