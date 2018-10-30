@@ -1,4 +1,4 @@
-create database ourbnb2;
+create database ourbnb;
 
 create table guest (
   id serial primary key,
