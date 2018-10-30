@@ -21,6 +21,7 @@ class Property extends React.Component {
     this.setButtonClass = this.setButtonClass.bind(this);
     this.setButtonValue = this.setButtonValue.bind(this);
     this.validInput = this.validInput.bind(this);
+    this.validInputPassword = this.validInputPassword.bind(this);
 
     this.state = {
       descriptionToggle: false,
@@ -96,16 +97,22 @@ class Property extends React.Component {
     return `${dateObject.getDate()} ${months[dateObject.getMonth()]} ${dateObject.getFullYear()}`;
   }
 
-  setButtonClass () {
-    return this.validInput() ? "booking__button" : "booking__button-inactive";
+  setButtonClass (pw) {
+    const passwordCheck = pw ? this.validInputPassword() : this.validInput();
+    return passwordCheck ? "booking__button" : "booking__button-inactive";
   }
 
-  setButtonValue () {
-    return this.validInput() ? "Book Now": "Enter your details to book...";
+  setButtonValue (pw) {
+    const passwordCheck = pw ? this.validInputPassword() : this.validInput();
+    return passwordCheck ? "Book Now": "Enter your details to book...";
   }
 
   validInput () {
     return !!this.state.first_name && !!this.state.last_name && !!this.state.telephone && !!this.state.email;
+  }
+
+  validInputPassword () {
+    return !!this.state.first_name && !!this.state.last_name && !!this.state.telephone && !!this.state.email && !!this.state.password;
   }
 
   handleChange(event) {
@@ -236,7 +243,7 @@ class Property extends React.Component {
                       onChange={this.handleChange}
                       className="booking__first_name"
                       type="text"
-                      defaultValue={this.props.currentGuest.first_name}
+                      value={this.props.currentGuest.first_name}
                       name="first_name"
                       autoComplete="on"
                     />
@@ -246,7 +253,7 @@ class Property extends React.Component {
                       onChange={this.handleChange}
                       className="booking__last_name"
                       type="text"
-                      defaultValue={this.props.currentGuest.last_name}
+                      value={this.props.currentGuest.last_name}
                       name="last_name"
                       autoComplete="on"
                     />
@@ -256,7 +263,7 @@ class Property extends React.Component {
                       onChange={this.handleChange}
                       className="booking__telephone"
                       type="text"
-                      defaultValue={this.props.currentGuest.telephone}
+                      value={this.props.currentGuest.telephone}
                       name="telephone"
                       autoComplete="on"
                     />
@@ -266,10 +273,15 @@ class Property extends React.Component {
                       onChange={this.handleChange}
                       className="booking__email"
                       type="text"
-                      defaultValue={this.props.currentGuest.email}
+                      value={this.props.currentGuest.email}
                       name="email"
                       autoComplete="on"
                     />
+                  </li>
+                  <li>
+                    <button type="submit" className={this.setButtonClass()}>
+                    {this.setButtonValue()}
+                    </button>
                   </li>
                 </React.Fragment>
               ) : (
@@ -324,13 +336,13 @@ class Property extends React.Component {
                       autoComplete="on"
                     />
                   </li>
+                  <li>
+                    <button type="submit" className={this.setButtonClass("password")}>
+                    {this.setButtonValue("password")}
+                    </button>
+                  </li>
                 </React.Fragment>
               )}
-              <li>
-                <button type="submit" className={this.setButtonClass()}>
-                {this.setButtonValue()}
-                </button>
-              </li>
             </ul>
           </form>
         </section>
