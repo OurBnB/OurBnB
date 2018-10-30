@@ -2,5 +2,6 @@
 node_modules
 dist
 .DS_Store
-static
+static/bundle.js
+static/bundle.js.map
 .idea
