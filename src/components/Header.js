@@ -18,7 +18,7 @@ class Header extends React.Component {
 
   handleClick(event){
     event.preventDefault();
-      this.props.switchScreen(event.target.name);
+    this.props.switchScreen(event.target.name);
   }
 
   render() {
