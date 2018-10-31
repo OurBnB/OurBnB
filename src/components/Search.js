@@ -59,7 +59,7 @@ class Search extends React.Component {
     return(
       <React.Fragment>
         <form onSubmit={this.handleSubmit} className="search__form">
-          <input autoFocus onChange={this.handleChangeCity} className="search__city" type="text" placeholder="Destination" name="city" autoComplete="off" />
+          <input autoFocus={true} onChange={this.handleChangeCity} className="search__city" type="text" placeholder="Destination" name="city" autoComplete="off" />
           <div className="search__dates">
 
             <div className="myDatePickerContainer myDatePickerStart">

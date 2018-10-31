@@ -79,9 +79,9 @@ class App extends React.Component {
     .then(response => response.json())
     .then(data => {
       this.setState({
-        message: `Dear ${
-          data.first_name
-        }, thank you for your booking. Your ID is ${data.id}.`
+        message: `Dear ${data.first_name}, 
+        Thank you for your booking and details. 
+        You will receive a confirmation by text which includes your booking ID: ${data.id}. Many thanks!`
       });
       this.displayModal(data);
       return data;

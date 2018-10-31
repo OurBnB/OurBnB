@@ -62,8 +62,9 @@
   }
   &__submit-disabled {
     input {
-      -webkit-filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.15));
-      filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.15));
+      border: 0.05rem solid #c2c2c2;
+      // -webkit-filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.15));
+      // filter: drop-shadow(0 0 0.3rem rgba(0,0,0,0.15));
     }
   }
 

@@ -73,7 +73,7 @@ class Property extends React.Component {
         this.props.addBooking(bookingData);
       }
     } else {
-      if (this.validInput() && !!this.state.password) {
+      if (this.validInputPassword()) {
         const newGuest ={
             first_name: this.state.first_name,
             last_name: this.state.last_name,
@@ -240,7 +240,6 @@ class Property extends React.Component {
                 <ul className="booking__submit-disabled">
                   <li>
                     <input
-                      autoFocus
                       onChange={this.handleChange}
                       type="text"
                       value={this.props.currentGuest.first_name}
@@ -287,9 +286,8 @@ class Property extends React.Component {
                 <ul className="booking__submit-enabled">
                   <li>
                     <input
-                      autoFocus
+                      autoFocus={true}
                       onChange={this.handleChange}
-                      className="booking__first_name"
                       type="text"
                       placeholder="First Name"
                       name="first_name"
@@ -308,7 +306,6 @@ class Property extends React.Component {
                   <li>
                     <input
                       onChange={this.handleChange}
-                      className="booking__telephone"
                       type="text"
                       placeholder="Telephone"
                       name="telephone"
@@ -318,7 +315,6 @@ class Property extends React.Component {
                   <li>
                     <input
                       onChange={this.handleChange}
-                      className="booking__email"
                       type="text"
                       placeholder="Email"
                       name="email"
@@ -328,7 +324,6 @@ class Property extends React.Component {
                   <li>
                     <input
                       onChange={this.handleChange}
-                      className="booking__password"
                       type="password"
                       placeholder="Password"
                       name="password"

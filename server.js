@@ -75,8 +75,7 @@ app.post("/api/booking", (req, res) =>{
   [bookingData.property_id, bookingData.guest_id, bookingData.date_start, bookingData.date_end ])
   .then(booking => {
     const json = { id: booking.id, first_name: bookingData.first_name };
-    // SMS below works, commented out only for testing period.
-    // sendSMS(booking.id, bookingData.first_name, bookingData.telephone);
+    sendSMS(booking.id, bookingData.first_name, bookingData.telephone);
     return res.json(json);
   })
   .catch(error => res.json({ error: error.message }));
