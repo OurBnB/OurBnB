@@ -235,47 +235,44 @@ class Property extends React.Component {
                 )}
               </li>
               </ul>
-              <ul className="booking__submit">
               {this.props.currentGuest.id ? (
                 <React.Fragment>
+                <ul className="booking__submit-disabled">
                   <li>
                     <input
+                      autoFocus
                       onChange={this.handleChange}
-                      className="booking__first_name"
                       type="text"
                       value={this.props.currentGuest.first_name}
                       name="first_name"
-                      autoComplete="on"
+                      disabled="true"
                     />
                   </li>
                   <li>
                     <input
                       onChange={this.handleChange}
-                      className="booking__last_name"
                       type="text"
                       value={this.props.currentGuest.last_name}
                       name="last_name"
-                      autoComplete="on"
+                      disabled="true"
                     />
                   </li>
                   <li>
                     <input
                       onChange={this.handleChange}
-                      className="booking__telephone"
                       type="text"
                       value={this.props.currentGuest.telephone}
                       name="telephone"
-                      autoComplete="on"
+                      disabled="true"
                     />
                   </li>
                   <li>
                     <input
                       onChange={this.handleChange}
-                      className="booking__email"
                       type="text"
                       value={this.props.currentGuest.email}
                       name="email"
-                      autoComplete="on"
+                      disabled="true"
                     />
                   </li>
                   <li>
@@ -283,11 +280,14 @@ class Property extends React.Component {
                     {this.setButtonValue()}
                     </button>
                   </li>
+                </ul>
                 </React.Fragment>
               ) : (
                 <React.Fragment>
+                <ul className="booking__submit-enabled">
                   <li>
                     <input
+                      autoFocus
                       onChange={this.handleChange}
                       className="booking__first_name"
                       type="text"
@@ -299,7 +299,6 @@ class Property extends React.Component {
                   <li>
                     <input
                       onChange={this.handleChange}
-                      className="booking__last_name"
                       type="text"
                       placeholder="Last Name"
                       name="last_name"
@@ -341,9 +340,9 @@ class Property extends React.Component {
                     {this.setButtonValue("password")}
                     </button>
                   </li>
+                </ul>
                 </React.Fragment>
               )}
-            </ul>
           </form>
         </section>
       </div>
