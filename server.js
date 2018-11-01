@@ -75,21 +75,22 @@ app.post("/api/booking", (req, res) =>{
   [bookingData.property_id, bookingData.guest_id, bookingData.date_start, bookingData.date_end ])
   .then(booking => {
     const json = { id: booking.id, first_name: bookingData.first_name };
-    sendSMS(booking.id, bookingData.first_name, bookingData.telephone);
+    sendSMS(booking.id, bookingData.first_name, bookingData.telephone, bookingData.password);
     return res.json(json);
   })
   .catch(error => res.json({ error: error.message }));
 });
 
-function sendSMS(booking_id, first_name, telephone) {
+function sendSMS(booking_id, first_name, telephone, password) {
   const accountSid = process.env.TWILIO_SID_LIVE
   const authToken = process.env.TWILIO_AUTH_LIVE;
   const twilio = require('twilio');
   const client = new twilio(accountSid, authToken);
   const baseUrl = 'www.heroku.com';
-  // To view your order details, please visit ${baseUrl}/?viewBookingId=${booking_id}
   client.messages.create({
-      body: `Dear ${first_name}, thank you for your booking. Your ID is ${booking_id}.`,
+      body: `Dear ${first_name}, thank you for your booking and details. 
+      Your booking ID is ${booking_id}. To view your booking details, 
+      please visit www.ourbnb.co.uk and login with your email address and password: ${password}. Many thanks!`,
       to: telephone,
       from: '+447446494074'
   })
