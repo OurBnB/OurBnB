@@ -45,11 +45,9 @@ class Property extends React.Component {
   }
 
   handleToggleDescription() {
-    this.setState(
-      {
+    this.setState({
         descriptionToggle: !this.state.descriptionToggle
-      },
-      () => {
+      }, () => {
         if (this.state.descriptionToggle) {
           document.location = "#description";
         }
@@ -57,10 +55,9 @@ class Property extends React.Component {
     );
   }
 
-
   handleSubmit(event) {
     event.preventDefault();
-    if (this.props.currentGuest.id) {
+    if (this.props.currentGuest && this.props.currentGuest.id) {
       if (this.validInput()) {
         const bookingData = {
             guest_id: this.props.currentGuest.id,
@@ -73,7 +70,7 @@ class Property extends React.Component {
         this.props.addBooking(bookingData);
       }
     } else {
-      if (this.validInput() && !!this.state.password) {
+      if (this.validInputPassword()) {
         const newGuest ={
             first_name: this.state.first_name,
             last_name: this.state.last_name,
@@ -89,7 +86,6 @@ class Property extends React.Component {
         this.props.addBookingNewGuest(newGuest, bookingData);
       }
     }
-
   }
 
   formatDate (dateObject) {
@@ -157,9 +153,7 @@ class Property extends React.Component {
 
     const descriptionText = this.props.property.description;
 
-    let images = [],
-      i = 0,
-      max = 5;
+    let images = [], i = 0, max = 5;
     while (++i <= max) {
       images.push(`../static/images/${this.props.property[`image_${i}`]}`);
     }
@@ -168,8 +162,7 @@ class Property extends React.Component {
       <div className="property">
         <section className="property__details">
           <h1><i className="fas fa-1x fa-home fa-home-icon" />
-            {this.props.property.bedrooms} bedroom property in{" "}
-            {this.props.property.city}
+            {this.props.property.bedrooms} bedroom property in{" "}{this.props.property.city}
           </h1>
           <div className="photo__carousel">
             <Carousel
@@ -183,30 +176,19 @@ class Property extends React.Component {
             {this.props.property.address_l1}, {this.props.property.address_l2}
           </h2>
           <ul className="property__icons">
-            <li>
-              <img className="icon" src="../static/images/bed.png" />{this.props.property.bedrooms}
-            </li>
-            <li>
-              <img className="icon" src="../static/images/bathroom.png" /> {this.props.property.bathrooms}
-            </li>
-            <li>
-              <img className="icon" src="../static/images/family.png" /> {this.props.property.can_sleep} max
-            </li>
-            <li>
-              <img className="icon" src="../static/images/money.png" />&pound;{Number(this.props.property.price_per_night)}
-            </li>
+            <li><img className="icon" src="../static/images/bed.png" />{this.props.property.bedrooms}</li>
+            <li><img className="icon" src="../static/images/bathroom.png" /> {this.props.property.bathrooms}</li>
+            <li><img className="icon" src="../static/images/family.png" /> {this.props.property.can_sleep} max</li>
+            <li><img className="icon" src="../static/images/money.png" />&pound;{Number(this.props.property.price_per_night)}</li>
           </ul>
         </section>
-        <section className="property__description">
 
+        <section className="property__description">
           <button id="description" className="property__description-btn" onClick={this.handleToggleDescription}>
             Description
           </button>
           <div className={this.setDescriptionClass()}>
-            {this.state.descriptionToggle &&
-              remark()
-                .use(reactRenderer)
-                .processSync(descriptionText).contents}
+            {this.state.descriptionToggle && remark().use(reactRenderer).processSync(descriptionText).contents}
           </div>
         </section>
 
@@ -220,134 +202,33 @@ class Property extends React.Component {
             <ul className="booking__list">
               <li className="bullet">{" "}Check-in date: {this.formatDate(this.props.startDate._d)}</li>
               <li className="bullet">{" "}Check-out date: {this.formatDate(this.props.endDate._d)}</li>
-              <li className="bullet">
-                {" "}Length of stay: {lengthOfStay} night
-                {this.pluralise(lengthOfStay)}
-              </li>
-              <li className="bullet">
-                {" "}Price per night:{" "}
-                {this.getCurrency(Number(this.props.property.price_per_night))}
-              </li>
-              <li className="bullet">
-                {" "}Total price:{" "}
-                {this.getCurrency(
-                  this.props.property.price_per_night * lengthOfStay
-                )}
-              </li>
-              </ul>
-              <ul className="booking__submit">
-              {this.props.currentGuest.id ? (
-                <React.Fragment>
-                  <li>
-                    <input
-                      onChange={this.handleChange}
-                      className="booking__first_name"
-                      type="text"
-                      value={this.props.currentGuest.first_name}
-                      name="first_name"
-                      autoComplete="on"
-                    />
-                  </li>
-                  <li>
-                    <input
-                      onChange={this.handleChange}
-                      className="booking__last_name"
-                      type="text"
-                      value={this.props.currentGuest.last_name}
-                      name="last_name"
-                      autoComplete="on"
-                    />
-                  </li>
-                  <li>
-                    <input
-                      onChange={this.handleChange}
-                      className="booking__telephone"
-                      type="text"
-                      value={this.props.currentGuest.telephone}
-                      name="telephone"
-                      autoComplete="on"
-                    />
-                  </li>
-                  <li>
-                    <input
-                      onChange={this.handleChange}
-                      className="booking__email"
-                      type="text"
-                      value={this.props.currentGuest.email}
-                      name="email"
-                      autoComplete="on"
-                    />
-                  </li>
-                  <li>
-                    <button type="submit" className={this.setButtonClass()}>
-                    {this.setButtonValue()}
-                    </button>
-                  </li>
-                </React.Fragment>
-              ) : (
-                <React.Fragment>
-                  <li>
-                    <input
-                      onChange={this.handleChange}
-                      className="booking__first_name"
-                      type="text"
-                      placeholder="First Name"
-                      name="first_name"
-                      autoComplete="on"
-                    />
-                  </li>
-                  <li>
-                    <input
-                      onChange={this.handleChange}
-                      className="booking__last_name"
-                      type="text"
-                      placeholder="Last Name"
-                      name="last_name"
-                      autoComplete="on"
-                    />
-                  </li>
-                  <li>
-                    <input
-                      onChange={this.handleChange}
-                      className="booking__telephone"
-                      type="text"
-                      placeholder="Telephone"
-                      name="telephone"
-                      autoComplete="on"
-                    />
-                  </li>
-                  <li>
-                    <input
-                      onChange={this.handleChange}
-                      className="booking__email"
-                      type="text"
-                      placeholder="Email"
-                      name="email"
-                      autoComplete="on"
-                    />
-                  </li>
-                  <li>
-                    <input
-                      onChange={this.handleChange}
-                      className="booking__password"
-                      type="password"
-                      placeholder="Password"
-                      name="password"
-                      autoComplete="on"
-                    />
-                  </li>
-                  <li>
-                    <button type="submit" className={this.setButtonClass("password")}>
-                    {this.setButtonValue("password")}
-                    </button>
-                  </li>
-                </React.Fragment>
-              )}
+              <li className="bullet">{" "}Length of stay: {lengthOfStay} night{this.pluralise(lengthOfStay)}</li>
+              <li className="bullet">{" "}Price per night:{" "}{this.getCurrency(Number(this.props.property.price_per_night))}</li>
+              <li className="bullet">{" "}Total price:{" "}{this.getCurrency(this.props.property.price_per_night * lengthOfStay)}</li>
             </ul>
+            {this.props.currentGuest && this.props.currentGuest.id ? (
+            <ul className="booking__submit-disabled">
+              <li><input key="first_name" type="text" value={this.props.currentGuest.first_name} name="first_name" disabled={true}/></li>
+              <li><input key="last_name" type="text" value={this.props.currentGuest.last_name} name="last_name" disabled={true}/></li>
+              <li><input key="telephone" type="text" value={this.props.currentGuest.telephone} name="telephone" disabled={true}/></li>
+              <li><input key="email" type="text" value={this.props.currentGuest.email} name="email" disabled={true}/></li>
+              <li><button type="submit" className={this.setButtonClass()}>{this.setButtonValue()}</button></li>
+            </ul>
+            ) : (
+            <ul className="booking__submit-enabled">
+              <li><input autoFocus={true} onChange={this.handleChange} type="text" placeholder="First Name" name="first_name" autoComplete="on"/></li>
+              <li><input onChange={this.handleChange} type="text" placeholder="Last Name" name="last_name" autoComplete="on"/></li>
+              <li><input onChange={this.handleChange} type="text" placeholder="Telephone" name="telephone" autoComplete="on"/></li>
+              <li><input onChange={this.handleChange} type="text" placeholder="Email" name="email" autoComplete="on"/></li>
+              <li><input onChange={this.handleChange} type="password" placeholder="Password" name="password" autoComplete="on"/></li>
+              <li><button type="submit" className={this.setButtonClass("password")}>{this.setButtonValue("password")}</button></li>
+            </ul>
+            )}
           </form>
         </section>
       </div>
     );
   }
 }
+
 export default Property;

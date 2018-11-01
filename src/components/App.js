@@ -17,7 +17,7 @@ class App extends React.Component {
       startDate: moment(),
       endDate: "",
       activeScreen: "main",
-      currentGuest: {},
+      currentGuest: null,
       on: false,
       message: ""
     };
@@ -35,6 +35,7 @@ class App extends React.Component {
     this.retrieveGuest = this.retrieveGuest.bind(this);
     this.displayModal = this.displayModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.logOut = this.logOut.bind(this);
   }
 
   cityCall(city) {
@@ -79,9 +80,7 @@ class App extends React.Component {
     .then(response => response.json())
     .then(data => {
       this.setState({
-        message: `Dear ${
-          data.first_name
-        }, thank you for your booking. Your ID is ${data.id}.`
+        message: `Dear ${data.first_name}, thank you for your booking and details. You will receive a confirmation by text which includes your booking ID: ${data.id}. Many thanks!`
       });
       this.displayModal(data);
       return data;
@@ -98,7 +97,8 @@ class App extends React.Component {
           { 
             guest_id: currentGuest.id, 
             first_name: currentGuest.first_name, 
-            telephone: currentGuest.telephone
+            telephone: currentGuest.telephone, 
+            password: currentGuest.password
           })
         this.addBooking(completeData);
       });
@@ -119,6 +119,13 @@ class App extends React.Component {
 
   switchScreen(screen) {
     this.setState({ activeScreen: screen });
+  }
+
+  logOut() {
+    this.setState({
+      currentGuest: null,
+      message: this.state.currentGuest ? "You are now logged out" : "You are trying to log out but were not logged in"
+    }, () => this.displayModal())
   }
 
   sentenceCase(str) {
@@ -165,11 +172,11 @@ class App extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        data.error? (this.setState({
+        data.error ? 
+        this.setState({
           message: "Incorrect email or password. Please try again."
-        }, ()=>this.displayModal())):
-        this.setState(
-          {
+        }, () => this.displayModal()) :
+        this.setState({
             currentGuest: data,
             activeScreen: "main"
           });
@@ -184,7 +191,12 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <main className="main">
-          <Header switchScreen={this.switchScreen} activeScreen={this.state.activeScreen} currentGuest={this.state.currentGuest} />
+          <Header 
+          logOut={this.logOut} 
+          switchScreen={this.switchScreen} 
+          activeScreen={this.state.activeScreen} 
+          currentGuest={this.state.currentGuest} 
+        />
           {this.state.activeScreen === "main" && (
             <React.Fragment>
               <div className="top">
@@ -203,13 +215,13 @@ class App extends React.Component {
               <div id="results__page-top" className="results__page-top">
                 <div id="results" className="search__results-feed">
                   <SearchResults
-                  citySearchResults={this.state.citySearchResults}
-                  startDate={this.state.startDate}
-                  endDate={this.state.endDate}
-                  addBooking={this.addBooking}
-                  addBookingNewGuest={this.addBookingNewGuest}
-                  currentGuest={this.state.currentGuest}
-                  citySearch={this.state.citySearch}
+                    citySearchResults={this.state.citySearchResults}
+                    startDate={this.state.startDate}
+                    endDate={this.state.endDate}
+                    addBooking={this.addBooking}
+                    addBookingNewGuest={this.addBookingNewGuest}
+                    currentGuest={this.state.currentGuest}
+                    citySearch={this.state.citySearch}
                   />
                 </div>
               </div> : null

@@ -7,6 +7,7 @@ class Header extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
     this.state = {
 
     }
@@ -21,6 +22,11 @@ class Header extends React.Component {
     this.props.switchScreen(event.target.name);
   }
 
+  handleLogout(event){
+    event.preventDefault();
+    this.props.logOut();
+  }
+
   render() {
     const headerClass = this.props.activeScreen === "main" ? "header__browse" : "header__login"
     return (
@@ -33,6 +39,7 @@ class Header extends React.Component {
             <div className="dropdown__content">
               <a onClick={this.handleClick} name="guestLogin" href="#">Guest Login</a>
               <a onClick={this.handleClick} name="hostLogin" href="#">Host Login</a>
+              <a onClick={this.handleLogout} name="logout" href="#">Logout</a>
               <a onClick={this.handleClick} name="faq" href="#">FAQ</a>
               <a onClick={this.handleClick} name="contact" href="#">Contact Us</a>
             </div>
@@ -41,7 +48,7 @@ class Header extends React.Component {
             <a href="/">Ourbnb</a>
           </h1>
         </header>
-        {this.props.currentGuest.id ?  
+        {this.props.currentGuest && this.props.currentGuest.id ?  
           <div className="header__guest">
             <h1>
               <i className="fas fa-1x fa-user margin-right-user" /> Welcome {this.props.currentGuest.first_name}
