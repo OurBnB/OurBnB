@@ -1,14 +1,44 @@
-# Ourbnb app > find and book accommodation worldwide
-
 ![Screenshot](./static/images/screenshot-mobile-views.jpg) 
 ![Screenshot](./static/images/screenshot-tablet-view.jpg) 
+
+# Ourbnb app 
+## Find and book accommodation worldwide
+
+> [Visit live demo](#)
+
+> [View 'Ourbnb' repo on Github](https://github.com/OurBnB/OurBnB)
+
+--- 
 
 ## Objective > what does it do?
 **Ourbnb** is similar to Airbnb, allowing you to find and book accomodation worldwide. It has a responsive layout for mobile, tablet and desktop screen sizes giving a user-friendly experience.
 
-> [View 'Ourbnb' repo on Github](https://github.com/OurBnB/OurBnB)
+## Installation and set up
+Clone the project and run `npm install`
 
-## Functionality and features > How does it work?
+Create your own local PostreSQL database instance and create the tables by running `pgweb` navigating to localhost:8081 and running the query in the database.sql file.
+
+Create a `.env` file with the following variables
+```
+DB_HOST=localhost
+DB_NAME=
+DB_USERNAME=
+DB_PASSWORD=
+TWILIO_SID_TEST=
+TWILIO_AUTH_TEST=
+TWILIO_SID_LIVE=
+TWILIO_AUTH_LIVE=
+GMAPS_API_KEY=
+```
+Run `npm start` to launch the app and navigate to localhost:8080
+
+### API Keys needed:
++ Twilio
++ Google Maps
+
+---
+
+### Functionality and features > How does it work?
 + The app starts with a quick search based on the user's destination and dates 
 + The app fetches data for relevant properties from the database using SQL
 + The results are displayed as a list using React and SCSS
@@ -17,7 +47,7 @@
 + You receive a booking confirmation by text with your booking ID
 + You can make further bookings as a guest by setting up a Guest account from the main menu
 
-## Stages of development
+### Stages of development
 + Planned structure of the database tables and their relationships
 + Created database tables, sourced text and image data, entered data into tables
 + Set up and created basic core functionality in React
@@ -28,29 +58,35 @@
 > + property details page
 > + login page
 
-## Technology used
-+ SQL
-+ Postgres
-+ Node.js
+### Tech stack
 + React
++ PostgreSQL
++ Node.js
++ Express
++ Handlebars
 + SCSS
 + Classnames
 + Flex-box
 + Grid
 + Git
 
-## APIs and Node Packages used
+
+### Build tools
+- Webpack
+- Babel
+
+### APIs and Node Packages used
 + Google Maps API - for displaying maps
 + Twilio API - for sending booking confirmation by text
 + Remark React Node package - for rendering markdown as HTML
 + React Datepicker Node package - for displaying dates on search screen
 + React Image Carousel Node package - for displaying photos of the property's rooms
 
-## Problems and errors to be fixed
+### Problems and errors to be fixed
 + The search is limited to London, New York and Sydney
 + No form validation for email addresses or telephone numbers
 
-## Desired features with more time
+### Desired features with more time
 + A map view for search results
 + Allow guests to write reviews of properties
 + Allow hosts to write reviews of guests
