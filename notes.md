@@ -13,7 +13,7 @@
 
 [Documentation](https://reactdatepicker.com/)
 [Documentation](https://github.com/Hacker0x01/react-datepicker/blob/master/docs/datepicker.md)
-[NPM package](https://www.npmjs.com/package/react-datepicker)
+[Date picker](https://www.npmjs.com/package/react-datepicker)
 + npm install react-datepicker --save
 + npm install prop-types --save
 + npm install moment
@@ -24,7 +24,7 @@
 
 
 ## Image carousel for the Property component
-[Documentation and package] (https://www.npmjs.com/package/react-image-carousel) 
+[Documentation and package](https://www.npmjs.com/package/react-image-carousel) 
 + npm install react-image-carousel
 **Documentation is incomplete and also requires installation of the react-transition-group:
 + npm install react-transition-group@^2.3.1

@@ -4,9 +4,9 @@
 # Ourbnb app 
 ## Find and book accommodation worldwide
 
-> [Visit live demo](#)
+> [Visit the live demo](#)
 
-> [View 'Ourbnb' repo on Github](https://github.com/OurBnB/OurBnB)
+> [View the repo on Github](https://github.com/OurBnB/OurBnB)
 
 --- 
 
@@ -75,12 +75,12 @@ Run `npm start` to launch the app and navigate to localhost:8080
 - Webpack
 - Babel
 
-### APIs and Node Packages used
-+ Google Maps API - for displaying maps
-+ Twilio API - for sending booking confirmation by text
-+ Remark React Node package - for rendering markdown as HTML
-+ React Datepicker Node package - for displaying dates on search screen
-+ React Image Carousel Node package - for displaying photos of the property's rooms
+### APIs and Node Packages
++ [Google Maps API](https://developers.google.com/maps/documentation/)- for displaying maps
++ [Twilio API](https://www.twilio.com/docs/libraries/node) - for sending booking confirmation by text
++ [Remark React](https://www.npmjs.com/package/remark-react) - for rendering markdown as HTML
++ [React Date picker](https://www.npmjs.com/package/react-datepicker) - for displaying dates on search screen
++ [React Image Carousel](https://www.npmjs.com/package/react-image-carousel) - for displaying photos of the property's rooms
 
 ### Problems and errors to be fixed
 + The search is limited to London, New York and Sydney
