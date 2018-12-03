@@ -71,5 +71,8 @@
       "@babel/preset-react",
       "@babel/preset-env"
     ]
+  },
+  "resolutions": {
+    "image-webpack-loader/imagemin-pngquant": "5.0.1"
   }
 }

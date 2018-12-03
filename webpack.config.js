@@ -24,13 +24,17 @@ module.exports = {
               publicPath: 'static/'
             }
           },
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              bypassOnDebug: true, // webpack@1.x
-              disable: true, // webpack@2.x and newer
-            },
-          },
+          // this is commented out because it wouldn't build and threw this error 
+          // Error: pngquant failed to build, make sure that libpng is installed at Promise.all.then.arr
+          // alternative is to use https://www.npmjs.com/package/img-loader
+          
+          // {
+          //   loader: 'image-webpack-loader',
+          //   options: {
+          //     bypassOnDebug: true, // webpack@1.x
+          //     disable: true, // webpack@2.x and newer
+          //   },
+          // },
         ],
       },
       {
