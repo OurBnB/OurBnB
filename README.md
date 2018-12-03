@@ -6,7 +6,8 @@
 ## Find and book accommodation
 **Ourbnb** allows you to browse, find and book various accommodation in three locations (London, New York and Sydney) based on selected dates. Each property displays a full description with a map and a form to make a booking.  It has a responsive layout for mobile, tablet and desktop screen sizes giving a user-friendly experience.
 
-> [Visit the live demo](#)
+> [Visit the live demo](https://ourbnb.herokuapp.com/)
+
 > [View the repo on Github](https://github.com/OurBnB/OurBnB)
 
 --- 
