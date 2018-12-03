@@ -86,11 +86,11 @@ function sendSMS(booking_id, first_name, telephone, password) {
   const authToken = process.env.TWILIO_AUTH_LIVE;
   const twilio = require('twilio');
   const client = new twilio(accountSid, authToken);
-  const baseUrl = 'www.heroku.com';
+  const baseUrl = 'https://ourbnb.herokuapp.com';
   client.messages.create({
       body: `Dear ${first_name}, thank you for your booking and details. 
       Your booking ID is ${booking_id}. To view your booking details, 
-      please visit www.ourbnb.co.uk and login with your email address and password: ${password}. Many thanks!`,
+      please visit ${baseUrl} and login with your email address and password: ${password}. Many thanks!`,
       to: telephone,
       from: '+447446494074'
   })
