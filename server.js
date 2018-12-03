@@ -97,6 +97,7 @@ function sendSMS(booking_id, first_name, telephone, password) {
   .then((message) => console.log(message.sid));
 }
 
-app.listen(8080, function(){
-  console.log('Listening on port 8080');
+const port = process.env.PORT || 8080;
+app.listen( port, function(){
+  console.log(`Listening on port number ${port}`);
 });

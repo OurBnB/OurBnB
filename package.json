@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "11.3.0"
+  },
   "scripts": {
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
