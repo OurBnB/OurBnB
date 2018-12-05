@@ -64,7 +64,7 @@ class Search extends React.Component {
             onChange={this.handleChangeCity} 
             className="search__city" 
             type="text" 
-            placeholder="Destination" 
+            placeholder="Destination: London, New York or Sydney" 
             name="city" 
             autoComplete="off" 
           />
