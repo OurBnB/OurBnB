@@ -64,7 +64,7 @@ Run `npm start` to launch the app and navigate to localhost:8080
 + The app starts with a quick search based on the user's destination and dates 
 + The app fetches data for relevant properties from the database using SQL
 + The results are displayed as a list using React and SCSS
-+ For each property selected, a summary of details, desciption, images and a map for each property are displayed using React and SCSS
++ For each property selected, a summary of details, description, images and a map for each property are displayed using React and SCSS
 + A booking can then be make by filling out the form
 + You receive a booking confirmation by text with your booking ID
 + You can make further bookings as a guest by setting up a guest account from the main menu
